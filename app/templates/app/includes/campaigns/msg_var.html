@@ -1,0 +1,124 @@
+<div class="col-md-3">
+
+
+
+
+    <div class="col-md-12 p0" >
+        <label class="switch pull-left" >
+          {% include 'app/includes/campaigns/switch_button.html' with object=object %}
+        </label>
+
+        <h6 style="padding-top:10px;">&nbsp;Campaign is active</h6>
+
+        <a href="#" class="btn btn-flat btn-danger" data-click="removeCampaign" data-accid="{{object.owner_id}}" data-cid="{{object.id}}">DELETE MESSENGER CAMPAIGN</a>
+
+
+
+    </div>
+
+    <div class="col-md-12 p0 mt-2" >
+
+        <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+            <div class="card-body p-4">
+                <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                <div class="tile-left">
+                    <i class="batch-icon batch-icon-user-alt batch-icon-xxl"></i>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">{{ contacts_stat.contacts }}</div>
+                    <div class="tile-description">Contacts</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 p0  mt-3" >
+        <div class="card card-tile card-xs bg-success bg-gradient text-center">
+            <div class="card-body p-4">
+                <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                <div class="tile-left">
+                    <div id="epc-demo-1" style="height: 65px;" class="chart chart-epc" data-percent="{{ contacts_stat.message_percent }}" data-chart-color-1="#07a7e3" data-chart-color-2="#0ad251" data-chart-color-3="#fce418" data-chart-color-4="#f43a59">
+                        <span class="percent">{{ contacts_stat.message_percent }}%</span>
+                    </div>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">{{ contacts_stat.message_contacts }}</div>
+                    <div class="tile-description">Messages</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12 p0  mt-3" >
+        <div class="card card-tile card-xs bg-info bg-gradient text-center">
+            <div class="card-body p-4">
+                <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                <div class="tile-left">
+                    <div id="epc-demo-3"  style="height: 65px;"  class="chart chart-epc" data-percent="{{ contacts_stat.reply_percent }}" data-chart-color-1="#0ad251">
+                        <span class="percent">{{ contacts_stat.reply_percent }}%</span>
+                    </div>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">{{ contacts_stat.reply_contacts }}</div>
+                    <div class="tile-description">Replied</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!---<div id="accordion" role="tablist" aria-multiselectable="true">
+
+
+
+        <div class="card">
+            <div class="card-header p0" style="padding-top: 12px !important;" role="tab" id="headingOne">
+                <div class="row">
+                    <div class="col-md-12" >
+                        <a class="btn btn-lg btn-orange btn-gradient waves-effect waves-light col-md-12" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Settings
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="card-body">
+                    <div class="box box-success">
+                        <div class="box-header">
+                          <b class="box-title">Messenger Campaign Status</b>
+                        </div>
+
+                        <div class="box-body">
+                            <p style="min-height:123px;">
+                            You can turn this Messenger Campaign on and off. Turned on campaign will send out connection requests and messages according to your <a href="#tab_2" data-toggle="tab" onclick="$('.nav-tabs li').removeClass('active');$('.nav-tabs li:eq(1)').addClass('active');">messaging settings</a>. If you turn off the campaign, all campaign activity will be paused.</p>
+
+                            <label class="switch pull-left" style="margin-right:20px">
+                              {% include 'app/includes/campaigns/switch_button.html' with object=object %}
+                            </label>
+
+                            <h7 style="margin-top:10px;">Campaign is active</h7>
+                        </div>
+                    </div>
+                    <div class="box-header float-left">
+                      <b class="box-title">Delete Messenger Campaign</b>
+                    </div>
+
+                    <div class="box-body float-left">
+                        <p style="float:left;min-height:120px;">Deleting Messenger Campaign will stop all campaign activity. Contacts from the campaign will remain in 'My Network' and in your 'Inbox', however, and will no longer receive automated campaign messages. Contact(s) status will change to "Old Connect". You will be able to continue manual communication with these contacts.</p>
+
+                        <a href="#" class="btn btn-flat btn-danger" data-click="removeCampaign" data-accid="{{object.owner_id}}" data-cid="{{object.id}}">DELETE MESSENGER CAMPAIGN</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>---->
+
+
+</div>

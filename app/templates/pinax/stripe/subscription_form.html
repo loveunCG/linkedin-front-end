@@ -1,0 +1,81 @@
+{% extends "pinax/stripe/base.html" %}
+{% load static %}
+
+
+
+{% block body_class %}{{ block.super }} pinax-stripe-subscriptions{% endblock %}
+
+{% block content %}
+
+{% if object %}
+    {% url "pinax_stripe_subscription_update" object.pk as post_url %}
+{% else %}
+    {% url "pinax_stripe_subscription_create" as post_url %}
+{% endif %}
+
+<div class="pinax-stripe-subscriptions-container">
+    <h4>
+        {% if object %}Change{% else %}Add{% endif %} Subscription
+        <span class="current-plan">{% if object %}{{ object.plan.name }}{% endif %}</span>
+    </h4>
+    {% if errors %}
+        <div class="errors">
+            {{ errors }}
+        </div>
+    {% endif %}
+    <form id="payment-form" data-stripe-key="{{ PINAX_STRIPE_PUBLIC_KEY }}" data-card-mount-id="card-element" data-card-errors-id="card-errors" action="{{ post_url }}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        {{ form }}
+        {% if not request.user.customer.default_source %}
+            <div id="card-element" class="form-control"></div>
+            <div id="card-errors" role="alert"></div>
+        {% endif %}
+        </div>
+        <div class="form-group">
+            <button class="btn btn-info" type=submit>{% if object %}Update{% else %}Subscribe{% endif %}</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block script_stripe %}
+    
+    {{ block.super }}
+    
+    {% include "pinax/stripe/_stripe_js.html" %}
+	<script type="text/javascript" src="{% static 'assets/js/mystripe.js' %}"></script>
+	
+	
+	
+{% endblock %}
+
+
+{% block script%}
+
+<script>
+	$(document).ready(function() {
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		
+		var plan = getUrlParameter('plan');
+		$('#id_plan').addClass('form-control');
+		
+		$('#id_plan option[value='+plan+']').attr('selected','selected');
+	});
+	</script>
+{%endblock%}

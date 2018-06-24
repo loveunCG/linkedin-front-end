@@ -1,0 +1,15 @@
+
+
+{% include 'app/includes/chatdirect.html' with chat=chat contact=object %}
+<!--/.direct-chat -->
+<div class="form-group">
+	<a href="https://www.linkedin.com/in/{{object.linkedin_id}}/" class="btn btn-outline-primary btn-gradient waves-effect waves-light btn-block btn-flat" target="_blank">LinkedIn profile link  <i class="fa fa-link"></i> </a>
+</div><h4>Notes</h4>
+<form method="POST" action="{% url 'contact-update-note' pk=object.id %}">
+{% csrf_token %}
+	{{ form.notes }}
+	<button class="btn btn-blue btn-gradient waves-effect waves-light pull-right" data-click="saveNotes" id="save_notes">SAVE</button>
+</form>
+<br>
+
+

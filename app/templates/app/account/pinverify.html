@@ -1,0 +1,59 @@
+<div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="progress-circle p40">
+                <span>40%</span>
+                <div class="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div class="value-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            {% if error %}
+                <p class="error">The pin you entered is not correct. Please enter the latest pin</p>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="pin_text">PIN Verification: </label>
+                <input type="text" class="form-control" id='pin_text' placeholder="Enter Your Pin">
+            </div>
+            <button type="button" id="pin_submit" class="btn btn-default">Submit PIN</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+    $("#pin_submit").click(function () {
+        console.log('ok')
+        data_ = new Object()
+        data_.id = '{{ object.id }}'
+        data_.pin = $('#pin_text')[0].value
+        $.ajax({
+            url: "{% url 'account-info' %}",
+            type: "post",
+            data: data_,
+            success: function (response) {
+                $('#add_account_modal_results').html(response)
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+
+
+        });
+
+
+    });
+
+
+</script>

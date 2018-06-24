@@ -1,0 +1,45 @@
+
+
+        <table class="table100-head table table-datatable table-striped table-hover" id="campaign_people">
+	<thead class="align-middle">
+	{% include 'app/includes/people_datatable_headrow.html' with campaign=campaign%}
+	</thead>
+	<tbody>
+	{% for contact in contacts %}
+	 <tr  class="contact" style="cursor: pointer !important;">
+		 <td></td>
+ 	  <td>{{contact.name}}</td>
+ 	  <td>{{contact.name}}</td>
+ 	  <td>{{contact.industry}}</td>
+ 	  <td>{{contact.location}}</td>
+ 	  <td>{{contact.title}}</td>
+ 	  <td>{{contact.latest_activity}}</td>
+	  {%if campaign%}
+	  <td>{{contact.campaign}}</td>
+	  {%endif%}
+	  <td>
+			{# how to deal with this #}
+	  <span data-contactid="{{contact.id}}" class="btn btn-orange btn-gradient waves-effect waves-light btn-block" data-toggle="tooltip" data-popover-content="#popover{{pk}}"
+	  data-html="true" data-tooltip-content="<strong>angular develooper</strong><br>In Queue for Connection request">
+	  In Queue
+	</span>
+	 </td>
+	</tr>
+	{%endfor%}
+	</tbody>
+</table>
+<script>
+
+    var sel ='&nbsp;Show<br/><select style="width: 50px" onchange="ChangePagePerRecord()" id="sel_page_rec" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;entries'
+
+    setTimeout(function(){
+        $("#campaign_people_filter").append(sel);
+    }, 1200);
+
+
+</script>
+
+<form name="contacts-delete" action="{% url 'contacts-delete' %}" method="post">
+{% csrf_token %}
+<input name="cid" value="" type=hidden />
+</form>

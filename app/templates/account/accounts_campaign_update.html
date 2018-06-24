@@ -1,0 +1,49 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link href="{% static 'css/search_page.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/css-circular-prog-bar.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %}Connect Campaign Details{% endblock title %}
+{% block pagetitle %}
+    Connect Campaign Details
+{% endblock %}}
+
+{% block content %}
+
+    <section class="content">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="nav nav-tabs">
+                    {% include 'account/campaign/tab_header.html' %}
+                    <div class="tab-content">
+                        {% include 'account/campaign/tab_1.html' %}
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_2" style="">
+                            <form name="campaign" method="POST" action="{% url 'connector-campaign' pk=object.pk %}">
+                                {% include 'account/campaign/tab_2_form.html' %}
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                        {% include 'account/campaign/tab_3.html' %}
+                        <!-- /.tab-pane -->
+                        {% include 'account/campaign/tab_4.html' %}
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block pagefooter %}
+
+    {% include 'app/includes/campaigns/page_footer.html' %}
+
+
+{% endblock %}

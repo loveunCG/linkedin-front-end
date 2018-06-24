@@ -1,0 +1,11 @@
+<div class="plan-select">
+   
+   {%if current_sub.plan == price%} 
+   <a class="subscription-cancel btn btn-warning" href="{% url "pinax_stripe_subscription_delete" current_sub.pk %}">Cancel</a>
+                    <a class="subscription-update btn btn-warning" href="{% url "pinax_stripe_subscription_update" current_sub.pk %}">Update</a>
+   
+   {%else%}
+   <a href="{% url "pinax_stripe_subscription_create" %}?plan={{price.id}}" class="btn btn-primary waves-effect waves-light">Select Plan</a>
+   {%endif%} 
+        
+    </div>

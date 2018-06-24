@@ -1,0 +1,51 @@
+{% load i18n %}
+	{% load widget_tweaks %}
+	<div class="box">
+	<div class="text alert-box"></div>
+		<div class="box-body campaignsteps-row">
+			{% for form in campaignsteps.forms %}
+				<div class="{{ form.prefix }}-row" >
+					{% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                	{% endfor %}
+
+                    <div class="form-group">
+                    {{ form.DELETE }}
+
+                    	{{ form.step_time.errors.as_ul }}
+                    	{{ form.step_time }}
+                    </div>
+                     <div class="form-group">
+                    	{{ form.message.errors.as_ul }}
+
+                        <label>Autoresponder Message {{ forloop.counter }}</label>
+
+                         <div class="note-btn-group btn-group note-mybutton float-right">
+                            <button type="button" onclick="addText(this, '{FirstName}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">First name</button>
+                                        <button type="button" onclick="addText(this, '{Company}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Company</button>
+                                        <button type="button" onclick="addText(this, '{Title}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Title</button>
+                                        <button type="button" onclick="addText(this, '{Location}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Location</button>
+                        </div>
+                        {% render_field form.message  maxlength="300" style="height: 8rem;" %}
+                        <small class="form-text text-muted" style="margin-top:-.50rem">Remained chars 300</small>
+                    </div>
+
+
+                </div>
+            	{% endfor %}
+				{{ campaignsteps.management_form }}
+
+
+		</div>
+                            <input type="hidden" name="cpk" value="{{ pk }}">
+
+    <input type="submit" class="btn btn-primary btn-block btn-save bg-primary bg-gradient" style="width: 210px !important;" name="save" value="SAVE">
+	</div>
+<script>
+
+    var data_frm_len = {{ campaignsteps.forms|length }}
+        data_frm_len = data_frm_len-1
+
+    $('.campaignsteps-'+ data_frm_len +'-row').css( "display", "none" );
+</script>
+

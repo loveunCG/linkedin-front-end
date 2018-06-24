@@ -1,0 +1,21 @@
+{% extends 'app/base_headless.html' %}
+{% load static %}
+
+{% block title %}Invalid activation code{% endblock title %}
+
+
+{% block content %}
+
+<div class="block-center mt-xl wd-xl">
+    <div class="panel panel-dark panel-flat">
+        {%include 'registration/includes/header.html'%}
+        
+        <div class="panel-body">
+            <p class="text-center pv">INVALID ACTIVATION</p>
+            <p class="pt-lg text-center">Your activation code is invalid. If you have done that before. Please try to login now.</p>
+           {%include 'registration/includes/login_button.html'%}
+         </div>
+    </div>
+</div>
+
+{% endblock content %}

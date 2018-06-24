@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+
+    {% include 'v2/account/includes/head.html' %}
+    {% block head %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+		<div class="row">
+            {% include 'v2/account/includes/sidebar.html' %}
+			<div class="right-column">
+                {% include 'v2/account/includes/header.html' %}
+				<main class="main-content p-5" role="main">
+
+                    {% block content %}
+                    {% endblock %}
+
+
+                </main>
+			</div>
+		</div>
+	</div>
+
+
+
+
+    {% include 'v2/account/includes/script.html' %}
+    {% block script %}
+
+
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'v2/account/base.html' %}
+{% load static %}
+{% block title %}New Messenger Campaign{% endblock title %}
+
+{% block content %}
+<div class="row mb-5 justify-content-md-center">
+    <div class="col-md-5 mb-5">
+        <div class="card text-center">
+            <div class="card-header">
+                New Messenger Campaign
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% include 'v2/account/campaign/add_form.html' with form=form %}
+                    <input type="submit" name="save" class="btn btn-primary btn-gradient waves-effect waves-light btn-block" value="CREATE MESSENGER CAMPAIGN">
+                </form>               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+/* QUILLPRO FRONTEND STYLES */
+
+@import "quillpro-variables";
+
+/* General Styles */
+body{
+	background-color: $qp-color-white;
+}
+
+.right-column{
+	overflow: hidden;
+	main,
+	section{
+		.feature-image{
+			position: static;
+			max-width: 100%;
+			margin-top: 50px;
+		}
+		.video-container{
+			max-width: 100%;
+			margin-top: -90px;
+			overflow: hidden;
+			@include qp-transition(all .225s ease-in-out !important);
+			@include qp-border-radius();
+			a::after{
+				content: "";
+				background: no-repeat url("../../img/play-button.png");
+				height: 59px;
+				width: 80px;
+				display: block;
+				position: absolute;
+				top: calc(50% - 29px);
+				left: calc(50% - 40px);
+			}
+		}
+		.video-container:hover{
+			transform: scale(1.05);
+		}
+	}
+	footer,
+	section{
+		.section-content{
+			padding-top: 100px;
+			padding-bottom: 100px;
+			.section-block{
+				margin-bottom: 50px;
+			}
+		}
+	}
+	section.video-section{
+		// padding: 100px 0 50px;
+	}
+	main + section{
+		.section-content{
+			padding-top: 150px;
+		}
+	}
+	footer{
+		hr{
+			width: 70%;
+			border-color: darken($qp-color-white, 50);
+		}
+	}
+}
+
+/* Responsiveness */
+
+// Small devices (Not Mobile-first approach) (landscape phones, 576px and up) 
+@media (max-width: 575px){
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px){
+}
+
+// To fix override by MDB Framework
+@media (max-width: 600px){
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px){
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px){
+	.right-column{
+		main,
+		section{
+			.feature-image{
+				position: absolute;
+				max-width: none;
+			}
+		}
+	}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px){
+}

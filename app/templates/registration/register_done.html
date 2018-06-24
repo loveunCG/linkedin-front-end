@@ -1,0 +1,22 @@
+{% extends 'app/base_headless.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock title %}
+
+
+{% block content %}
+
+<div class="block-center mt-xl wd-xl">
+    <div class="panel panel-dark panel-flat">
+        {%include 'registration/includes/header.html'%}
+        
+        <div class="panel-body">
+            <p class="text-center pv">REGISTERED</p>
+            <p class="pt-lg text-center">Please check your emaill to activate your account!</p>
+           
+           {%include 'registration/includes/login_button.html'%}
+         </div>
+    </div>
+</div>
+
+{% endblock content %}

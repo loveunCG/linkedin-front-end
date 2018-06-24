@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'new/landing/includes/__head.html' %}
+    <title>
+      {% block title %}B2B Prospects {% endblock title %}
+    </title>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+
+  <body>
+    {% include 'new/landing/includes/__sidebar.html' %}
+    <div class="container-fluid">
+      <div class="row">
+        {% include 'new/landing/includes/__header.html' %}
+        <main class="main-content p-5" role="main">
+          {% block content %}
+          {% endblock %}
+        </main>
+      </div>
+    </div>
+    {% include 'new/landing/includes/__script.html' %}
+    {% block extrajs %}
+    {% endblock %}
+  </body>
+</html>

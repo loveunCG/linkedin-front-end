@@ -1,0 +1,100 @@
+{% load static %}
+{% load site_title %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary bg-gradient">
+    <a class="navbar-brand" href="#" style="padding-top:12px">
+        <span class="head-title">{% site_title %}</span>
+    </a>
+    <button class="hamburger hamburger--slider" type="button" data-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle Sidebar">
+        <span class="hamburger-box" >
+            <span class="hamburger-inner" ></span>
+        </span>
+    </button>
+    <!-- Added Mobile-Only Menu -->
+    <ul class="navbar-nav ml-auto mobile-only-control d-block d-sm-block d-md-block d-lg-none">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbar-notification-search-mobile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                <i class="batch-icon batch-icon-search"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search-mobile">
+                <li>
+                    <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-gradient waves-effect waves-light" type="button">
+                                    <i class="batch-icon batch-icon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="collapse navbar-collapse" id="navbar-header-content">
+        <ul class="navbar-nav navbar-language-translation mr-auto">
+        </ul>
+        {% if user.is_authenticated %}
+
+            <ul class="navbar-nav ml-5 navbar-profile">
+        </li>
+            <ul class="navbar-nav navbar-notifications float-right">              
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle no-waves-effect ml-3" id="navbar-notification-misc" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                        <i class="clr-white batch-icon batch-icon-bell "></i>
+{#                        <span class="notification-number"></span>#}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-md" aria-labelledby="navbar-notification-misc">
+                        <li class="media">
+                            <a href="#">
+                                <i class="batch-icon batch-icon-bell batch-icon-xl d-flex mr-3"></i>
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1 notification-heading">You have no notification</h6>
+                                    <div class="notification-text">
+
+                                    </div>
+                                    <!--<span class="notification-time">Just now</span>-->
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-5 navbar-profile">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbar-dropdown-navbar-profile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                        <div class="profile-name">
+                            {{ user.username }}
+                        </div>
+{#                        <div class="profile-picture bg-gradient bg-primary has-message float-right">#}
+{#                            <img src="{% static 'assets/img/profile-pic.jpg' %}" width="44" height="44">#}
+{#                        </div>#}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown-navbar-profile">
+						<li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pinax_stripe_subscription_list' %}">subscription</a></li>
+                        <li onclick="___log_out()"><a class="dropdown-item">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {%else%}
+            <ul class="navbar-nav navbar-notifications float-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/" id="navbar-notification-search" >
+                        <i class="batch-icon batch-icon-in"></i> Sign in
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/" id="navbar-notification-search" >
+                        <i class="batch-icon batch-icon-user-alt-add"></i> Sign up
+                    </a>
+                </li>
+            </ul>
+       {%endif%}
+
+    </div>
+</nav>
+

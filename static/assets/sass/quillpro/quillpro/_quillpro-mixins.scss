@@ -1,0 +1,120 @@
+/* QUILLPRO MIXINS */
+
+@mixin qp-font($qp-font-family: "Montserrat"){
+	@if $qp-font-family == 'Montserrat' {
+		font-family: 'Montserrat', sans-serif !important;
+		font-size: 12px;
+		font-weight: 400;
+	} @else {
+		font-family: $qp-font-family, sans-serif !important;
+		font-size: 14px;
+		font-weight: 400;
+	}
+}
+
+@mixin qp-button-padding($qp-font-family: "Montserrat"){
+	@if $qp-font-family == 'Montserrat' {
+		padding: .95rem 2.13rem .85rem;
+	} @else {
+		padding: .85rem 2.13rem;
+	}
+}
+
+@mixin qp-button-size-md($qp-font-family: "Montserrat"){
+	@if $qp-font-family == 'Montserrat' {
+		font-size: 1rem;
+	} @else {
+		font-size: 1rem;
+	}
+	@include qp-border-radius();
+	font-weight: 500;
+}
+
+@mixin qp-button-size-lg($qp-font-family: "Montserrat"){
+	@if $qp-font-family == 'Montserrat' {
+		font-size: 1.25rem;
+		font-weight: 500;
+	} @else {
+		font-size: 1rem;
+	}
+	@include qp-border-radius();
+}
+
+@mixin qp-button-size-sm($qp-font-family: "Montserrat"){
+	@if $qp-font-family == 'Montserrat' {
+		font-size: 0.8rem;
+	} @else {
+		font-size: 1rem;
+	}
+	@include qp-border-radius();
+	font-weight: 500;
+}
+
+@mixin qp-gradient($qp-color-1, $qp-color-2){
+	@if $qp-color-1 != '0' {
+		background: $qp-color-1;
+		/* Old browsers */
+		background: -moz-linear-gradient(-45deg, $qp-color-1 0%, $qp-color-2 100%);
+		/* FF3.6-15 */
+		background: -webkit-linear-gradient(-45deg, $qp-color-1 0%, $qp-color-2 100%);
+		/* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(135deg, $qp-color-1 0%, $qp-color-2 100%);
+		/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$qp-color-1, endColorstr=$qp-color-2,GradientType=1 );
+		/* IE6-9 fallback on horizontal gradient */
+		@include qp-transition(opacity 0.2s ease-out);
+	}
+}
+
+@mixin qp-transition($transition...){
+	-webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+@mixin qp-border-radius($radius: 0.4167rem){
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin qp-border-radius-top-left($radius: 0.4167rem){
+	-webkit-border-top-left-radius: $radius;
+	-moz-border-top-left-radius: $radius;
+	-ms-border-top-left-radius: $radius;
+	-o-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+}
+
+@mixin qp-border-radius-top-right($radius: 0.4167rem){
+	-webkit-border-top-right-radius: $radius;
+	-moz-border-top-right-radius: $radius;
+	-ms-border-top-right-radius: $radius;
+	-o-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+}
+
+@mixin qp-border-radius-bottom-left($radius: 0.4167rem){
+	-webkit-border-bottom-left-radius: $radius;
+	-moz-border-bottom-left-radius: $radius;
+	-ms-border-bottom-left-radius: $radius;
+	-o-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+@mixin qp-border-radius-bottom-right($radius: 0.4167rem){
+	-webkit-border-bottom-right-radius: $radius;
+	-moz-border-bottom-right-radius: $radius;
+	-ms-border-bottom-right-radius: $radius;
+	-o-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+}
+
+@mixin qp-rotate($degrees: 90deg){
+	-ms-transform: rotate($degrees); /* IE 9 */
+	-webkit-transform: rotate($degrees); /* Safari */
+	transform: rotate($degrees);
+}

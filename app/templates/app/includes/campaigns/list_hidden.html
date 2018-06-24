@@ -1,0 +1,7 @@
+{%for camp in campaigns %}
+
+	<div style="display: none" class="hidden campaign campaign-{{camp.id}}" data-url="{{camp.get_absolute_url}}">{%if camp.connection_message %}{{camp.connection_message}}{%endif%}</div>
+	<div style="display: none" class="hidden campaign connect-{{camp.id}}" data-url="{{camp.get_absolute_url}}">{%if camp.connection_message %}{{camp.connection_message}}{%endif%}</div>
+
+	
+{%endfor%}

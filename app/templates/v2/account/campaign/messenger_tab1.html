@@ -1,0 +1,18 @@
+<div class="tab-pane active" id="tab_1">
+{% if object.contacts.count > 0 %}
+    <div class="row">
+        {% include 'v2/account/campaign/messenger_people.html' with contacts=object.contacts.all %}
+    </div>
+{%else%}
+    <h4>To get things going with this Messenger Campaign:</h4>
+  <p>1. Go to
+  {% if object.is_bulk %}
+    <a href="{%url 'account-network' pk=object.owner_id %}">My Network</a>
+  {%else%}
+       <a href="{%url 'account-search' pk=object.owner_id %}">Search</a>
+  {%endif%}
+  .</p>
+  <p>2. Find people you would like to add to this Messenger Campaign.</p>
+  <p>3. Select and add people you would like to contact by clicking "Add Selected People to Messenger Campaign" or "Add All New People to Messenger Campaign" button.</p>
+{%endif%}
+</div>

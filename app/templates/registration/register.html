@@ -1,0 +1,36 @@
+{% extends 'app/base_headless.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock title %}
+
+
+{% block content %}
+
+<div class="block-center mt-xl wd-xl">
+    <div class="panel panel-dark panel-flat">
+        {%include 'registration/includes/header.html'%}
+        <div class="panel-body">
+            <p class="text-center pv">SIGNUP TO GET INSTANT ACCESS</p>
+            <form class="mb-lg" method="post" role="form">
+                {% csrf_token %}
+                
+                {% include 'registration/includes/register_form.html' with form=form %}
+               
+
+
+               
+                <div class="clearfix">
+                    <div class="checkbox pull-left mt0">
+                        <label>
+                            By creating an account,
+I agree with the <a href="#">terms</a> </label>
+                        <br> <span class="field-validation-valid text-danger small" data-valmsg-for="AgreeWithTerms" data-valmsg-replace="true"></span></div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary mt-lg">Create account</button>
+            </form>
+            {%include 'registration/includes/login_button.html'%}
+         </div>
+    </div>
+</div>
+
+{% endblock content %}

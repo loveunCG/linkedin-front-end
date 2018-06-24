@@ -1,0 +1,69 @@
+{% load static %}
+<nav id="sidebar" class="px-0 bg-dark bg-gradient sidebar sidebar-hidden">
+    <ul class="nav nav-pills flex-column">
+        <li class="logo-nav-item text-center">
+            <a class="navbar-brand" >
+                <div class=" has-message float-right">
+                    {% if  user.is_authenticated %}
+                        <img src="{% static 'new/img/B2B_Logo.png' %}" style="width:130px; margin: 0 1.5em" alt="QuillPro" class="mCS_img_loaded">
+                    {%else%}
+                        <img src="{% static 'new/img/B2B_Logo.png' %}" style="width:130px; margin: 0 1.5em" alt="QuillPro" class="mCS_img_loaded">
+                    {%endif%}
+                </div>
+            </a>
+            <div>
+                <!-- {% if  user.is_authenticated %}
+                    {{ user.username }}
+                {%endif%}   -->  
+            </div>
+        </li>
+        <li>
+            {% if  user.is_authenticated %}
+{#            <img src="{% static 'new/img/logo_new.jpg' %}" width="44" height="44" alt="logo" style="margin-left: 30px;border-radius: 50%;">#}
+            {%endif%}
+            
+        </li>
+        <li>
+            <h6 class="nav-header">General</h6>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link  {% if request.path == '/' %} active {% endif %}" href="{% url 'home' %}">
+                    <i class="batch-icon batch-icon-home"></i>
+                    Home <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == '/accounts/' %} active {% endif %}" href="{% url 'accounts' %}">
+                    <i class="batch-icon batch-icon-user-alt-3"></i>
+                    Accounts <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if 'subscription' in request.path %} active {% endif %}" href="{% url 'pinax_stripe_subscription_list' %}">
+                    <i class="batch-icon batch-icon-user-alt-3"></i>
+                    Subscription <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <i class="batch-icon batch-icon-out"></i>
+                    logout <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        {%else%}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">
+                    <i class="batch-icon batch-icon-in"></i>
+                    Sign In <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">
+                    <i class="batch-icon batch-icon-user-alt-add"></i>
+                    Sign Up <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        {%endif%}
+    </ul>
+</nav>

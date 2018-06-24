@@ -1,0 +1,69 @@
+{% extends 'v2/app/base.html' %} {% load static %} {% block title %}Home{% endblock title %} 
+
+{%block head%}
+<link rel="stylesheet" href="{% static 'assets/css/subscription.css' %}">
+
+{%endblock%}
+
+{%block sidebar%} {%endblock%}
+
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-6 col-lg-6 mb-5">
+		<div class="card card-sm bg-info">
+			<div class="card-body">
+				<div class="mb-4 clearfix">
+					<div class="float-left text-warning text-left">
+						<i class="fa batch-icon-tag-alt-3 batch-icon-xxl"></i>
+					</div>
+					<div class="float-right text-right">
+						<h6 class="m-0">Current plan</h6>
+					</div>
+				</div>
+				<div class="text-right clearfix">
+					<div class="display-4">TRIAL</div>
+					<div class="m-0">4 days left</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-lg-6 mb-5">
+		<div class="card card-sm">
+			<div class="card-body">
+				<div class="mb-4 clearfix">
+					<div class="float-left text-warning text-left">
+						<i class="batch-icon batch-icon-star batch-icon-xxl"></i>
+					</div>
+					<div class="float-right text-right">
+						<h6 class="m-0">Reviews</h6>
+					</div>
+				</div>
+				<div class="text-right clearfix">
+					<div class="display-4">Seats</div>
+					<div class="m-0">
+						<a href="#">1</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+<div class="row my-5 pt-5 clearfix">
+	<div class="col-md-12">
+		<div class="price-list-type-2 clearfix">
+			{% include 'v2/app/includes/price_block.html' with price=plans.0 %}
+            {% include 'v2/app/includes/price_block.html' with price=plans.1 %}
+            {% include 'v2/app/includes/price_block.html' with price=plans.2 %}
+		</div>
+	</div>
+</div>
+<div class="text-center">
+	<p>Invoices</p>
+	
+</div>
+
+
+{%endblock%}

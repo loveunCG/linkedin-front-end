@@ -1,0 +1,155 @@
+{% load static %}
+<script src="{% static 'js/modernizr-2.8.3.js' %}"></script>
+<script src="{% static 'js/matchMedia.js' %}"></script>
+<script src="{% static 'js/jquery-2.2.4.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery.storageapi.js' %}"></script>
+<script src="{% static 'js/jquery.easing.js' %}"></script>
+<script src="{% static 'js/animo.js' %}"></script>
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'js/screenfull.js' %}"></script>
+<script src="{% static 'js/jquery.localize.js' %}"></script>
+<script src="{% static 'js/demo-rtl.js' %}"></script>
+<script src="{% static 'js/sweetalert.min.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/jquery.flot.js' %}"></script>
+<script src="{% static 'js/jquery.flot.tooltip.min.js' %}"></script>
+<script src="{% static 'js/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'js/jquery.flot.pie.js' %}"></script>
+<script src="{% static 'js/jquery.flot.time.js' %}"></script>
+<script src="{% static 'js/jquery.flot.categories.js' %}"></script>
+<script src="{% static 'js/jquery.flot.spline.min.js' %}"></script>
+<script src="{% static 'js/jquery.classyloader.min.js' %}"></script>
+<script src="{% static 'js/moment-with-locales.min.js' %}"></script>
+
+
+
+<script>
+    var data = [{
+        "label": "Invitations",
+        "color": "#768294",
+        "data": [
+            ['1518048000000', 0],
+            ['1518134400000', 0],
+            ['1518220800000', 0],
+            ['1518307200000', 0],
+            ['1518393600000', 0],
+            ['1518480000000', 0],
+            ['1518566400000', 0],
+            ['1518652800000', 0],
+            ['1518739200000', 0],
+            ['1518825600000', 0],
+            ['1518912000000', 0],
+            ['1518998400000', 0],
+            ['1519084800000', 0],
+            ['1519171200000', 0],
+            ['1519257600000', 0]
+        ]
+    }, {
+        "label": "Connections",
+        "color": "#1f92fe",
+        "data": [
+            ['1518048000000', 0],
+            ['1518134400000', 0],
+            ['1518220800000', 0],
+            ['1518307200000', 0],
+            ['1518393600000', 0],
+            ['1518480000000', 0],
+            ['1518566400000', 0],
+            ['1518652800000', 0],
+            ['1518739200000', 0],
+            ['1518825600000', 0],
+            ['1518912000000', 0],
+            ['1518998400000', 0],
+            ['1519084800000', 0],
+            ['1519171200000', 0],
+            ['1519257600000', 0]
+        ]
+    }];
+    var options = {
+        series: {
+            lines: {
+                show: false
+            },
+            points: {
+                show: true,
+                radius: 4
+            },
+            splines: {
+                show: true,
+                tension: 0.4,
+                lineWidth: 1,
+                fill: 0.5
+            }
+        },
+        grid: {
+            borderColor: '#eee',
+            borderWidth: 1,
+            hoverable: true,
+            backgroundColor: '#fcfcfc'
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: function (label, x, y) {
+                return label + ' : ' + x + ' : ' + y;
+            }
+        },
+        xaxis: {
+            tickColor: '#fcfcfc',
+            mode: "time",
+            timeformat: "%m/%d/%Y"
+        },
+        yaxis: {
+            min: 0,
+            max: 100,
+            tickColor: '#eee',
+            tickFormatter: function (v) {
+                return v;
+            }
+        },
+        shadowSize: 0
+    };
+    var chart = $('.chart-spline');
+    if (chart.length) $.plot(chart, data, options);
+</script>
+<div class="flotTip"
+     style="display: none; position: absolute; background: rgb(255, 255, 255); z-index: 1040; padding: 0.4em 0.6em; border-radius: 0.5em; font-size: 0.8em; border: 1px solid rgb(17, 17, 17); white-space: nowrap; left: 461px; top: 555px;"></div>
+<script src="{% static 'js/app.init.js'%}"></script>
+<script src="{% static 'js/bootstrap-start.js'%}"></script>
+<script src="{% static 'js/calendar.js'%}"></script>
+<script src="{% static 'js/classyloader.js'%}"></script>
+<script src="{% static 'js/clear-storage.js'%}"></script>
+<script src="{% static 'js/constants.js'%}"></script>
+<script src="{% static 'js/flatdoc.js'%}"></script>
+<script src="{% static 'js/trigger-resize.js'%}"></script>
+<script src="{% static 'js/fullscreen.js'%}"></script>
+<script src="{% static 'js/gmap.js'%}"></script>
+<script src="{% static 'js/load-css.js'%}"></script>
+<script src="{% static 'js/localize.js'%}"></script>
+<script src="{% static 'js/maps-vector.js'%}"></script>
+<script src="{% static 'js/navbar-search.js'%}"></script>
+<script src="{% static 'js/notify.js'%}"></script>
+<script src="{% static 'js/now.js'%}"></script>
+<script src="{% static 'js/panel-tools.js'%}"></script>
+<script src="{% static 'js/play-animation.js'%}"></script>
+<script src="{% static 'js/porlets.js'%}"></script>
+<script src="{% static 'js/sidebar.js'%}"></script>
+<script src="{% static 'js/skycons.js'%}"></script>
+<script src="{% static 'js/slimscroll.js'%}"></script>
+<script src="{% static 'js/sparkline.js'%}"></script>
+<script src="{% static 'js/table-checkall.js'%}"></script>
+<script src="{% static 'js/toggle-state.js'%}"></script>
+<script src="{% static 'js/utils.js'%}"></script>
+<script src="{% static 'js/chart.js'%}"></script>
+<script src="{% static 'js/morris.js'%}"></script>
+<script src="{% static 'js/rickshaw.js'%}"></script>
+<script src="{% static 'js/chartist.js'%}"></script>
+<script src="{% static 'js/tour.js'%}"></script>
+<script src="{% static 'js/sweetalert.js'%}"></script>
+<script src="{% static 'js/color-picker.js'%}"></script>
+<script src="{% static 'js/imagecrop.js'%}"></script>
+<script src="{% static 'js/chart-knob.js'%}"></script>
+<script src="{% static 'js/chart-easypie.js'%}"></script>
+<script src="{% static 'js/select2.full.min.js'%}"></script>
+<script src="{% static 'js/select2.js'%}"></script>
+<script src="{% static 'js/datatables.min.js'%}"></script>

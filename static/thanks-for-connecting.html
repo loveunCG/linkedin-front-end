@@ -1,0 +1,98 @@
+<section>
+    <div class="content-wrapper">
+        <div class="content-heading">
+            <div class="pull-right">
+                <div class="btn-group"> <a type="button" href="autoresponder.php" class="btn btn-default"><em class="icon-speech">&nbsp;</em> Add New Autoresponder Message</a></div>
+            </div> Autoresponder <small>Set up your autoresponder message here</small></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <h4 class="mv"> Thanks for connecting</h4></div>
+                            <div class="pull-right">
+                                <button class="btn btn-default"><span class=""><em class="fa fa-trash-o">&nbsp;</em>Delete</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form action="/Autoresponder/Update" class="form-horizontal" id="bootstrap-wysiwyg-form" method="post" role="form">
+                            <input name="__RequestVerificationToken" type="hidden" value="KwGcmVGnGAsblXzF4s1ZMLJIJtgf7y8WK_GWqP8LCzeEIzEgHE-IANEQA06QDdFEx9zEKsgo3rjpAYO9Smxy0Lf9O0QinihEhQEpE-INeU9gZRoZ6XSpECvbYn65eBpMXPm88Lf6vSRRzSbF-edLew2">
+                            <input data-val="true" data-val-number="The field AutoresponderMessageId must be a number." id="AutoresponderMessageId" name="AutoresponderMessageId" type="hidden" value="7">
+                            <input id="MessageBody" name="MessageBody" type="hidden" value="{first_name},<br>Thanks for connecting! Quick question: Are you in need of Working Capital for your business this week? <br><br>Reply quick here for more info.<br>Thanks - Jonathan http://workingcapitalloantoday.com/">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="MessageName">MessageName</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control" id="MessageName" name="MessageName" placeholder="" type="text" value="Thanks for connecting"> <span class="field-validation-valid text-danger small" data-valmsg-for="MessageName" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Message Text</label>
+                                <div class="col-sm-10">
+                                    <div data-role="editor-toolbar" data-target="#editor" class="btn-toolbar btn-editor">
+                                        <div class="btn-group dropdown">
+                                            <button data-toggle="dropdown" title="Insert User Field" class="btn dropdown-toggle btn-default"> Insert User Field&nbsp;&nbsp;<b class="caret"></b> </button>
+                                            <ul class="dropdown-menu">
+                                                <li> <a href="#" data-edit="insertHTML {first_name}">First Name</a></li>
+                                                <li> <a href="#" data-edit="insertHTML {last_name}">Last Name</a></li>
+                                                <li> <a href="#" data-edit="insertHTML {member_title}">Title</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a data-edit="bold" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Bold (Ctrl/Cmd+B)"> <em class="fa fa-bold"></em> </a>
+                                            <a data-edit="italic" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Italic (Ctrl/Cmd+I)"> <em class="fa fa-italic"></em> </a>
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <a data-edit="undo" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Undo (Ctrl/Cmd+Z)"> <em class="fa fa-undo"></em> </a>
+                                            <a data-edit="redo" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Redo (Ctrl/Cmd+Y)"> <em class="fa fa-repeat"></em> </a>
+                                        </div>
+                                    </div>
+                                    <div id="editor" style="overflow:scroll; height:250px;max-height:250px" class="form-control wysiwyg mt-lg" contenteditable="true">{first_name},
+                                        <br>Thanks for connecting! Quick question: Are you in need of Working Capital for your business this week?
+                                        <br>
+                                        <br>Reply quick here for more info.
+                                        <br>Thanks - Jonathan http://workingcapitalloantoday.com/</div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="btn-group"> <a href="onclick-save-connecting.php" class="btn btn-labeled btn-info col-lg-12"><span class="btn-label"><em class="fa fa-save"></em></span>Save</a></div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <div class="btn-group">
+                                    <button class="btn btn-labeled btn-default col-lg-12"><span class="btn-label"><em class="fa fa-times"></em></span>Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>Attached Campaigns</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group m-b">
+                            <table class="table table-bordered bg-transparent">
+                                <tbody>
+                                    <tr>
+                                        <td> <em class="icon-grid">&nbsp;</em> <a href="#" class="text-muted">My First Campaign</a>
+                                            <br><small>[+ 0 days]</small>
+                                            <br>
+                                        </td>
+                                        <td> <a class="btn btn-link btn-custom-link" type="button" href="#" title="Detach Message"><em class="fa fa-close fa-fw small"></em> </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button data-toggle="modal" data-target="#myModal2" class="btn btn-link"><em class="icon-paper-clip">&nbsp;</em>Attach Campaign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

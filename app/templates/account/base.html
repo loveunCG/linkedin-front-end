@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en"
+      class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+
+<head>
+    {% include 'account/includes/head.html' %}
+    <title>{% block title %}B2B Prospects {% endblock title %}</title>
+    {% block extra_head %}
+
+    {% endblock %}
+<title>Prospects Generator</title>
+</head>
+
+<body class="">
+<div class="wrapper">
+{% include 'account/includes/header.html' %}
+{% include 'account/includes/aside.html' %}
+
+
+    <section>
+        <div class="content-wrapper">
+            <div class="content-heading">{% block pagetitle %}
+            
+            {% endblock %}</div>
+            {% block content %}
+            
+            {% endblock %}
+
+        </div>
+    </section>
+    <footer><span>© 2017 - 2018, ProspectsGenerator.com</span></footer>
+</div>
+
+
+
+{% include 'account/includes/script.html' %}
+
+{% block pagefooter %}
+
+{% endblock %}
+
+
+
+</body>
+
+</html>

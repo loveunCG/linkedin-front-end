@@ -1,0 +1,46 @@
+{% load static %}
+{% load site_title %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    {% include 'v2/app/includes/head.html' %}
+</head>
+
+<body>
+
+<div class="container-fluid">
+		<div class="row justify-content-md-center ">
+			
+					
+					<div class="col-md-auto order-md-1 bg-white px-5 pt-5">
+						<a class="signin-logo d-sm-none d-md-block" href="/">
+							
+							<img src="{% static 'new/img/B2B_Logo.png' %}" width="145" height="auto"  alt="logo" style="border-radius: 50%;">
+							
+						
+							<h2 class="text-info">{% site_title %}</h2>
+						</a>
+	{% block content %}
+	
+    {% endblock content %}
+    </div>
+				
+		
+		</div>
+	</div>
+    
+    {% include 'v2/app/includes/script.html' %}
+    <script>
+            var msg = "{{ msg }}";
+        </script>
+        <script type="text/javascript" src="{% static 'assets/plugins/form-validator/jquery.form-validator.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/scripts/register.js' %}"></script>
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>

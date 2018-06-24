@@ -1,0 +1,35 @@
+ {% extends 'v2/account/base.html' %} {% load static %} {% block title %}Messenger{% endblock title %} {% block pagetitle%}
+Messenger {% endblock %} {%block content%}
+
+<div class="row mb-5">
+	<div class="col-md-3">
+		<a class="btn btn-primary btn-gradient waves-effect waves-light btn-block" href="{% url 'account-messenger-add' pk=pk %}">NEW MESSENGER CAMPAIGN</a>
+	</div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-body">
+				<div id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="header" role="tab" id="headingOne">
+						<h4 class="mb-0">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+								Want to communicate with your existing network? Start new Messenger Campaign.
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">				
+							<ul>
+								<li>Set up steps with personalized automated messages for your first message or for a follow-up message, set another
+									automated follow-up message if no response is received in a few days. This is done by clicking on the
+									<u>Steps</u> tab inside the Messenger Campaign.</li>
+								<li>To add people from your network to the Messenger Campaign click on
+									<u>My Network</u> in the top menu. Select people you would like to be added to Messenger Campaign and click 'Add selected
+									people to Messenger Campaign', or add all filtered people by clicking 'Add all new people to Messenger Campaign'.</li>
+							</ul>					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+{%include 'v2/account/campaign/messenger_list.html' with object_list=object_list %} {%endblock%}

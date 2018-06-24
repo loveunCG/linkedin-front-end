@@ -1,0 +1,32 @@
+<div class="table-responsive">
+<table class="table table-datatable table-striped table-hover" id="campaign_people">
+	<thead>
+	{% include 'app/includes/people_datatable_headrow.html' with campaign=campaign%}
+	</thead>
+	<tbody>
+	{% for contact in contacts %}
+	 <tr class="contact cursor-pointer" style="cursor: pointer !important;">
+	  <td></td>
+	  <td>{{contact.name}}</td>
+	  <td>{{contact.name}}</td>
+	  <td>{{contact.industry}}</td>
+	  <td>{{contact.title}}</td>
+	  <td>{{contact.location}}</td>
+	  <td>{{contact.latest_activity}}</td>
+	  {%if campaign%}
+	  <td>{{contact.campaign}}</td>
+	  {%endif%}
+	  <td >{# how to deal with this
+	  <span data-contactid="{{contact.id}}" class="btn btn-orange btn-gradient waves-effect waves-light btn-block" data-toggle="tooltip" data-popover-content="#popover{{pk}}"
+	  data-html="true" data-tooltip-content="<strong>angular develooper</strong><br>In Queue for Connection request">
+	  In Queue</span>
+	 </td>
+	</tr>
+	{%endfor%}
+	</tbody>
+</table>
+</div>
+<form name="contacts-delete" action="{% url 'contacts-delete' %}" method="post">
+{% csrf_token %}
+<input name="cid" value="" type=hidden />
+</form>

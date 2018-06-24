@@ -1,0 +1,304 @@
+{% extends 'v2/app/base.html' %}
+{% load static %}
+{% block head %}
+    <link href="{% static 'css/css-circular-prog-bar.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/progress_bar.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block title %}Home{% endblock title %}
+{% block sidebar %}
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">
+                    <img src="{% static 'new/img/logo_new.jpg' %}" width="44" height="44" alt="logo" style="border-radius: 50%;">
+                    Linkedin Accounts
+                    <a href="/accounts/add/" class="btn btn-primary btn-gradient waves-effect waves-light pull-right add-account pull-right"
+                                      data-toggle="tooltip" title="Add account">
+                        <i class="batch-icon batch-icon-user-alt-add"></i>
+                        Add LinkedIn Account
+                        </a>
+                </h3>
+            <div class="card-table table-responsive">
+                  <table class="table table-hover align-middle">
+                <tbody>
+                {% for item in object_list %}
+                   {% if not item.is_deleted %}
+                    <tr>
+                        <td>
+                            {% if item.login_status %}
+                                <a href="{% url 'account-detail' pk=item.id %}">{{ item.email }}</a>
+                            {% else %}
+                                <a href="#" id="inactive_account_click"
+                                   data-email="{{ item.email }}"
+                                   data-pass="{{ item.password }}">{{ item.email }}</a>
+                            {% endif %}
+                        </td>
+                        <td class="text-right">
+                            <span class="badge badge-{% if item.status %}success{% else %}warning{% endif %}">{% if item.status %} Active{% else %}Inactive{% endif %}</span>
+                        </td>
+                        <td class="text-right">
+                            {% if item.login_status %}
+                                <a class="btn btn-primary btn-sm btn-gradient"  href="{% url 'account-detail' pk=item.id %}" data-toggle="tooltip" data-original-title=""
+                                    title="">
+                                    Dashboard
+                                </a>
+                            {% endif %}
+                            <a href="#" title="Delete" data_id="{{ item.id }}" class="remove_account btn-danger btn btn-sm btn-gradient"
+                               id="acc_{{ item.id }}"><span class="batch-icon batch-icon-bin-alt-2"></span>
+                            </a>
+                        </td>
+                    </tr>
+                   {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            </div>
+       
+  </div>
+</div>
+</div>
+
+<div id="add_account_modal" tabindex="-1" role="dialog" aria-labelledby="Add account" aria-hidden="true"
+     class="modal fade" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 id="myModalLabel" class="text-info" style="margin-top: 5px">Add LinkedIn Account</h3>
+                    <p>Please be patient, this process may take few minutes</p>
+                    <hr style="display: block; height: 1px;border: 0;border-top: 1px solid #23b7e5;margin: 1em 0;padding: 0; ">
+
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-12" id="add_account_modal_results">
+                    </div>
+                </div>
+                <div id="progressbar_custom_first_page">
+                    {% include "account/accounts/progress_authentication.html" %}
+                    </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <form class="form-horizontal" id="modal-form"
+                              role="form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" style="text-align: left">Email</label>
+                                <input class="form-control" id="email" name="email" type="email"
+                                       value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-left col-lg-2 control-label" style="align: left">Password</label>
+                                <input class="form-control" id="password" name="password" type="password" value="">
+                            </div>
+                        </form>
+                        <div id="add_account_modal_extra_results"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11">
+                    <a href="#" form="modal-form" class="pull-right btn-gradient btn btn-primary"
+                       id="add_account">Add</a>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="remove_account" tabindex="-1" role="dialog" aria-labelledby="Add account" aria-hidden="true"
+     class="modal fade" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Account</h4>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure you want to delete this account ?</h5>
+                <p class="text-red">All of your account data will be permanently deleted from B2B Prospects's
+                    servers and can't be restored.</p>
+                <h5 class="text-danger">You can only use one LinkedIn account during the 7-day free trial. If you
+                    delete this LinkedIn account, your free trial will end immediately. The next time you add this
+                    or any other LinkedIn account, you will have to pay for it first.</h5>
+            </div>
+            <input type="hidden" name="cid" value="">
+            <div class="card-footer">
+                <button type="button" class="btn btn-default btn-gradient pull-left" data-dismiss="modal">Cancel</button>
+                <a type="button" href="#" class="btn btn-primary pull-right add_button"
+                   id="account_delete_confirm">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+
+    <script>
+        $(document).ready(function () {
+
+            localStorage.removeItem('pin_code');
+
+            $('#add_account_modal').on('hidden.bs.modal', function (e) {
+                window.location.reload();
+            });
+
+            $("#modal-form").validate({
+                errorElement: "span",
+                errorClass: "help-block help-block-error",
+                focusInvalid: !1,
+                ignore: "",
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (e) {
+                    $(e).closest(".form-group").addClass("has-error")
+                },
+                unhighlight: function (e) {
+                    $(e).closest(".form-group").removeClass("has-error")
+                },
+                success: function (e) {
+                    e.closest(".form-group").removeClass("has-error")
+                },
+                submitHandler: function (e) {
+                    AjaxAddLinkedAccount();
+                }
+            });
+
+            function modal_open() {
+                if (typeof interval !== 'undefined') {
+                    clearInterval(interval);
+                }
+                $('#loading_image').hide()
+                $('#add_account_modal').modal('show');
+                $('#add_account').show()
+                $('#modal-form').show();
+                $('#progressbar_custom_first_page').show();
+                $('#add_account_modal_results').html('')
+            }
+
+            $('body').on('click', '.add-account', function (e) {
+                e.preventDefault();
+                modal_open()
+            });
+
+            function AjaxAddLinkedAccount(){
+                data = new Object()
+                data.email = $('#email')[0].value
+                data.password = $('#password')[0].value
+                var html = $('#add_account_modal_results').html()
+                if (html.indexOf('Data_Sync') >= 0) {
+                    data.task_type = 'Data_Sync'
+                }
+                $.ajax({
+                    url: '{% url 'add-account' %}',
+                    type: "post",
+                    data: data,
+                    success: function (response) {
+                        $('#add_account').hide()
+                        $('#add_account_modal_extra_results').html('')
+                        load(data)
+                        interval = setInterval(function () {
+                            load(data)
+                        }, 10000);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.responseText == '400'){
+                            swal({
+                              title: "Error!",
+                              text: "Account with this email is already exists!",
+                              icon: "error",
+                              button: "Ok",
+                            });
+                            $('#add_account_modal_extra_results').html('<p class="text-danger"> Account with this email is already exists </p>')
+                        }else{
+                            $('#add_account_modal_extra_results').html('<p class="text-danger"> An error occur during add this acount. please reloade this page and try again </p>')
+                        }
+                    }
+                });
+            }
+
+            function load(data) {
+                if(localStorage.getItem('pin_code') !== null){
+                    console.log('not_refresh');
+                    return;
+                }
+                $.ajax({
+                    url: '{% url 'account-info' %}',
+                    type: "post",
+                    data: data,
+                    success: function (response) {
+                        $('#modal-form').hide();
+                        $('#progressbar_custom_first_page').hide();
+                        $('#add_account_modal_results').html(response)
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
+            }
+
+            $('body').on('click', '#inactive_account_click', function (e) {
+                e.preventDefault();
+                email = this.getAttribute('data-email')
+                password = this.getAttribute('data-pass')
+                data = new Object();
+                data.email = email
+                data.password = password
+                modal_open()
+                $('#add_account').hide()
+                load(data)
+                interval = setInterval(function () {
+                    load(data)
+                }, 10000);
+            });
+
+            $('body').on('click', '#add_account', function (e) {
+                e.preventDefault();
+                $('#modal-form').submit();
+            });
+
+            $('body').on('click', '.remove_account', function (e) {
+                e.preventDefault();
+                linkedin_id = this.getAttribute('data_id');
+                console.log(linkedin_id);
+                $('#account_delete_confirm')[0].href = '/accounts/remove/' + linkedin_id;
+                $('#remove_account').modal('show');
+            });
+
+            $('body').on('click', '#add_item_modal_close', function (e) {
+                e.preventDefault();
+                window.location.href = ''
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,68 @@
+
+
+/* Form Progress_custom */
+.progress_custom {
+  /*width: 1000px;*/
+  margin: 20px auto;
+  text-align: center;
+}
+.progress_custom .circle_custom,
+.progress_custom .bar_custom {
+  display: inline-block;
+  background: #fff;
+  width: 40px; height: 40px;
+  border-radius: 40px;
+  border: 1px solid #d5d5da;
+}
+.progress_custom .bar_custom {
+  position: relative;
+  width: 20%;
+  height: 6px;
+  top: -33px;
+  margin-left: -5px;
+  margin-right: -5px;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+.progress_custom .circle_custom .label_custom {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 32px;
+  margin-top: 3px;
+  color: #b5b5ba;
+  font-size: 17px;
+}
+.progress_custom .circle_custom .title {
+  color: #b5b5ba;
+  font-size: 13px;
+  line-height: 30px;
+  margin-left: -5px;
+}
+
+/* Done / Active */
+.progress_custom .bar_custom.done,
+.progress_custom .circle_custom.done {
+  background: #eee;
+}
+.progress_custom .bar_custom.active {
+  background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+}
+.progress_custom .circle_custom.done .label_custom {
+  color: #FFF;
+  background: #8bc435;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progress_custom .circle_custom.done .title {
+  color: #444;
+}
+.progress_custom .circle_custom.active .label_custom {
+  color: #FFF;
+  background: #0c95be;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progress_custom .circle_custom.active .title {
+  color: #0c95be;
+}

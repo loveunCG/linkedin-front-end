@@ -1,0 +1,56 @@
+{% load static %}
+{% block autoresponder %}
+<section>
+    <div class="content-wrapper">
+        <div class="content-heading">
+            <div class="pull-right">
+                <div class="btn-group"> <a type="button" href="autoresponder.php" class="btn btn-default"><em class="icon-speech">&nbsp;</em> Add New Autoresponder Message</a></div>
+            </div> Autoresponder <small>Set up your autoresponder message here</small></div>
+        <div class="panel panel-default">
+            <div class="table-responsive">
+                <table class="table table-striped top">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%" class="h4">Name / Content</th>
+                            <th class="h4 text-center">Attached Campaigns</th>
+                            <th class="h4 text-center">Messages Sent</th>
+                            <th class="h4 text-center">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: top;">
+                                <h4><a href="thanks-for-connecting.php"> <em class="icon-speech">&nbsp;</em> <strong>Thanks for connecting</strong> </a></h4>
+                                <div class="text-muted"> {first_name},
+                                    <br>Thanks for connecting! Quick question: Are you in need of Working Capital for your business this week?
+                                    <br>
+                                    <br>Reply quick here for more info.
+                                    <br>Thanks - Jonathan http://workingcapitalloantoday.com/</div>
+                            </td>
+                            <td class="text-muted hidden-xs hidden-sm">
+                                <div class="list-group m-b">
+                                    <table class="table table-bordered bg-transparent">
+                                        <tbody>
+                                            <tr>
+                                                <td> <em class="icon-grid">&nbsp;</em> <a href="/Campaigns/My%20First%20Campaign/Settings" class="text-muted">My First Campaign</a>
+                                                    <br><small>[+ 0 days]</small>
+                                                    <br>
+                                                </td>
+                                                <td><a class="btn btn-link btn-custom-link" type="button" href="/Campaigns/DetachAutoresponderMessage/13" title="Detach Message"><em class="fa fa-close fa-fw small"></em> </a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button data-id="7" data-toggle="modal" data-target="#myModal2" class="btn btn-link"><em class="icon-paper-clip">&nbsp;</em>Attach Campaign</button>
+                                </div>
+                            </td>
+                            <td class="text-muted text-center hidden-xs hidden-sm"> <strong>&nbsp;</strong></td>
+                            <td class="hidden-xs hidden-sm"> <small> 11/15/2017 <br> 9:16:07 PM </small></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock autoresponder %}

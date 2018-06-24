@@ -1,0 +1,26 @@
+.h-xl{
+	height:32px;
+}
+.h-xxl{
+	height:48px;
+} 
+
+.wrapper > section {
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+@media only screen and (min-width: 768px)
+	.aside-collapsed .wrapper > section, .aside-collapsed .wrapper > footer {
+    margin-left:auto;
+	margin-right:auto;
+}
+
+.nav-wrapper .nav > li.active {
+    background-color:#fff;
+    color: #23b7e5;
+}
+.nav-wrapper .nav > li.active>a{
+	color: #23b7e5;
+}

@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">{{ name }}</div>
+        <div class="header-btn-block">
+            <a href="#" id="btn-save-followup" class="btn btn-primary waves-effect waves-light">
+                Save
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form id="form-save" method="post">
+            {% csrf_token %}
+            <input name="cpk" type="hidden" value="{{ cpk }}">
+            <input name="type" type="hidden" value="save">
+            <input name="fpk" type="hidden" value="{{ fpk }}">
+            <textarea name="message" class="summernote">{{ message }}</textarea>
+            {% if steps %}
+                <br>
+                <div class="form-group">
+                    <label for="step">Step Time</label>
+                    <select name="step" class="form-control" id="step">
+
+                        {% for step in steps %}
+                            <option value="{{ step.0 }}" {% if step.0 == step_time %} selected {% endif %}>{{ step.1 }}</option>
+
+                        {% endfor %}
+
+                    </select>
+                </div>
+            {% endif %}
+
+
+        </form>
+    </div>
+</div>

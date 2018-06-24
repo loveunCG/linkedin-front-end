@@ -1,0 +1,75 @@
+<aside class="aside">
+    <div class="aside-inner">
+        <nav class="sidebar" data-sidebar-anyclick-close="">
+            <ul class="nav">
+                <li class="has-user-block">
+                    <div id="user-block" class="">
+                        <div class="item user-block">
+                            <style>
+                                .btn-custom-link,
+                                .btn-custom-link:hover {
+                                    color: grey;
+                                    text-decoration: none
+                                }
+
+                                .btn-custom-link:hover {
+                                    color: rgb(51, 51, 51)
+                                }
+                            </style>
+                            <div class="pull-right" style="margin-top: -12px; margin-right: 11px;"><a
+                                    class="btn btn-link btn-custom-link" type="button"
+                                    href="{% url 'account-settings' pk=pk %}"
+                                    title="Account Settings"><em class="icon-settings"></em></a></div>
+                            <div class="user-block-picture">
+                                <div class="user-block-status"><img src="/static/images/linkedin-in.svg"
+                                                                    alt="Jonathan Korkol" width="60" height="60"
+                                                                    class="img-thumbnail img-rectangle">
+
+                                </div>
+                            </div>
+                            <div class="user-block-info"><span class="user-block-name">{{ linkedin_user.email }}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-heading"><span>User Menu</span></li>
+                <li class="False">
+                    <a href="{% url 'account-detail' pk=pk %}" title="Dashboard"> <em class="icon-speedometer"></em> <span>Home</span>
+                    </a>
+                </li>
+
+                <li class="False">
+                    <a href="{% url 'account-network' pk=pk %}" title="My Network"> <em class="icon-people"></em>
+                        <span>My Network</span> </a>
+                </li>
+
+                <li class="False">
+                    <a href="{% url 'account-messenger' pk=pk %}" title="Messenger"> <em class="icon-speech"></em>
+                        <span>Messenger</span> </a>
+                </li>
+                <li class="False">
+                    <a href="{% url 'account-campaign' pk=pk %}" title="Connector"> <em class="icon-user-following"></em> <span>Connector</span>
+                    </a>
+                </li>
+                <li class="False">
+                    <a href="{% url 'account-search' pk=pk %}" title="Search"> <em class="icon-magnifier"></em> <span>Search</span>
+                    </a>
+                </li>
+
+                <li class="False">
+                    <a href="{% url 'account-all' pk=pk %}" title="Inbox"> <em class="icon-envelope"></em> <span>Inbox</span>
+                    </a>
+                </li>
+
+                <li class="False">
+                    <a href="{% url 'account-task' pk=pk %}" title="Tasks Queue"> <em class="icon-layers"></em> <span>Tasks Queue</span>
+                    </a>
+                </li>
+
+
+
+            </ul>
+        </nav>
+    </div>
+</aside>

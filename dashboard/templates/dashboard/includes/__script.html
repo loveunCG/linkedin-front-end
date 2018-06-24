@@ -1,0 +1,49 @@
+{% load static %}
+<script type="text/javascript" src="{% static 'new/js/bootstrap/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/js/bootstrap/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/js/bootstrap/mdb.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/velocity/velocity.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/velocity/velocity.ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/jquery_visible/jquery.visible.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/js/misc/ie10-viewport-bug-workaround.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/chartjs/chart.bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/jvmaps/jquery.vmap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/jvmaps/maps/jquery.vmap.usa.js' %}"></script>
+<script type="text/javascript" src="{% static 'new/js/misc/holder.min.js' %}"></script>
+<script src="{%static 'dashboard/bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'new/plugins/datatables/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{%static 'dashboard/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
+<script src="{%static 'dashboard/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js'%}"></script>
+<script src="{%static 'dashboard/bower_components/datatables.net-buttons-bs4/js/buttons.bootstrap4.js'%}"></script>
+
+
+<script src="{%static 'dashboard/bower_components/jquery-confirm2/js/jquery-confirm.js'%}"></script>
+<script src="{%static 'dashboard/bower_components/izimodal/js/iziModal.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'new/js/scripts.js' %}"></script>
+
+<script>
+    function ___log_out(){
+        $.confirm({
+            title: 'Are you sure sign out?',
+            icon:'fa fa-unlock',
+            theme:'material',
+            content: 'Are you sure Log out？',
+            autoClose: 'cancel|6000',
+            typeAnimated: true,
+            animationSpeed: 1000,
+            buttons: {
+                ok: {
+                    text: 'yes',
+                    action: function () {
+                        var strURL = "{% url 'logout' %}";
+                        window.location.href = strURL;
+                    }
+                },
+                cancel: {
+                    text: 'no'
+                }
+            }
+        });
+    }
+</script>

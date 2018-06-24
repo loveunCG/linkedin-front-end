@@ -1,0 +1,138 @@
+{% extends 'v2/account/base.html' %}
+{% load static %} {% block title %}Home{% endblock title %} {% block header %} 
+{% include 'app/includes/header.html' with account_menu=1 %} {% endblock %} {% block pagetitle %} Home 
+( {{ linkedin_user }}) {% endblock%} {% block content %}
+
+<div class="content p-5">
+
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+                <div class="card-body p-4">
+                    <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-user-alt batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">1,359</div>
+                        <div class="tile-description">CAMPAIGN MEMBERS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-tile card-xs bg-secondary bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">$7,349.90</div>
+                        <div class="tile-description"> INVITIONS SENT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-list batch-icon-lg pull-left"></i>
+                        <h6 class="text-left" style="margin-top: 3em">Campaign <br> Member</h6>
+                    </div>
+                    <div class="tile-right">
+                        <h3 style="margin-top: 1.5em"><strong>26</strong></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-list batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">26</div>
+                        <div class="tile-description"> Connected Members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">  
+        <div class="col-md-12 mb-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-3">
+                            <a class="btn btn-secondary btn-gradient waves-effect waves-light btn-block" href="{% url 'account-messenger-add' pk=object.id %}">NEW MESSENGER CAMPAIGN</a>
+                            <a class="btn btn-secondary btn-gradient waves-effect waves-light btn-block" href="{% url 'account-campaign-add' pk=object.id %}">NEW CONNECTOR CAMPAIGN</a>
+                            <div class="text-center" style="margin-top:10px ">
+                                <a href="{% url 'account-settings' pk=object.id %}">Set account schedule</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-md-8">
+
+                            <p>Want to communicate with your existing network? Start new Messenger Campaign.
+                                <br>Need to grow your network, find new leads? Start new Connector Campaign.</p>
+                            <p>When new Messenger Campaign or Connector Campaign is created, you will add contacts to the campaign.
+                                Contacts will be either your existing connections or you can launch a new search to find
+                                new ones you can connect with. For more details see
+                                <a href="/support/?openfaq=getstarted"
+                                    target="_blank">FAQ</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    Your Connection
+                </div>
+                <div class="card-body">
+                   {% include 'account/account_details/your_connections.html' %} {% include 'account/account_details/upcomming_tasks.html' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-5">
+            <div class="card text-center">
+                <div class="card-header">
+                    Communication stats
+                </div>
+                <div class="card-body">
+                        {% include 'account/account_details/communication_stats.html' %} 
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-5">
+            <div class="card text-right">
+                <div class="card-header">
+                        Connector campaigns
+                </div>
+                <div class="card-body">
+                        {% include 'account/account_details/connector_campaigns.html' with object_list=connectors.all %} 
+                </div>               
+            </div>
+        </div>
+        <div class="col-md-6 mb-5">
+                <div class="card text-right">
+                    <div class="card-header">
+                            Messenger campaigns
+                    </div>
+                    <div class="card-body">
+                            {% include 'account/account_details/messenger_campaigns.html' with object_list=connectors.all %}
+    
+                    </div>                
+                </div>
+            </div>
+    </div>  
+ 
+</div>
+
+{% endblock %}

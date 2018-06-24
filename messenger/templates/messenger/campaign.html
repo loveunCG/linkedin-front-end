@@ -1,0 +1,250 @@
+{% extends 'messenger/base.html' %}
+{% load static %}
+
+{% block title %}Add Messenger Compaigns{% endblock %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+   
+   	<div class="nav-tabs-custom">
+	<ul class="nav nav-tabs">
+	  <li id="cname" class="pull-right col-md-3 col-sm-4 col-xs-5">		
+		<label class="switch pull-right" style="margin-top:6px">
+		  <input type="checkbox" checked class="switch_campaign" data-cid="3">
+		  <div class="slider round"></div>
+		</label>
+		
+		<h4>Test1</h4>
+	  </li>
+	  <li class="active"><a href="#tab_1" data-toggle="tab">People</a></li>
+	  <li><a href="#tab_2" data-toggle="tab">Steps</a></li>
+	  <li><a href="#tab_3" data-toggle="tab">Settings</a></li>
+	  <li><a href="#tab_4" data-toggle="tab">Stats</a></li>
+
+	  
+	</ul>
+	<div class="tab-content">
+	  <div class="tab-pane active" id="tab_1">
+					<div class="row">
+	<div class="col-md-9" style="position:relative">
+				<div id="camp_search"><form method="GET" class="form-inline">
+	<div class="input-group">
+		<input class="form-control" type="text" name="search" placeholder="Search your contacts..." value=""/>
+		<span class="input-group-btn"><button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button></span>
+	</div>
+</form></div>
+						<div class="box">
+		<div class="box-body table-responsive" style="overflow:hidden">
+		  <div class="pull-right"></div>
+		  <div class="pull-left" style="margin-bottom:10px;">
+	<span class="btn btn-default"><input type="checkbox" data-click="checkAll" id="checkAll"></span>&nbsp;&nbsp;&nbsp;
+
+	<button class="btn btn-default" data-click="markRead">Mark as read</button>&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-default" data-click="markUnread">Mark as unread</button>&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-default" data-click="removeFromCampaign" data-cid="1">Delete</button>&nbsp;&nbsp;&nbsp;
+	<button class="btn btn-default" data-click="export" data-toggle="tooltip" title="Export contacts to CSV"><i class="glyphicon glyphicon-export"></i></button>
+</div>		  <div class="scroll-block" style="position:relative">
+		  <table class="table table-bordered table-striped" id="campaign_people">
+			<thead>
+			<tr>
+			  <th style="border-right:none;"></th>
+			  <th style="border-left:none;">Name</th>
+			  <th>Company</th>
+			  <th>Industry</th>
+			  <th>Title</th>
+			  <th>Location</th>
+			  <th>Latest acitvity</th>
+			  <th>Status
+				<div>
+					<select id="statusOrder">
+						<option value="-1">All</option>
+						<option value="200">Unread</option>
+						<option value="3">Connected</option>
+						<option value="1">Connect Requested</option>
+						<option value="23">Disconnected</option>
+						<option value="0">In Queue</option>
+						<option value="20">Later</option>
+						<option value="7">Message</option>
+						<option value="21">No Interest</option>
+						<option value="22">Old Connect</option>
+						<option value="10">Replied</option>
+						<option value="12">Talking</option>
+						<option value="100" selected>Talking & Replied</option>
+						<option value="6">Welcome Mes</option>
+					</select>
+				</div>
+			  </th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for people in peoples %}
+
+			<tr id="ctct_{{people.id}}" class="contact">
+			  <td><input type="checkbox" /></td>
+			  <td>{{people.name}}</td>
+			  <td>{{people.company}}</td>
+			  <td>{{people.industry}}</td>
+			  <td>{{people.title}}</td>
+			  <td>{{people.location}}</td>
+			  <td>{{people.latest_acitvity}}</td>
+			  <td><span class="btn bg-teal btn-block" data-click="change_status" data-toggle="tooltip" data-html="true" title="<strong>Test1</strong><br>Message sent to prospect<br><i>Click on status to change it manually</i>">Message</span>
+			  </td>
+			</tr>
+			{% endfor %}
+			</tbody>
+		  </table>
+		  </div>
+		</div>
+		<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+			</div>
+	<div class="col-md-3" id="uinfo_box">
+		
+	</div>
+</div>
+			  </div>
+	  <!-- /.tab-pane -->
+	  <div class="tab-pane" id="tab_2">
+	  		<form method="POST" action="?act=edit_steps">
+	<div class="row">
+		<div class="col-md-9">
+						<div class="box">
+				<div class="box-body">
+					<div class="form-group">
+						<label>MESSAGE 1</label>
+						<textarea class="form-control measured" name="message[welcome]" placeholder="Enter ...">hello user</textarea>
+					</div>
+				</div>
+			</div>
+						
+													
+			<button class="btn btn-primary" id="add_step">ADD ANOTHER STEP</button><br><br>
+		</div>
+		
+		<div class="col-md-3">
+			<input type="submit" class="btn btn-primary btn-block" name="save" value="SAVE">
+			
+			<div class="box msg_vars">
+				<div class="box-body">
+					<p class="title">You can use these tags in place of an individual's details to build a more personalized message.</p>
+					
+					<p>Name<span>{Name}<span></p>
+					<p>First name<span>{FirstName}<span></p>
+					<p>Company name<span>{Company}<span></p>
+					<p>Title<span>{Title}<span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div id="new_step" style="display:none">
+		<div class="box box-solid">
+		<div class="box-body">
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-click="removeStep" data-toggle="tooltip" title="Delete step"><i class="fa fa-remove"></i></button>
+			</div>
+			
+			<div class="form-group">
+				<label class="title">MESSAGE <span>1</span></label>
+				<select name="message[step_time][]" class="form-control">
+					<option value="1">SEND 1 DAY AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="2">SEND 2 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="3">SEND 3 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="4">SEND 4 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="5">SEND 5 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="6">SEND 6 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="7">SEND 7 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="8">SEND 8 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="9">SEND 9 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="10">SEND 10 DAYS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="14">SEND 2 WEEKS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="28">SEND 4 WEEKS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="60">SEND 2 MONTHS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="90">SEND 3 MONTHS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="180">SEND 6 MONTHS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="270">SEND 9 MONTHS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="365">SEND 1 YEAR AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+					<option value="730">SEND 2 YEARS AFTER PREVIOUS MESSAGE IF NO REPLY</option>
+				</select>
+				<textarea class="form-control measured"  name="message[step][]" placeholder="Enter message..."></textarea>
+				<input type="hidden" name="message[step_id][]" value="" />
+			</div>
+		</div>
+	</div></div>	  	  </div>
+	  <!-- /.tab-pane -->
+	  <div class="tab-pane" id="tab_3">
+	  		<div class="row">
+	<div class="col-md-6">
+		<div class="box box-success">
+			<div class="box-header">
+			  <h3 class="box-title">Messenger Campaign Status</h3>
+			</div>
+		
+			<div class="box-body">
+				<p style="font-size:16px;min-height:123px;">
+				You can turn this Messenger Campaign on and off. Turned on campaign will send out connection requests and messages according to your <a href="#tab_2" data-toggle="tab" onclick="$('.nav-tabs li').removeClass('active');$('.nav-tabs li:eq(1)').addClass('active');">messaging settings</a>. If you turn off the campaign, all campaign activity will be paused.</p>
+				
+				<label class="switch pull-left" style="margin-right:20px">
+				  <input type="checkbox" checked class="switch_campaign" data-cid="3">
+				  <div class="slider round"></div>
+				</label>
+				
+				<h5 style="margin-top:16px;">Campaign is active</h5>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-6">
+		<div class="box box-danger">
+			<div class="box-header">
+			  <h3 class="box-title">Delete Messenger Campaign</h3>
+			</div>
+		
+			<div class="box-body">
+				<p style="font-size:16px;min-height:120px;">Deleting Messenger Campaign will stop all campaign activity. Contacts from the campaign will remain in 'My Network' and in your 'Inbox', however, and will no longer receive automated campaign messages. Contact(s) status will change to “Old Connect”. You will be able to continue manual communication with these contacts.</p>
+				
+				<a href="#" class="btn btn-flat btn-danger" data-click="removeCampaign" data-cid="3">DELETE MESSENGER CAMPAIGN</a>
+			</div>
+		</div>
+	</div>
+</div>	  	  </div>
+	  <!-- /.tab-pane -->
+	  <div class="tab-pane" id="tab_4">
+	  		<div class="row">
+	<div class="col-sm-4 stats_block">
+		<h1>1</h1>
+		<p>Contacts</p>
+	</div>
+	
+	<div class="col-sm-4 stats_block">
+		<input type="text" class="knob" data-displayinput="false" data-readonly="true" value="100" data-width="100" data-height="100" data-fgColor="#00c1fe">
+		<div class="nums">
+			<h2>100%</h2>
+			<h3>1</h3>
+		</div>
+		<p>Messages</p>
+	</div>
+	
+	<div class="col-sm-4 stats_block">
+		<input type="text" class="knob" data-displayinput="false" data-readonly="true" value="0" data-width="100" data-height="100" data-fgColor="#00b257">
+		<div class="nums">
+			<h2>0%</h2>
+			<h3>0</h3>
+		</div>
+		<p>Replied</p>
+	</div>
+</div>	  	  </div>
+	  <!-- /.tab-pane -->
+	</div>
+	<!-- /.tab-content -->
+</div>	</section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock content %}

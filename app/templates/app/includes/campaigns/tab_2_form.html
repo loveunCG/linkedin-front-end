@@ -1,0 +1,22 @@
+{% csrf_token %}
+	  		
+			<div class="row">
+				<div class="col-md-9">
+					<div class="box">
+						<div class="box-body">
+							<div class="form-group">
+								<label>{%if not messenger %}Connection {%endif%}Message</label>
+								{{form.connection_message}}
+							</div>
+							
+						</div>
+					</div>
+					
+					{% include 'app/includes/campaigns/step_formset.html' with campaignsteps=campaignsteps %}
+											
+						
+						
+				</div>
+				{% include 'app/includes/campaigns/msg_var.html' %}
+				
+			</div>

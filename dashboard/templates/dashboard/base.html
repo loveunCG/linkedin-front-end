@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    {% include 'dashboard/includes/__head.html' %}
+    <title>
+      {% block title %}B2B Prospects {% endblock title %}
+    </title>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        {% include 'dashboard/includes/__sidebar.html' %}
+        <div class="right-column">
+         {% include 'dashboard/includes/__header.html' %}
+          <main class="main-content p-5" role="main">
+            {% block content %}
+            {% endblock %}
+          </main>
+      </div>
+    </div>
+  </div>
+    {% include 'dashboard/includes/__script.html' %}
+    {% block extra_script %}
+
+
+    {% endblock %}
+  </body>
+</html>

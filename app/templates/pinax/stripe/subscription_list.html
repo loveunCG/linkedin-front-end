@@ -1,0 +1,116 @@
+{% extends "pinax/stripe/base.html" %}
+{% load static site_title %}
+
+{%block head%}
+<link href="{% static 'assets/css/subscription.css' %}" rel="stylesheet">
+{%endblock%}
+
+{% block body_class %}{{ block.super }} pinax-stripe-subscriptions{% endblock %}
+
+{% block content %}
+
+
+{% current_subscription  as current_sub %}
+
+<div class="row">
+	<div class="col-md-4 col-lg-4 mb-5">
+		<div class="card card-sm bg-info">
+			<div class="card-body">
+				<div class="mb-4 clearfix">
+					<div class="float-left text-warning text-left">
+						<i class="fa batch-icon-tag-alt-3 batch-icon-xxl"></i>
+					</div>
+					<div class="float-right text-right">
+						<h6 class="m-0">Current plan: {{current_sub.plan.name}}</h6>
+					</div>
+				</div>
+				<div class="text-right clearfix">
+					<div class="display-4">{{current_sub.status}}</div>
+					<div class="m-0">{% day_left  current_sub.current_period_start current_sub.current_period_end %} days left</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-lg-4 mb-5">
+		<div class="card card-sm">
+			<div class="card-body">
+				<div class="mb-4 clearfix">
+					<div class="float-left text-warning text-left">
+						<i class="batch-icon batch-icon-star batch-icon-xxl"></i>
+					</div>
+					<div class="float-right text-right">
+						<h6 class="m-0">Reviews</h6>
+					</div>
+				</div>
+				<div class="text-right clearfix">
+					<div class="display-4">Seats</div>
+					<div class="m-0">
+						<a href="#">1</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-4 col-lg-4 mb-5">
+		<div class="card card-sm bg-danger">
+			<div class="card-body">
+				<div class="mb-4 clearfix">
+					<div class="float-left text-left">
+						<i class="batch-icon batch-icon-section batch-icon-xxl"></i>
+					</div>
+					<div class="float-right text-right">
+						<h6 class="m-0">Price Plan</h6>
+					</div>
+				</div>
+				<div class="text-right clearfix">
+					<div class="display-4">Cost</div>
+					<div class="m-0">{{current_sub.plan.amount }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+<div class="text-center">
+    <h4 class="">
+        <a class="button" href="{% url "pinax_stripe_subscription_create" %}">
+        <span class="gradient">
+                        <i class="batch-icon batch-icon-add"></i>
+                        Add Subscription
+                        </span>
+           
+        </a>
+        
+	<p>To select one of the plans, you need to add a payment method.</p>
+	<a href="{% url 'pinax_stripe_payment_method_list'%} " class="btn btn-primary waves-effect waves-light">Payment Methods</a>
+    </h4>
+    </div>
+
+
+{% get_plans as plans %}
+
+
+<div class="row my-5 pt-5 clearfix">
+	<div class="col-md-12">
+		<div class="price-list-type-2 clearfix">
+			{% include 'v2/app/includes/price_block_1.html' with price=plans.0 current_sub=current_sub %}
+            {% include 'v2/app/includes/price_block_2.html' with price=plans.1 current_sub=current_sub %}
+            {% include 'v2/app/includes/price_block_3.html' with price=plans.2 current_sub=current_sub %}
+		</div>
+	</div>
+</div>
+
+
+
+
+    
+    <div class="text-center">
+    <a href="{% url 'pinax_stripe_invoice_list' %}" class="btn btn-info">Invoices</a>
+    </div>
+    
+    
+    
+{% endblock %}

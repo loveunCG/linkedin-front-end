@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    {% include 'v2/app/includes/head.html' %}
+
+    {% block head %}
+    {% endblock head %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'v2/app/includes/sidebar.html' %}
+            <div class="right-column">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-gradient">
+                    <a class="navbar-brand" href="#" style="padding-top:12px">
+                        <span class="head-title">B2B PROSPECTING</span>
+                    </a>
+                    <button class="hamburger hamburger--slider" type="button" data-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle Sidebar">
+                        <span class="hamburger-box" >
+                            <span class="hamburger-inner" ></span>
+                        </span>
+                    </button>
+
+
+            </div>
+        </div>
+        <main class="main-content p-5" role="main">
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header"><strong>B2B</strong> Prospects</div>
+                                <div class="card-body">
+                                    <p>
+                                        B2B Prospects is a Powerful tool to get leads from Linkdin newtwork working for you on autopilot every single day.
+                                    </p>
+
+                                    <div class="col-md-3">
+                                     <a class="btn btn-primary btn-block btn-gradient waves-effect waves-light" href="#">
+                                                   Learn More
+                                    </a>
+                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+        </main>
+
+        <main class="main-content p-5" role="main" style="display:none;">
+                    
+                    <div class="row mb-5 task-manager">
+                       <div class="col-md-4 mb-5">
+                            <div class="card text-center">
+                                <div class="card-body card-border">
+                                    <div class="card-border-top card-start"></div>
+                                    <p><h3 ><b>STARTER</b></h3></p>
+                                    <p><h4><b>$35</b>/seat</h4></p>
+                                    <p >Up to <b> 500</b> results per search</p>
+                                    <p > <b> 10</b> Saved Search</p>
+                                    <p > <b> 5</b> campaigns</p>
+                                    <p > 2 way Communications</p>
+                                    <p > Welcome Message</p>
+                                    <div class="card-border-right  card-start"></div>
+                                </div>
+                            </div>
+                       </div>
+
+                       <div class="col-md-4 mb-5">
+                            <div class="card text-center">
+                                <div class="card-body card-border">
+                                    <div class="card-border-top card-red"></div>
+                                    <h3 ><b>PROFESSIONAL</b></h3>
+                                    <p><h4><b>$50</b>/seat</h4></p>
+                                    <p >Up to <b> 750</b> results per search</p>
+                                    <p > <b> 50</b> Saved Search</p>
+                                    <p > <b> 25</b> campaigns</p>
+                                    <p > 2 way Communications</p>
+                                    <p > Welcome Message</p>
+                                    <p > Custom connect message</p>
+                                    <p > Company & title search filter</p>
+                                    <p > Withdraw invites</p>
+                                    <div class="card-border-right  card-red"></div>
+                                </div>
+                            </div>
+                       </div>
+
+                       <div class="col-md-4 mb-5">
+                            <div class="card text-center">
+                                <div class="card-body card-border">
+                                    <div class="card-border-top card-business"></div>
+                                    <h3 ><b>BUSINESS</b></h3>
+                                    <p><h4><b>$75</b>/seat</h4></p>
+                                    <p ><b>Unlimited</b> results per search</p>
+                                    <p > <b> Unlimited</b> Saved Search</p>
+                                    <p > <b> Unlimited</b> campaigns</p>
+                                    <p > 2 way Communications</p>
+                                    <p > Welcome Message</p>
+                                    <p > Custom connect message</p>
+                                    <p > Company & title search filter</p>
+                                    <p > Withdraw invites</p>
+                                    <p > Export to CSV </p>
+                                    
+                                    <div class="card-border-right  card-business"></div>
+                                </div>
+                            </div>
+                       </div>
+
+                    </div>
+                    
+                </main>
+
+    </div>
+    {% include 'v2/app/includes/script.html' %}
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>

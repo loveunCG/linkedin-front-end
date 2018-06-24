@@ -1,0 +1,59 @@
+{% load static %}
+
+<nav class="sidebar-horizontal navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-collapse" id="navbar-header-menu-outer">
+        <ul class="navbar-nav navbar-header-menu mr-auto">
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == '/dashboard/' %} active {% endif %}" href="{% url 'account-detail' pk=pk %}">
+                    <i class="batch-icon batch-icon-browser-alt"></i>
+                    Home
+                </a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts' %}">
+                    <i class="batch-icon batch-icon-user-alt-3 "></i>
+                    Accounts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if 'campaigns' in request.path %} active {% endif %}" href="{% url 'account-campaign' pk=pk %}">
+                    <i class="batch-icon batch-icon-bullhorn-alt"></i>
+                    Campaigns
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {% if 'network' in request.path %} active {% endif %}" href="{% url 'account-network' pk=pk %}">
+                    <i class="batch-icon batch-icon-users"></i>
+                    My Network
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {% if 'messenger' in request.path %} active {% endif %}" href="{% url 'account-messenger' pk=pk %}">
+                    <i class="batch-icon batch-icon-speech-bubble-left-tip-solid-text"></i>
+                    Messenger
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account-search' pk=pk %}">
+                    <i class="batch-icon batch-icon-search-alt"></i>
+                    Search
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link {% if 'all' in request.path %} active {% endif %}" href="{% url 'account-all' pk=pk %}">
+                    <i class="batch-icon batch-icon-envelope"></i>
+                    Indox
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link {% if 'task' in request.path %} active {% endif %}" href="{% url 'account-task' pk=pk %}">
+                    <i class="batch-icon batch-icon-envelope"></i>
+                    Tasks Queue
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

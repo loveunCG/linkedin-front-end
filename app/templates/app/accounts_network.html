@@ -1,0 +1,114 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{%block pagecss%}
+    <link href="{% static 'css/AdminLTE.css' %}" rel="stylesheet" type="text/css" id="maincss">
+    <link href="{% static 'css/dataTables.checkboxes.css' %}" rel="stylesheet" type="text/css" id="maincss2">
+    <link href="{% static 'css/account.css' %}" rel="stylesheet" type="text/css" id="maincss3">
+{%endblock%}
+
+{% block title %}Inbox{% endblock title %}
+
+{%block header%}
+   {% include 'app/includes/header.html' with account_menu=1 %}
+{%endblock%}
+
+{%block sidebar%}
+
+{%endblock%}
+
+
+{%block content%}
+<section class="content">
+   <div class="panel-group info">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		  <h4 class="panel-title">
+			<a data-toggle="collapse" href="#collapse1">
+			<i class="glyphicon glyphicon-minus pull-right"></i>
+			Want to communicate with your existing network?
+			</a>
+		  </h4>
+		</div>
+		<div id="collapse1" class="panel-collapse collapse in">
+		  <div class="panel-body">
+			<ul>
+				<li>Messenger Campaign helps you facilitate communication with your network of contacts.</li>
+				<li>Want to send a message to specific contacts or to your whole network? Go to Messenger page located in the top menu and start new Messenger Campaign.</li>
+				<li>Next step is to add contacts from My Network page.</li>
+				<li>One contact can be a part of no more than one Campaign at any moment in time. This helps avoid breaking the logic of ongoing communication. You can move contacts across campaigns. Moved to new campaign contacts will no longer receive automated messages scheduled with old campaigns.</li>
+				<li>To help you filter campaigns use the following three filters below: ’Show Connector contacts’, ‘Show Messenger contacts’, ‘Show Talking contacts’.</li>
+			</ul>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9 bg-white " style="position:relative">
+	
+	
+		{% include 'app/includes/people_datatable.html' with contacts=object_list campaign=1%}
+		
+		
+	</div>
+	<div class="col-md-3 bg-white" id="uinfo_box"><!-- DIRECT CHAT PRIMARY -->
+	
+
+	</div>
+</div>
+</section>
+
+{%endblock%}
+
+
+{% block pagefooter%}
+
+{% include 'app/includes/datatable_pagefooter.html' %}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="add2campaign">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="{%url 'campaign-contacts' %}" method="POST">
+    {% csrf_token %}
+      <div class="modal-header">
+        <h4 class="modal-title">Add Contacts to Messenger Campaign</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body modal-body-input">
+      {% if messenger_campaigns_count > 0 %}
+		        <p>Choose Campaign</p>
+		<select class="form-control" name="campaign" id="campaign">
+		
+		{% include 'app/includes/campaigns/list_select.html' with campaigns=messenger_campaigns %}			
+				</select>
+		{% include 'app/includes/campaigns/list_hidden.html' with  campaigns=messenger_campaigns %}
+		
+		      
+	  {%else%}
+	  You don't have any Messenger Campaigns yet. To create one go <a href="{% url 'account-messenger' pk=account.id %}">here</a>.
+	  {%endif%}
+	  </div>
+	  <input type="hidden" name="cid" value="">
+	  <div class="modal-body modal-body-move text text-danger">
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        {% if messenger_campaigns_count > 0 %}
+		        <button type="button" class="btn btn-primary add2bulk_button">Add to Messenger</button>
+		        <button type="button" class="btn btn-info move2bulk_button hidden">Move</button>
+		{%endif%}
+		
+		      </div>
+		      
+	</form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
+
+
+
+{%endblock%}
+

@@ -1,0 +1,43 @@
+{% load site_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    {% include 'v2/app/includes/head.html' %}
+
+    {% block head %}
+    {% endblock head %}
+</head>
+<body>
+    <div class="container-fluid">
+		<div class="row">
+            {% include 'v2/app/includes/sidebar.html' %}
+			<div class="right-column">
+                {% include 'v2/app/includes/header.html' %}
+				<main class="main-content p-5" role="main">
+                    {% block content %}
+                    {% endblock content %}
+                </main>
+			</div>
+		</div>
+	</div>
+
+    {% block pagefooter %}
+    {% endblock pagefooter %}
+    
+    
+    {% block script_stripe %}
+    
+	
+    {% endblock script_stripe %}
+    
+    {% include 'v2/app/includes/script.html' %}
+    
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>

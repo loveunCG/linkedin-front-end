@@ -1,0 +1,36 @@
+<div class="box {% if box_solid %} box-solid {% endif %}">
+    <div class="box-header with-border">
+        <h3 class="box-title">Connector campaigns</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive pt-0" id="campaigns_list">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Contacts</th>
+                <th>Connected</th>
+                <th>Replied to<br>connection message</th>
+                <th>Replied to<br>other messages</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for mc in object_list %}
+                <tr>
+                    <td><a href="{% url 'connector-campaign' pk=mc.id %}">{{ mc.title }}</a></td>
+                    <td>
+                        {% include 'app/includes/campaigns/list_status.html' with mc=mc %}
+                    </td>
+                    <td>{{ mc.contacts.all | length }}</td>
+                    <td>{{ mc.count_sends }}</td>
+                    <td>{{ mc.count_replies }}</td>
+                    <td>{{ mc.count_reply_other }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>

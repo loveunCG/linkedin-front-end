@@ -1,0 +1,24 @@
+{% if upcoming_tasks %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Task type</th>
+            <th>Name</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in upcoming_tasks %}
+            <tr>
+                <td>{{ task.queue_type }}</td>
+                <td>{{ task.content_object }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% else %}
+    There are no tasks
+{% endif %}

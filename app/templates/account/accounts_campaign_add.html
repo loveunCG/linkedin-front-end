@@ -1,0 +1,28 @@
+{% extends 'new/account/base.html' %}
+{% load static %}
+
+{% block title %}NEW CONNECTION CAMPAIGN{% endblock title %}
+
+{% block pagetitle %}
+    NEW CONNECTION CAMPAIGN
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-5 justify-content-md-center">
+    <div class="col-md-5 mb-5">
+        <div class="card text-center">
+            <div class="card-header">
+                    NEW CONNECTION CAMPAIGN
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% include 'account/campaign/add_form.html' with form=form %}
+                    <small class="form-text text-muted">If you are not copying steps from existing campaign simply click on create button to add the campaign</small>
+                    <input type="submit" name="save" class="btn btn-primary btn-gradient waves-effect waves-light btn-block" value="CREATE CONNECTOR CAMPAIGN">
+                </form>               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+/* QUILLPRO SASS */
+/* QUILLPRO FRONTEND STYLES */
+/* QUILLPRO VARIABLES */
+/* QUILLPRO MIXINS */
+/* Colors */
+/* General Styles */
+body {
+  background-color: #FFFFFF; }
+
+.right-column {
+  overflow: hidden; }
+  .right-column main .feature-image,
+  .right-column section .feature-image {
+    position: static;
+    max-width: 100%;
+    margin-top: 50px; }
+  .right-column main .video-container,
+  .right-column section .video-container {
+    max-width: 100%;
+    margin-top: -90px;
+    overflow: hidden;
+    -webkit-transition: all 0.225s ease-in-out !important;
+    -moz-transition: all 0.225s ease-in-out !important;
+    -o-transition: all 0.225s ease-in-out !important;
+    transition: all 0.225s ease-in-out !important;
+    -webkit-border-radius: 0.4167rem;
+    -moz-border-radius: 0.4167rem;
+    -ms-border-radius: 0.4167rem;
+    -o-border-radius: 0.4167rem;
+    border-radius: 0.4167rem; }
+    .right-column main .video-container a::after,
+    .right-column section .video-container a::after {
+      content: "";
+      background: no-repeat url("../../img/play-button.png");
+      height: 59px;
+      width: 80px;
+      display: block;
+      position: absolute;
+      top: calc(50% - 29px);
+      left: calc(50% - 40px); }
+  .right-column main .video-container:hover,
+  .right-column section .video-container:hover {
+    transform: scale(1.05); }
+  .right-column footer .section-content,
+  .right-column section .section-content {
+    padding-top: 100px;
+    padding-bottom: 100px; }
+    .right-column footer .section-content .section-block,
+    .right-column section .section-content .section-block {
+      margin-bottom: 50px; }
+  .right-column main + section .section-content {
+    padding-top: 150px; }
+  .right-column footer hr {
+    width: 70%;
+    border-color: gray; }
+
+/* Responsiveness */
+@media (min-width: 992px) {
+  .right-column main .feature-image,
+  .right-column section .feature-image {
+    position: absolute;
+    max-width: none; } }
+
+/*# sourceMappingURL=quillpro-frontend.css.map */

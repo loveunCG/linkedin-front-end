@@ -1,0 +1,64 @@
+{% load static %}
+
+{% block script %}
+
+
+<script type="text/javascript">
+
+	var filtered_row_num = 0;
+	var filtered_rows = [];
+	var contact_camps = {};
+	
+	var contact_statuses = {
+			{%include 'app/includes/datatable_pagefooter_contactstatus.html' with statuses=inbox_page_statuses %}
+	};
+	var mynetwork_statuses = {
+			{%include 'app/includes/datatable_pagefooter_contactstatus.html' with statuses=mynetwork_page_statuses %}
+			
+		};
+	
+	</script>
+	
+<script src="{% static 'app/inbox.js' %}?v=10"></script>
+		<script>
+
+        function ChangePagePerRecord() {
+            var rowCount = $("#sel_page_rec").val();
+                $('#campaign_people').dataTable().fnClearTable();
+                $('#th_status').html('');
+                $('#th_status').html('Status<br/>');
+                loadTable(rowCount)
+                var sel ='&nbsp;&nbsp;Show<br/><select style="width: 50px; margin-left:5px;" onchange="ChangePagePerRecord()" id="sel_page_rec" value="[val]" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control form-control-sm">'
+                    if (rowCount == 10){
+                        sel += '<option selected value="10">10</option>'
+                    }else{
+                        sel += '<option value="10">10</option>'
+                    }
+                    if (rowCount == 25){
+                        sel += '<option selected value="25">25</option>'
+                    }else{
+                        sel += '<option value="25">25</option>'
+                    }
+                    if (rowCount == 50){
+                        sel += '<option selected value="50">50</option>'
+                    }else{
+                        sel += '<option value="50">50</option>'
+                    }
+                    if (rowCount == 100){
+                        sel += '<option selected value="100">100</option>'
+                    }else{
+                        sel += '<option value="100">100</option>'
+                    }
+
+
+                    sel += '</select>&nbsp;&nbsp;&nbsp;entries'
+                sel = sel.replace("[val]",rowCount)
+                {#setTimeout(function(){$( sel ).insertAfter( "#campaign_people_next" ); }, 1000);#}
+                setTimeout(function(){$("#campaign_people_filter").append(sel); }, 500);
+
+            }
+        </script>
+    <script src="{% static 'js/datatables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.checkboxes.min.js' %}"></script>
+{% endblock %}
+

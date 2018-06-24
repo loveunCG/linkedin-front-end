@@ -1,0 +1,80 @@
+{% extends 'messenger/base.html' %}
+{% load static %}
+
+{% block title %}Messenger Compaigns{% endblock %}
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 318px;">
+    <!-- Main content -->
+    <section class="content">
+   
+   	<div class="row">
+	<div class="col-sm-4 col-md-3">
+		<a class="btn btn-primary btn-block" href="/5366834/campaigns/?act=add&amp;is_bulk=1">NEW MESSENGER CAMPAIGN</a>
+	</div>
+	<div class="col-sm-8 col-md-9">
+		<div class="panel-group info">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1">
+					<i class="glyphicon glyphicon-minus pull-right"></i>
+					Want to communicate with your existing network? Start new Messenger Campaign.
+					</a>
+				  </h4>
+				</div>
+				<div id="collapse1" class="panel-collapse collapse in">
+				  <div class="panel-body">
+					<ul>
+						<li>Set up steps with personalized automated messages for your 
+first message or for a follow-up message, set another automated 
+follow-up message if no response is received in a few days. This is done
+ by clicking on the <u>Steps</u> tab inside the Messenger Campaign.</li>
+						<li>To add people from your network to the Messenger Campaign click on <u>My Network</u>
+ in the top menu. Select people you would like to be added to Messenger 
+Campaign and click 'Add selected people to Messenger Campaign', or add 
+all filtered people by clicking 'Add all new people to Messenger 
+Campaign'.</li>
+					</ul>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box">
+	<div class="box-header with-border">
+	  <h3 class="box-title">Messenger Campaigns</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body table-responsive no-padding" id="bulk_campaigns_list"><table class="table table-hover">
+	<thead>
+	<tr>
+	  <th>Title</th>
+	  <th>Status</th>
+	  <th>Contacts</th>
+	  <th>Replied</th>
+	</tr>
+	</thead>
+	<tbody>
+		{% for campaign in campaigns %}
+		<tr>
+	  	<td><a href="/5366834/campaigns/{{campaign.id}}/">{{campaign.title}}</a></td>
+	   <td>
+			<span class="label label-primary">Active</span>
+		</td>
+		  <td>0</td>
+		  <td>0</td>
+
+		</tr>
+		{% endfor %}
+		</tbody>
+</table></div>
+</div>
+<!-- /.box -->	</section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% endblock content %}

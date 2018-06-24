@@ -1,0 +1,105 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Save Account{% endblock title %}
+
+{% block content %}
+<section>
+    <div class="content-wrapper">
+        <div class="content-heading"> Account Settings <small>Configure your LinkedIn account here</small></div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="alert alert-success">
+                            <ul class="fa-ul">
+                                <li> <em class="fa fa-info-circle fa-lg fa-li"></em>Account settings updated successfully</li>
+                            </ul>
+                        </div>
+                        <form class="form-horizontal" method="post" role="form">
+                            <input name="__RequestVerificationToken" type="hidden" value="E6JcAVBFkr4LvpiZ4ZYwPUwPuJIpZhbgaXhnF3yJ9a-qpKyvdvspTUUBZLWa-OQ_xiMqW1NGg2hkJgEyEQ4VvWT6mBs9DpP6bMFciTIcEab-D76XZ_ghvfgcJnZkCKrugrjgSqvPmvzm2jrV_B2dTQ2">
+                            <input data-val="true" data-val-number="The field AccountId must be a number." id="AccountId" name="AccountId" type="hidden" value="19">
+                            <fieldset>
+                                <legend>LinkedIn Account Credentials</legend>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="Username">Username*</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" data-val="true" data-val-required="The Username* field is required." disabled="disabled" id="Username" name="Username" type="email" value="cpnnumbers@gmail.com">
+                                        <input id="Username" name="Username" type="hidden" value="cpnnumbers@gmail.com"> <span class="field-validation-valid text-danger small" data-valmsg-for="Username" data-valmsg-replace="true"></span></div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="Password">Password*</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" data-val="true" data-val-required="The Password* field is required." id="Password" name="Password" type="password" value="LinkedInLeadNinja123"> <span class="field-validation-valid text-danger small" data-valmsg-for="Password" data-valmsg-replace="true"></span></div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Proxy Settings</legend>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="UseProxy">Enable Proxy</label>
+                                    <div class="col-lg-10">
+                                        <input checked="checked" data-val="true" data-val-required="The Enable Proxy field is required." id="UseProxy" name="UseProxy" style="margin-top:10px;" type="checkbox" value="true">
+                                        <input name="UseProxy" type="hidden" value="false">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="ProxyAddress">Proxy Address</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="ProxyAddress" name="ProxyAddress" placeholder="e.g. 123.45.67.89:12345" type="text" value="127.0.0.1:8888"> <span class="field-validation-valid text-danger small" data-valmsg-for="ProxyAddress" data-valmsg-replace="true"></span></div>
+                                    <br>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="ProxyAuthType">Proxy Authentication Type</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="ProxyAuthType" name="ProxyAuthType">
+                                            <option selected="selected" value="0">(none)</option>
+                                            <option value="1">Plain Text Authentication</option>
+                                            <option value="2">Basic Authentication Type</option>
+                                        </select> <span class="field-validation-valid text-danger small" data-valmsg-for="ProxyAuthType" data-valmsg-replace="true"></span></div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="ProxyUsername">Proxy Username</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="ProxyUsername" name="ProxyUsername" type="text" value=""> <span class="field-validation-valid text-danger small" data-valmsg-for="ProxyUsername" data-valmsg-replace="true"></span></div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="ProxyPassword">Proxy Password</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="ProxyPassword" name="ProxyPassword" type="password" value=""> <span class="field-validation-valid text-danger small" data-valmsg-for="ProxyPassword" data-valmsg-replace="true"></span></div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>License Settings</legend>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">License Type <sup>*</sup></label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control required" disabled="" name="licensetype">
+                                            <option>14-days Free Trial Basic Subscription Plan</option>
+                                            <option selected="">Basic Subscription Plan</option>
+                                            <option>Pro Subscription Plan w/Sales Navigator</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <button type="button" class="btn btn-default" onclick="alert('You can't change the subscription plan!');">Change Subscription Plan</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="text-center">
+                                <div class="btn-group"> <a href="onclick-save-of-accountsettings" class="btn btn-labeled btn-info col-lg-12"><span class="btn-label"><em class="fa fa-save"></em></span>Save</a></div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <div class="btn-group">
+                                    <button type="reset" class="btn btn-labeled btn-default col-lg-12" href="/AccountSettings"><span class="btn-label"><em class="fa fa-times"></em></span>Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

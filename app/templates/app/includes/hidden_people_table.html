@@ -1,0 +1,26 @@
+<div style="width: 0; height:0; overflow: hidden">
+<table id="csv_convert_table" class="table table-striped table-hover" >
+    <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Industry</th>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Latest acitvity</th>
+        <th>Status</th>
+    </tr>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.name|default_if_none:"" }}</td>
+            <td>{{ contact.company|default_if_none:"" }}</td>
+            <td>{{ contact.industry|default_if_none:"" }}</td>
+            <td>{{ contact.title|default_if_none:"" }}</td>
+            <td>{{ contact.location|default_if_none:"" }}</td>
+            <td>{{ contact.latest_activity|default_if_none:"" }}</td>
+            <td>{{ contact.get_status_display|default_if_none:""}}</td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+</div>

@@ -1,0 +1,90 @@
+/* QUILLPRO PRINT STYLES */
+
+@import "quillpro-variables";
+html,
+body{
+	background-color: transparent;
+	color: #000000 !important;
+}
+[class^="col-"]{
+	// padding-left: 0 !important;
+	// padding-right: 0 !important;
+}
+.right-column .navbar{
+	display: none !important;
+}
+.sidebar{
+	display: none !important;
+}
+.sidebar + .right-column{
+	margin-left: 0 !important;
+}
+.main-content{
+	padding: 0 !important;
+	width: 97% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+h1{
+	display: none !important;
+}
+.card{
+	box-shadow: none !important;
+	@include qp-border-radius(0);
+	.card-body{
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+footer{
+	display: none !important;
+}
+/* Print Utilities */
+// .qp-float-left{
+// 	float: left !important;
+// 	display: block;
+// 	flex: unset;
+// 	max-width: 48%;
+// }
+// .qp-float-right{
+// 	float: right !important;
+// 	display: block;
+// 	flex: unset;
+// 	max-width: 48%;
+// }
+.col-sm-1{
+	max-width: calc(1 / 12 * 100%);
+}
+.col-sm-2{
+	max-width: calc(2 / 12 * 100%);
+}
+.col-sm-3{
+	max-width: calc(3 / 12 * 100%);
+}
+.col-sm-4{
+	max-width: calc(4 / 12 * 100%);
+}
+.col-sm-5{
+	max-width: calc(5 / 12 * 100%);
+}
+.col-sm-6{
+	max-width: calc(6 / 12 * 100%);
+}
+.col-sm-7{
+	max-width: calc(7 / 12 * 100%);
+}
+.col-sm-8{
+	max-width: calc(8 / 12 * 100%);
+}
+.col-sm-9{
+	max-width: calc(9 / 12 * 100%);
+}
+.col-sm-10{
+	max-width: calc(10 / 12 * 100%);
+}
+.col-sm-11{
+	max-width: calc(11 / 12 * 100%);
+}
+.col-sm-12{
+	max-width: calc(12 / 12 * 100%);
+}

@@ -1,0 +1,31 @@
+{% load humanize  %}
+
+<div class="col-md-4 text text-center">
+
+                <h2>{{price.name}}</h2>
+                <p>{{price.description}}</p>
+                <p><b>${{price.price | floatformat:0 | intcomma}}</b> / Seat</p>
+                <p>
+                {%if price.max_search_result < 1000 %} Up to <b>{{price.max_search_result}}</b> {%else%}<b>Unlimited</b>{%endif%} results per search</p>
+				<p>
+				{%if price.max_search < 1000 %} Up to <b>{{price.max_search}}</b> {%else%}<b>Unlimited</b>{%endif%} saved searches</p>
+				<p>
+				{%if price.max_campaign < 1000 %} Up to <b>{{price.max_campaign}}</b> {%else%}<b>Unlimited</b>{%endif%} campaigns</p>
+				<p>
+				{% if price.twoway_comm %}
+				2-way communication{%else%}-{%endif%}</p>
+				
+				{% if price.welcome_message %}
+				Welcome message{%else%}-{%endif%}</p>
+				{% if price.custom_connect_message %}
+				Custom connect message{%else%}-{%endif%}</p>
+				{% if price.company_title_search %}
+				Company & title search filter{%else%}-{%endif%}</p>
+				{% if price.withdrawn_invite %}
+				Withdraw invites{%else%}-{%endif%}</p>
+				{% if price.export_csv %}
+				Export csv{%else%}-{%endif%}</p>
+				
+                
+                <p><a class="btn btn-default" href="{% url 'login'%}">Learn more »</a></p>
+</div>

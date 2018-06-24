@@ -1,0 +1,59 @@
+{% extends 'new/account/base.html' %}
+{% load static %}
+
+
+{% block title %}Settings{% endblock title %}
+{% block pagetitle %}
+    Task Queue
+{% endblock %}
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-md-6 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Upcoming tasks</h3>
+                {% include 'account/common_use/upcomming_task.html' %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-5">
+        <div class="card">
+            <div class="card-header">
+                    Finished tasks
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote">
+                        {% if finished_tasks %}
+                        <table class="table .table-bordered">
+
+                            <tbody>
+                             <tr>
+                                <th>Task type</th>
+                                <th>Name</th>
+                                <th>Date completed</th>
+
+                            </tr>
+                            {% for task in finished_tasks %}
+
+                                <tr>
+                                    <td>{{ task.queue_type }}</td>
+                                    <td>{{ task.content_object }}</td>
+                                    <td>{{ task.updated_at }}</td>
+
+                                </tr>
+
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    {% else %}
+                        There are no tasks
+                    {% endif %}
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}

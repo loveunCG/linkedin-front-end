@@ -1,0 +1,12 @@
+<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+				<ul class="nav navbar-nav">
+			<li class="{%if account_home %} active{%endif%}"><a href="{% url 'account-detail' pk=pk %}"><span>Home</span></a></li>
+			<li class="{%if 'network' in request.path %}active{%endif%}"><a href="{% url 'account-network' pk=pk %}"><span>My Network</span></a></li>
+			<li class="{%if 'messenger' in request.path %}active{%endif%}"><a href="{% url 'account-messenger' pk=pk %}"><span>Messenger</span></a></li>
+			<li class="{%if 'campaigns' in request.path %}active{%endif%}"><a href="{% url 'account-campaign' pk=pk %}"><span>Connector</span></a></li>
+			<li class="{%if 'search' in request.path %}active{%endif%}"><a href="{% url 'account-search' pk=pk %}"><span>Search</span></a></li>
+			<li class="{%if 'all' in request.path %}active{%endif%}"><a href="{% url 'account-all' pk=pk %}"><span>Inbox 
+			<span class="inUnread" style="display:none">(<span>0</span>)</span></span></a></li>
+			<li class="{%if 'task' in request.path %}active{%endif%}"><a href="{% url 'account-task' pk=pk %}">Tasks Queue</a></li>
+		</ul>
+				</div>

@@ -1,0 +1,46 @@
+{% extends 'app/base_headless.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+    <div class="block-center mt-xl wd-xl">
+        <div class="panel panel-dark panel-flat">
+            <div class="panel-heading text-center">
+                <a href="#"> 
+                    <img src="{% static 'images/logo.png' %}" alt="Image" class="block-center img-rounded">
+                </a>
+            </div>
+            <div class="panel-body">
+                <p class="text-center pv">LOG IN TO CONTINUE</p>
+                <form class="mb-lg" method="post" role="form">
+                    {% csrf_token %}
+                    <input name="__RequestVerificationToken" type="hidden" value="fkGWMa1LglWatRhW-OYC2GbvkRwiYacgANyeu3Q13vtlnrYQw0yhfU7JufWA9dq5-Ihp3YWrKCzUVpCQIZuScAnULJYpgE84wIkCnKSe6tQ1">
+                    <div class="form-group has-feedback">
+                        <input autocomplete="off" class="form-control" data-val="true" data-val-email="The Email address field is not a valid e-mail address." data-val-required="The Email address field is required." id="Email" name="email" placeholder="Enter email" required="required" type="email" value=""> 
+                        <span class="fa fa-envelope form-control-feedback text-muted"></span> 
+                        <span class="field-validation-valid text-danger small" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input autocomplete="off" class="form-control" data-val="true" data-val-required="The Password field is required." id="Password" name="password" placeholder="Password" required="required" type="password" value=""> 
+                        <span class="fa fa-lock form-control-feedback text-muted"></span> 
+                        <span class="field-validation-valid text-danger small" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="clearfix">
+                        <div class="checkbox c-checkbox pull-left mt0">
+                            <label>
+                                <input type="checkbox" value="" name="remember"> <span class="fa fa-check"></span>Remember Me 
+                            </label>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="text-muted">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
+                </form>
+                <p class="pt-lg text-center">Need to Signup?</p><a href="{% url 'register' %}" class="btn btn-block btn-default">Register Now</a></div>
+            </div>
+        </div>
+    
+{% endblock content %}

@@ -1,0 +1,25 @@
+ <ul>
+    {% for chat in chats %}
+        {%if chat.is_direct == False %}
+         {%include 'app/includes/messages/chat_left.html' with chat=chat%}
+        {%else%}
+        {%include 'app/includes/messages/chat_right.html' with chat=chat%}
+        {%endif%}
+    {%endfor%}
+</ul>
+
+<div class="chat-action">
+    <form action="{% url 'contact-chatmessage' pk=contact.id %}" method="post" id="chat_form">
+        {% csrf_token %} {{chatform.text}}
+        <button type="submit" class="btn btn-blue btn-gradient waves-effect waves-light pull-right" id="sendmessage">Send</button>
+    </form>
+</div>
+
+<style>
+    #sendmessage {
+        margin-bottom: 2em;
+    }
+    .plus-chat-button {
+        margin-top: 2em;
+    }
+</style>

@@ -1,0 +1,35 @@
+<div class="tab-pane" id="tab_3">
+	  		<div class="row">
+	<div class="col-md-6">
+		<div class="box box-success">
+			<div class="box-header">
+			  <h3 class="box-title">Messenger Campaign Status</h3>
+			</div>
+		
+			<div class="box-body">
+				<p style="font-size:16px;min-height:123px;">
+				You can turn this Messenger Campaign on and off. Turned on campaign will send out connection requests and messages according to your <a href="#tab_2" data-toggle="tab" onclick="$('.nav-tabs li').removeClass('active');$('.nav-tabs li:eq(1)').addClass('active');">messaging settings</a>. If you turn off the campaign, all campaign activity will be paused.</p>
+				
+				<label class="switch pull-left" style="margin-right:20px">
+				  {% include 'app/includes/campaigns/switch_button.html' with object=object %}
+				</label>
+				
+				<h5 style="margin-top:16px;">Campaign is active</h5>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-6">
+		<div class="box box-danger">
+			<div class="box-header">
+			  <h3 class="box-title">Delete Messenger Campaign</h3>
+			</div>
+		
+			<div class="box-body">
+				<p style="font-size:16px;min-height:120px;">Deleting Messenger Campaign will stop all campaign activity. Contacts from the campaign will remain in 'My Network' and in your 'Inbox', however, and will no longer receive automated campaign messages. Contact(s) status will change to "Old Connect". You will be able to continue manual communication with these contacts.</p>
+				
+				<a href="#" class="btn btn-flat btn-danger" data-click="removeCampaign" data-accid="{{object.owner_id}}" data-cid="{{object.id}}">DELETE MESSENGER CAMPAIGN</a>
+			</div>
+		</div>
+	</div>
+</div>	  	  </div>

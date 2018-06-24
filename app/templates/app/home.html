@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+
+{%block sidebar%}
+   
+{%endblock%}
+
+
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="jumbotron">
+            <h1>B2B Prospects</h1>
+            <p class="lead">B2B Prospects is a powerful tool to get leads from LinkedIn network, working for you on autopilot every single day</p>
+            <p><a href="{% url 'login'%} " class="btn btn-primary btn-lg">Learn more »</a></p>
+        </div>
+        <div class="row">
+        	{% include 'app/includes/price_block.html' with price=Starter %}
+        	
+            {% include 'app/includes/price_block.html' with price=Professional %}
+            {% include 'app/includes/price_block.html' with price=Business %}
+            
+        </div>
+    </div>
+
+{%endblock%}
+

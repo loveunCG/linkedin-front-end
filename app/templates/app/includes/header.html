@@ -1,0 +1,88 @@
+{% load static %}
+{% block header %}
+    
+<header class="topnavbar-wrapper">
+    <nav class="navbar topnavbar">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">
+                <div class="brand-logo"><h3>B2B Prospects</h3></div>
+                <div class="brand-logo-collapsed"> <img src="{% static 'images/logo-single.png' %}" alt="App Logo" class="img-responsive"></div>
+            </a>
+        </div>
+        <div class="nav-wrapper">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" data-trigger-resize="" data-toggle-state="aside-collapsed" class="hidden-xs"> <em class="fa fa-navicon"></em> </a>
+                    <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle"> <em class="fa fa-navicon"></em> </a>
+                </li>
+                <!--
+                <li class="dropdown dropdown-list" title="Switch Accounts">
+                    <a href="#" data-toggle="dropdown"> <em class="icon-people"></em> </a>
+                    <ul class="dropdown-menu animated">
+                        <li>
+                            <div class="list-group">
+                                <div class="dropdown-header text-center">Switch Accounts</div>
+                                <a href="#" class="list-group-item">
+                                    <div class="media-box">
+                                        <div class="pull-left"> <img src="{% static 'images/men.jpg' %}" alt="project member" class="img-circle thumb48"></div>
+                                        <div class="media-box-body clearfix">
+                                            <p class="m0">Jonathan Korkol</p>
+                                            <p class="m0 text-muted"> <small>Business Loan Specialist - Same Day Loan Offers Available</small>
+                                                <br> <small>cpnnumbers@gmail.com
+                                                {{ user_email }}
+                                                </small></p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="{% static 'add-more-account.html' %}" class="list-group-item text-center"> <em class="fa fa-plus"></em>&nbsp;<small>Add more accounts</small> </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                -->
+
+            </ul>
+            {%if 'account/' in request.path %}
+            	{%include 'app/includes/header_account.html' with acc_pk=acc_pk %}
+
+            {%endif%}
+
+            <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+                <li class="dropdown dropdown-list">
+                    <a href="#" data-toggle="dropdown"> <em class="icon-bell"></em> </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item"> <small>You have no notifications</small> </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{%if 'accounts' in request.path %}active{%endif%}">
+                    <a href="{% url 'accounts' %}" title="My Accounts"> Accounts</a>
+                </li>
+                <li class="{%if 'subscription' in request.path %}active{%endif%}">
+                    <a href="{% url 'subscription' %}" title="My subscrpition"> Subscription</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" title="Log out"> <em class="icon-logout"></em></a>
+                </li>
+
+           {%else%}
+
+          		 <li>
+                    <a href="{% url 'login' %}" title="Log In"> <em class="icon-login"></em></a>
+                </li>
+                <li>
+                    <a href="{% url 'register' %}" title="Register"> <em class="fa fa-user-plus"></em></a>
+                </li>
+
+           {%endif%}
+            </ul>
+        </div>
+
+    </nav>
+</header>
+
+{% endblock header %}

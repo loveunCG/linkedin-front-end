@@ -1,0 +1,49 @@
+{% load humanize  %}
+
+
+<div class="plan col-md-4">
+    <h3 class="plan-title">
+        {%if price.name == 'Starter' %} Individual User
+        {%elif price.name == 'Professional' %}
+        Basic Team
+        
+        {%else%} Enterprise Team {%endif%}
+    </h3>
+    
+    
+    
+    <div class="plan-cost"><span class="plan-price">${{price.price | floatformat:0 | intcomma}}</span><span class="plan-type">/ Monthly</span>
+    <br>
+    <small>
+    {%if price.name == 'Starter' %} User can add additional seats and will be billed $57 per additional seat (no free trial for additional seats)
+        {%elif price.name == 'Professional' %}
+        User can add additional seat and will be billed $47 per additional seat (no free trial for additional seats)
+        
+        {%else%}User can add additional seat and will be billed $37 per additional seat after 10 (no free trial for additional seats) {%endif%}
+    
+    </small>
+    
+    
+    </div>
+    <ul class="plan-features">
+        <li><i class="ion-checkmark"> </i>{{price.description}}</li>
+        <li><i class="ion-checkmark"> </i>{%if price.max_search_result < 1000 %} Up to <b>{{price.max_search_result}}</b> {%else%}<b>Unlimited</b>{%endif%} results per search</li>
+        <li><i class="ion-checkmark"> </i>{%if price.max_search < 1000 %} Up to <b>{{price.max_search}}</b> {%else%}<b>Unlimited</b>{%endif%} saved searches</li>
+        <li><i class="ion-checkmark"> </i>{%if price.max_campaign < 1000 %} Up to <b>{{price.max_campaign}}</b> {%else%}<b>Unlimited</b>{%endif%} campaigns</li>
+        <li><i class="ion-checkmark"> </i>{% if price.twoway_comm %}2-way communication{%else%}-{%endif%}</li>
+        <li><i class="ion-checkmark"> </i> {% if price.welcome_message %}
+            Welcome message{%else%}-{%endif%}</li>
+        <li><i class="ion-checkmark"> </i>{% if price.custom_connect_message %}
+            Custom connect message{%else%}-{%endif%}</li>
+        <li><i class="ion-checkmark"> </i>{% if price.company_title_search %}
+            Company & title search filter{%else%}-{%endif%}</li>
+        <li><i class="ion-checkmark"> </i>{% if price.withdrawn_invite %}
+            Withdraw invites{%else%}-{%endif%}</li>
+        
+        <li><i class="ion-checkmark"></i>{% if price.export_csv %}
+            Export csv{%else%}-{%endif%}</li>
+    </ul>
+    <div class="plan-select">
+        <a href="{% url 'login' %}" class="btn btn-primary">Select Plan</a>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+{% extends 'messenger/base.html' %}
+{% load static %}
+
+{% block title %}Add Messenger Compaigns{% endblock %}
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+   
+   	<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<form class="box box-primary" method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="is_bulk" value="1">			<div class="box-header with-border">
+			  <h3 class="box-title">New Messenger Campaign</h3>
+			</div>
+			<!-- /.box-header -->
+			<!-- form start -->
+			<form role="form">
+			  <div class="box-body">
+				<div class="form-group">
+				  <label>Messenger Campaign name</label>
+				  <input type="text" name="name" class="form-control" required="true">
+				</div>
+				
+				<div class="form-group">
+				  <label>Copy Messenger Campaign steps from</label>
+				  <select class="form-control" name="import_steps">
+					<option value="0">---</option>
+					{% for campaign in campaigns %}
+						<option value="{{campaign.id}}">{{campaign.title}}</option>
+					{% endfor %}
+				  </select>
+				</div>
+			  </div>
+			  <!-- /.box-body -->
+
+			  <div class="box-footer">
+				<input type="submit" name="save" class="btn btn-primary" value="CREATE MESSENGER CAMPAIGN">
+			  </div>
+			</form>
+		</form>
+		<!-- /.box -->
+	</div>
+</div>
+	</section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock content %}

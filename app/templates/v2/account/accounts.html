@@ -1,0 +1,341 @@
+
+
+{% extends 'v2/app/base.html' %}
+
+{% load static %}
+
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+<div class="row" >
+
+    <div class="col-md-6 mb-5 " style="margin: auto !important;">
+        <div class="card ">
+            <div class="card-header text-center">
+                <i class="batch-icon batch-icon-user-alt-3"></i> Accounts
+
+                <div class="header-btn-block">
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target=".add-linkedin-account">
+                        <i class="batch-icon batch-icon-add"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+
+
+                    {% for item in object_list %}
+
+                        {% if item.is_deleted %}
+                        <li class="list-group-item">
+                            {% if item.login_status %}
+                                <a href="{% url 'account-detail' pk=item.id %}">{{ item.email }}</a>
+                            {% else %}
+                                <a href="#" id="inactive_account_click"
+                                   data-email="{{ item.email }}"
+                                   data-pass="{{ item.password }}">{{ item.email }}</a>
+                            {% endif %}
+
+                            {% if item.login_status %}
+                                <a href="{% url 'account-settings' pk=item.id %}" data-toggle="tooltip"
+                                   data-original-title="" title="">Settings</a> {% endif %}
+                            <a href="#" onclick="return deleteAccount({{item.id}})"><i class="batch-icon batch-icon-bin-alt-2 float-right ml-3"></i></a>
+
+                            <span class="float-right badge badge-{% if item.status %}success{% else %}warning{% endif %}">{% if item.status %}
+                            Active{% else %}Inactive{% endif %}</span>
+                        </li>
+                        {% endif %}
+
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <div class="card-footer text-center">
+                <a href="/accounts/add/" class="add-account" data-toggle="modal" data-target=".add-linkedin-account">Add LinkedIn account</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade add-linkedin-account" id="linkedin_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-info" id="">Add Linked Account
+
+                    <p style="font-size: 12px;">Please be patient, this process may take few minutes</p>
+                    </h2>
+
+
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+						<div class="col-md-12">
+							<div class="card">
+
+								<div class="card-form-wizard">
+									<div class="row">
+										<div class="col-lg-12">
+											<div id="rootwizard-1">
+												<ul class="nav nav-pills wizard-header">
+													<li>
+														<a href="#tab1" data-toggle="tab">
+															<span class="main-text">
+																<span >1.Authentication</span>
+																<small>This step has validation</small>
+															</span>
+														</a>
+													</li>
+													<li>
+														<a href="#tab2" data-toggle="tab">
+															<span class="main-text">
+																<span>2.Verification</span>
+																<small>No validation required</small>
+															</span>
+														</a>
+													</li>
+													<li>
+														<a href="#tab3" data-toggle="tab">
+															<span class="main-text">
+																<span>3.Sync</span>
+																<small>Here's a summary of what you entered.</small>
+															</span>
+														</a>
+													</li>
+													<li>
+														<a href="#tab4" data-toggle="tab">
+															<span class="main-text">
+																<span>4.Activate</span>
+																<small>You're done!</small>
+															</span>
+														</a>
+													</li>
+												</ul>
+												<div class="tab-content clearfix">
+													<div class="tab-pane active show" id="tab1">
+														<div class="row" >
+															<div class="col-md-6" id="div_add_email">
+																<form method="post" id="wizard-stage-1">
+																	<div class="form-group">
+																		<label class="control-label">Email address</label>
+																		<input type="text" class="form-control wizard-stage-1-email" id="email" name="email" />
+																	</div>
+																	<div class="form-group">
+																		<label class="control-label">Password</label>
+																		<input type="password" class="form-control wizard-stage-1-password" id="password" name="password" />
+																	</div>
+																</form>
+															</div>
+                                                            <div class="col-md-6" id="div_add_email_progress" style="display: none;">
+                                                                Please wait while we connect to your account...
+
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab2">
+														<div class="row">
+															<div class="col-md-6">
+																<form method="post" id="wizard-stage-2">
+
+																</form>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab3">
+														<div class="row">
+															<div class="col-md-6">
+																<div class="form-wizard-review-block"></div>
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane" id="tab4">
+														<div class="row">
+															<div class="col-md-6">
+																<h2>You're Done!</h2>
+																<p>Thanks for filling out this form. We'll get back to you shortly.</p>
+															</div>
+														</div>
+													</div>
+													<ul class="pager wizard" id="page_wizard_next_pre">
+														<li class="previous first" style="display:none;">
+															<a class="btn btn-light" href="#">
+																<i class="batch-icon batch-icon-arrow-right"></i>
+																First
+															</a>
+														</li>
+														<li class="previous">
+															<a class="btn btn-secondary" href="#">
+																<i class="batch-icon batch-icon-arrow-right"></i>
+															</a>
+														</li>
+														<li class="next last" style="display:none;">
+															<a class="btn btn-primary" href="#">Last</a>
+														</li>
+														<li class="next">
+															<a class="btn btn-primary" href="#" onclick="return addLinkedInAccound()">
+																Next
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+                </div>
+                <!---<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>--->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade remove-linkedin-account" id="remove_account" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="">Delete Account
+
+                    </h4>
+
+
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+						<div class="col-md-12">
+
+                                <p>Are you sure you want to delete this account ?</p>
+                                <p style="color:red">
+                                    All of your account data will be permanently deleted from B2B Prospecting  servers and can't be restored.
+                                    <br><br>
+                                    You can only use one LinkedIn account during the 7-day free trial. If you delete this LinkedIn account, your free trial will end immediately. The next time you add this or any other LinkedIn account, you will have to pay for it first.
+                                </p>
+
+
+						</div>
+					</div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a id="account_delete_confirm" href="#" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+    <br/>
+
+
+
+
+
+
+
+{% endblock content %}
+
+{% block script %}
+
+    <script>
+
+        function deleteAccount(linkedin_id) {
+            {#linkedin_id = this.getAttribute('data_id');#}
+
+                $('#account_delete_confirm')[0].href = '/accounts/remove/' + linkedin_id;
+
+                $('#remove_account').modal('show');
+
+        }
+        function addLinkedInAccound(){
+            //e.preventDefault();
+
+
+            data = new Object()
+            data.email = $('#email')[0].value
+            data.password = $('#password')[0].value
+            /*var html = $('#add_account_modal_results').html()
+            if (html.indexOf('Data_Sync') >= 0) {
+                data.task_type = 'Data_Sync'
+            }*/
+
+            $("#div_add_email").hide();
+            $("#div_add_email_progress").show();
+            $.ajax({
+                url: '{% url 'add-account' %}',
+                type: "post",
+                data: data,
+                success: function (response) {
+
+                    load(data)
+
+                       $('#linkedin_modal').modal('toggle');
+
+                    interval = setInterval(function () {
+                        load(data)
+                    }, 10000);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.responseText == '400')
+                        $('#add_account_modal_extra_results').html('<p class="text-danger"> Account with this email is already exists </p>')
+                    else
+                        $('#add_account_modal_extra_results').html('<p class="text-danger"> An error occur during add this acount. please reloade this page and try again </p>')
+                }
+
+
+            });
+        }
+
+
+        function load(data) {
+                $.ajax({
+                    url: '{% url 'account-info' %}',
+                    type: "post",
+                    data: data,
+                    success: function (response) {
+                        $('#modal-form').hide();
+                        $('#progressbar_custom_first_page').hide();
+                        $('#add_account_modal_results').html(response)
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+
+
+                });
+            }
+
+    </script>
+
+{% endblock %}
+
+

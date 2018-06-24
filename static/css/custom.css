@@ -1,0 +1,26 @@
+.wrapper > section {
+	margin-left:auto;
+	margin-right:auto;
+	
+}
+
+@media only screen and (min-width: 768px){
+	.aside-collapsed .wrapper > section, .aside-collapsed .wrapper > footer {
+    margin-left:auto;
+	margin-right:auto;
+}	
+}
+
+
+@media only screen and (min-width: 768px) {
+  body {
+    min-height: 100%; }
+  .wrapper > .aside .aside-inner {
+    padding-top: 55px; }
+  .wrapper > section,
+  .wrapper > footer {
+    margin-left: 220px; }
+  .wrapper > section.has-sidebar-right {
+    margin-right: 240px; }
+    .wrapper > section.has-sidebar-right + .offsidebar {
+      z-index: 1; } }

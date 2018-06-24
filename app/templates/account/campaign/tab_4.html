@@ -1,0 +1,35 @@
+<style>
+    .progress-circle{
+        margin: 20px auto;
+    }
+</style>
+<div class="tab-pane" id="tab_4">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <h3 class="">Contacts</h3>
+            <h1 style=" font-size: 5em; color:#53777A">{{ contacts_stat.contacts }}</h1>
+        </div>
+        <div class="col-md-4 text-center">
+            <h3 class="">Messages</h3>
+            <div class="progress-circle p{{ contacts_stat.message_percent }} {% if contacts_stat.message_above_50 %} over50 {% endif %}">
+                <span>{{ contacts_stat.message_percent }}%</span>
+                <div class="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div class="value-bar"></div>
+                </div>
+            </div>
+            <div class="h4">{{ contacts_stat.message_contacts }}</div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h3 class="">Replied</h3>
+            <div class="progress-circle p{{ contacts_stat.reply_percent }}  {% if contacts_stat.reply_above_50 %} over50 {% endif %}">
+                <span>{{ contacts_stat.reply_percent }}%</span>
+                <div class="left-half-clipper">
+                    <div class="first50-bar"></div>
+                    <div class="value-bar"></div>
+                </div>
+            </div>
+            <div class="h4">{{ contacts_stat.reply_contacts }}</div>
+        </div>
+    </div>
+</div>

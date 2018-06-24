@@ -1,0 +1,49 @@
+.right-column ul.batch-icons-demo-list {
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+.right-column ul.batch-icons-demo-list li {
+	display: inline-block;
+	margin: 10px;
+	vertical-align: top;
+	width: 145px;
+}
+.right-column ul.batch-icons-demo-list li .icon {
+	background-color: #07a7e3;
+	height: 130px;
+	line-height: 13rem;
+	margin: 0 0 10px;
+	width: 100%;
+	border-radius: 0.4167rem;
+}
+.right-column ul.batch-icons-demo-list li .icon .batch-icon{
+	color: #FFFFFF;
+	font-size: 3rem;
+}
+.right-column ul.batch-icons-demo-list li .glyph,
+.right-column ul.batch-icons-demo-list li .class-name {
+	display: block;
+}
+.right-column ul.batch-icons-demo-list li .glyph {
+	font-size: 12px;
+	line-height: 12px;
+	margin-bottom: 10px;
+}
+.right-column ul.batch-icons-demo-list li .class-name input {
+	background-color: rgba(0, 0, 0, 0.2);
+	border: medium none;
+	border-radius: 6px;
+	box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+	box-sizing: border-box;
+	color: #72848c;
+	font-family: monospace;
+	font-size: 10px;
+	height: 30px;
+	padding: 0 10px;
+	width: 100%;
+}
+.right-column ul.batch-icons-demo-list li .glyph-caption {
+	font-family: monospace;
+	text-transform: lowercase;
+}

@@ -1,0 +1,490 @@
+{% extends 'v2/account/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+{% block pagetitle %} Home( {{ linkedin_user }}) {% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                     <div class="card-title">NEW CONNECTION <br>CAMPAIGNS</div>
+                        <div class="header-btn-block" style="top: 15px;">
+                            <a href="{% url 'account-campaign-add' pk=pk %}"
+                               class="btn btn-primary btn-gradient waves-effect waves-light pull-right add-account pull-right"">
+                                <i class="batch-icon batch-icon-add"></i>
+                                BUILD CAMPAIGN
+                            </a>
+                        </div>
+                </div>
+                <div class="card-table table-responsive">
+                    {% if connectors %}
+                    <table class="table table-hover align-middle">
+                        <thead class="thead-light">
+                            <tr>
+                                <!-- <th>Member</th>
+                                <th>Email</th>
+                                <th class="text-center">Status</th>
+                                <th>Created</th>
+                                <th class="text-right">Action</th> -->
+
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Contacts</th>
+                                <th>Connected</th>
+                                <th>Replied to<br>connection message</th>
+                                <th>Replied to<br>other messages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mc in connectors %}
+                                <tr>
+                                    <td><a href="{% url 'connector-campaign' pk=mc.id %}">{{ mc.title }}</a></td>
+                                    <td>
+                                    <span class="badge badge-{% if mc.status %}success{% else %}danger{% endif %}">{% if mc.status %}
+                                        Active{% else %}Inactive{% endif %}</span>
+                                    </td>
+                                    <td>{{ mc.contacts.all | length }}</td>
+                                    <td>{{ mc.count_sends }}</td>
+                                    <td>{{ mc.count_replies }}</td>
+                                    <td>{{ mc.count_reply_other }}</td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>Currently you have no connector campaigns with this linkedin account</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                <div class="card-title">EXISTING CONNECTION <br>CAMPAIGNS</div>
+                <div class="header-btn-block" style="top: 15px;">
+                    <a href="{% url 'account-messenger-add' pk=pk %}"
+                       class="btn btn-primary btn-gradient waves-effect waves-light pull-right add-account pull-right">
+                        <i class="batch-icon batch-icon-add"></i>
+                        BUILD CAMPAIGN
+                    </a>
+                    </div>
+                </div>
+                <div class="card-table table-responsive">
+                    {% if messengers %}
+                    <table class="table table-hover align-middle">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Contacts</th>
+                                <th>Replied</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for mc in messengers %}
+                                <tr>
+                                    <td><a href="{% url 'messenger-campaign' pk=mc.id %}">{{ mc.title }}</a></td>
+                                    <td>
+                                        <span class="badge badge-{% if mc.status %}success{% else %}danger{% endif %}">{% if mc.status %}
+                                            Active{% else %}Inactive{% endif %}</span>
+                                    </td>
+                                    <td>{{ mc.contacts.count }}</td>
+                                    <td>{{ mc.count_replies }}</td>
+                                </tr>
+                            {% endfor %}
+                           
+                           
+                        </tbody>
+                    </table>
+                    {% else %}
+                        <p>Currently you have no existing campaigns with this linkedin account</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>     
+    </div>
+    </br>
+    </br>
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+            <div class="card card-tile card-xs bg-danger bg-gradient text-center">
+                <div class="card-body p-4">
+                    <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-user-alt batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">{{ dashboard_data.campaign_members }}</div>
+                        <div class="tile-description">CAMPAIGN MEMBERS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+            <div class="card card-tile card-xs bg-secondary bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">{{ dashboard_data.invitations_sent }}</div>
+                        <div class="tile-description">INVITATIONS SENT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+            <div class="card card-tile card-xs bg-success bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-list batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">{{ dashboard_data.connected_members }}</div>
+                        <div class="tile-description">CONNECTED MEMBERS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+            <div class="card card-tile card-xs bg-dark bg-gradient text-center">
+                <div class="card-body p-4">
+                    <div class="tile-left">
+                        <i class="batch-icon batch-icon-clock batch-icon-xxl"></i>
+                    </div>
+                    <div class="tile-right">
+                        <div class="tile-number">{{ dashboard_data.time|date:"d M" }}</div>
+                        <div class="tile-description"> {{ dashboard_data.time|time:"h:i A" }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-primary">
+
+                <div class="card-body">
+                    {#                    <div class="header-btn-block pull-right">#}
+                    {#										<span class="data-range dropdown">#}
+                    {#											<a href="#" class="btn btn-primary dropdown-toggle waves-effect waves-light"#}
+                    {#                                               id="navbar-dropdown-sales-overview-header-button" data-toggle="dropdown"#}
+                    {#                                               data-flip="false" aria-haspopup="true" aria-expanded="false">#}
+                    {#												<i class="batch-icon batch-icon-calendar"></i>#}
+                    {#											</a>#}
+                    {#											<div class="dropdown-menu dropdown-menu-right"#}
+                    {#                                                 aria-labelledby="navbar-dropdown-sales-overview-header-button"#}
+                    {#                                                 x-placement="bottom-end"#}
+                    {#                                                 style="position: absolute; transform: translate3d(52px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">#}
+                    {#												<a class="dropdown-item" href="today">Today</a>#}
+                    {#												<a class="dropdown-item" href="week">This Week</a>#}
+                    {#												<a class="dropdown-item" href="month">This Month</a>#}
+                    {#												<a class="dropdown-item active" href="year">This Year</a>#}
+                    {#											</div>#}
+                    {#										</span>#}
+                    {#                    </div>#}
+                    <div style="height: 280px;">
+                        <div id="vmap" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-md bg-secondary">
+                <div class="card-header">
+                    <h6>PERCENTAGE INVITES TO CONNECTIONS
+
+
+                    </h6>
+                    {#                    <div class="header-btn-block pull-right">#}
+                    {#										<span class="data-range dropdown">#}
+                    {#											<a href="#" class="btn btn-primary dropdown-toggle waves-effect waves-light"#}
+                    {#                                               id="navbar-dropdown-sales-overview-header-button" data-toggle="dropdown"#}
+                    {#                                               data-flip="false" aria-haspopup="true" aria-expanded="false">#}
+                    {#												<i class="batch-icon batch-icon-calendar"></i>#}
+                    {#											</a>#}
+                    {#											<div class="dropdown-menu dropdown-menu-right"#}
+                    {#                                                 aria-labelledby="navbar-dropdown-sales-overview-header-button"#}
+                    {#                                                 x-placement="bottom-end"#}
+                    {#                                                 style="position: absolute; transform: translate3d(52px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">#}
+                    {#												<a class="dropdown-item" href="today">Today</a>#}
+                    {#												<a class="dropdown-item" href="week">This Week</a>#}
+                    {#												<a class="dropdown-item" href="month">This Month</a>#}
+                    {#												<a class="dropdown-item active" href="year">This Year</a>#}
+                    {#											</div>#}
+                    {#										</span>#}
+                    {#                    </div>#}
+                </div>
+                <div class="card-body">
+
+
+                    <canvas id="myChart"></canvas>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-12">
+
+                            <div>
+                                <canvas id="myLineChart"></canvas>
+                            </div>
+
+                        </div>
+{#                        <div class="col-xl-4">#}
+{#                            <br><br>#}
+{#                            <h3>Backgrounds</h3>#}
+{#                            <span><strong>Contacts</strong></span>#}
+{#                            <div class="progress">#}
+{#                                <div class="progress-bar bg-success" role="progressbar"#}
+{#                                     style="width: {{ dashboard_data.campaign_members_p }}%"#}
+{#                                     aria-valuenow="{{ dashboard_data.campaign_members_p }}"#}
+{#                                     aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                            </div>#}
+{#                            <span><strong>Invitations Sent</strong></span>#}
+{#                            <div class="progress">#}
+{#                                <div class="progress-bar bg-info" role="progressbar"#}
+{#                                     style="width: {{ dashboard_data.invitations_sent_p }}%"#}
+{#                                     aria-valuenow="{{ dashboard_data.invitations_sent_p }}"#}
+{#                                     aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                            </div>#}
+{#                            <span><strong>Replied</strong></span>#}
+{#                            <div class="progress">#}
+{#                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                     style="width: {{ dashboard_data.replied_p }}%"#}
+{#                                     aria-valuenow="{{ dashboard_data.replied_p }}"#}
+{#                                     aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                            </div>#}
+{##}
+{##}
+{#                        </div>#}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br><br>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Report</div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th><strong>24h</strong></th>
+                            <th><strong>48h</strong></th>
+                            <th><strong>72h</strong></th>
+                            <th><strong>1w</strong></th>
+                            <th><strong>1m</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Connection requests:</td>
+                            <td>{{ connection.h24 }}</td>
+                            <td>{{ connection.h48 }}</td>
+                            <td>{{ connection.h72 }}</td>
+                            <td>{{ connection.d7 }}</td>
+                            <td>{{ connection.m1 }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Connected:</td>
+                            <td>{{ calculate_communication_stats.h24.connected }}</td>
+                            <td>{{ calculate_communication_stats.h48.connected }}</td>
+                            <td>{{ calculate_communication_stats.h72.connected }}</td>
+                            <td>{{ calculate_communication_stats.w1.connected }}</td>
+                            <td>{{ calculate_communication_stats.m1.connected }}</td>
+                        </tr>
+                        <tr>
+                            <td>Replied to connection message:</td>
+
+                            <td>{{ calculate_communication_stats.h24.replied }}</td>
+                            <td>{{ calculate_communication_stats.h48.replied }}</td>
+                            <td>{{ calculate_communication_stats.h72.replied }}</td>
+                            <td>{{ calculate_communication_stats.w1.replied }}</td>
+                            <td>{{ calculate_communication_stats.m1.replied }}</td>
+                        </tr>
+                        <tr>
+                            <td>Replied to other messages:</td>
+                            <td>{{ calculate_communication_stats.h24.replied_others }}</td>
+                            <td>{{ calculate_communication_stats.h48.replied_others }}</td>
+                            <td>{{ calculate_communication_stats.h72.replied_others }}</td>
+                            <td>{{ calculate_communication_stats.w1.replied_others }}</td>
+                            <td>{{ calculate_communication_stats.m1.replied_others }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'assets/jvmap/maps/jquery.vmap.world.js' %}"></script>
+    <script>
+        
+        {% if map.map_data %}
+            var sample_data = {{ map.map_data|safe }};
+        {% else %}
+             var sample_data = 0;
+        {% endif %}
+
+    </script>
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: '#07a7e3',
+                color: '#1aa0d2',
+                hoverOpacity: 0.7,
+                selectedColor: '#666666',
+                enableZoom: false,
+                showTooltip: true,
+                {#                scaleColors: ['#C8EEFF', '#006491'],#}
+                values: sample_data,
+                normalizeFunction: 'polynomial'
+            });
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById("myChart");
+        var chart_config = {
+            type: 'doughnut',
+            data: {
+                labels: ["INVITES", "PENDING"],
+                datasets: [{
+
+                    data: [{{ dashboard_data.invitation_rate }}, {{ dashboard_data.pending_rate }}],
+                    backgroundColor: [
+                        'rgba(255, 255, 255, 1)',
+                        'rgba(54, 162, 235, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)'
+
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
+
+            }
+
+        }
+        var myChart = new Chart(ctx, chart_config);
+    </script>
+
+
+    <script>
+        {% if connection_stat.max %}
+            var step_size = {{ connection_stat.max }}
+        {% else %}
+             var step_size = 1;
+        {% endif %}
+        
+        step_size = parseInt(step_size / 4) + 1
+
+        var config = {
+            type: 'line',
+            data: {
+                labels: {{ connection_stat.labels|safe }},
+                datasets: [{
+                    label: 'Contact List',
+                    borderColor: window.chartColors.green,
+                    backgroundColor: window.chartColors.green,
+                    data: {{ connection_stat.contacts_list|safe }},
+                }, {
+                    label: 'Invitations List',
+                    borderColor: window.chartColors.blue,
+                    backgroundColor: window.chartColors.blue,
+                    data: {{ connection_stat.invitations_list|safe }},
+                }, {
+                    label: 'Replied List',
+                    borderColor: window.chartColors.yellow,
+                    backgroundColor: window.chartColors.yellow,
+                    data: {{ connection_stat.replied_list|safe }},
+                },]
+            },
+            options: {
+                legend: {
+                    display: true
+                },
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'COMMUNICATION STATE'
+                },
+                tooltips: {
+                    mode: 'index',
+                },
+                hover: {
+                    mode: 'index'
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        },
+                        ticks: {
+                            stepSize: step_size
+                        }
+                    }]
+                }
+            }
+        };
+
+    </script>
+    <script>
+        var connect_ctx = document.getElementById("myLineChart");
+        var connectionChart = new Chart(connect_ctx, config);
+    </script>
+    {#    <script src="{% static 'assets/js/misc/circle-progress.min.js' %}"></script>#}
+
+
+{% endblock %}

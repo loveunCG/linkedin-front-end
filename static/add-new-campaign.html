@@ -1,0 +1,295 @@
+<section>
+    <div class="content-wrapper">
+        <div class="content-heading">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <select name="account" class="form-control m-b" onchange="selectChanged(this);" id="quick-campaign-switcher">
+                        <option selected="">Quick switch to campaign...</option>
+                        <option value="My+First+Campaign" href="my-first-campaign.html">&nbsp;&nbsp;My First Campaign</option>
+                        <option href="add-new-campaign.html">+&nbsp;Add New Campaign</option>
+                    </select>
+                </div>
+            </div>
+            <script>
+                function selectChanged() {
+                    var historySelectList = $('select#quick-campaign-switcher');
+                    var selectedValue = $('option:selected', historySelectList);
+                    window.location.href = (selectedValue.attr('href'));
+                }
+            </script> 
+            <div class="title-top">
+                Campaigns Management
+                <small>Manage your campaigns here</small></div>
+            </div>
+           </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="pull-right">
+                            <div class="btn-group dropdown">
+                                <button data-toggle="dropdown" class="btn btn-link" aria-expanded="false"> <em class="fa fa-ellipsis-v fa-lg text-muted"></em> </button>
+                                <ul role="menu" class="dropdown-menu dropdown-menu-right animated">
+                                    <li class="disabled">
+                                        <a href="#"> <span>Export</span> </a>
+                                    </li>
+                                    <li class="disabled">
+                                        <a href="#"> <span>Import</span> </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" id="delete-campaign-link"> <span class="text-danger">Delete</span> </a>
+                                        <form action="/Campaigns/SetCampaignStatus" id="form-campaign-delete" method="post">
+                                            <input name="__RequestVerificationToken" type="hidden" value="Wg1N_0MqtSKvEEkjtI-AePLb34-c5GYEXcaQhk_7VyZPI5XxHU-adMzQKo3raxInWBojpfmedcD1Czhllj4JrzaflH4eYx-wZcUXkDoJUkzTtk3KQKefEMBKicyyBY1PC2m8Qng7NS5DutpMkqGucw2">
+                                            <input data-val="true" data-val-number="The field CampaignId must be a number." id="campaignId" name="campaignId" type="hidden" value="18">
+                                            <input id="statusString" name="statusString" type="hidden" value="CAMPAIGN_DELETED">
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right mt"></div>
+                        <div>
+                            <div class="h4 mv"> <b>My Campaign (2)</b> <sup class="label label-info" style="font-size:55%; vertical-align:60%;">paused</sup>
+                                <div class="text-muted" style="font-size:65%;"></div>
+                            </div>
+                        </div>
+                        <form action="/Campaigns/SetCampaignStatus" id="form-campaign-start" method="post">
+                            <input name="__RequestVerificationToken" type="hidden" value="_aJkvoctDc78T0QNpJnsnxOoKy3C4RxIFp9y57sEBsnEjKqbSxzQ88wmuM-rnVwtXi7xy3sIaSw6Q8GheeyMXNkfTeIXJRqwNBfT83caL6oF_X9ylAKStcnvmItTEBDDuDrHh6syAoHDrEGW_Cy0zQ2">
+                            <input data-val="true" data-val-number="The field CampaignId must be a number." id="campaignId" name="campaignId" type="hidden" value="18">
+                            <input id="statusString" name="statusString" type="hidden" value="CAMPAIGN_RUNNING">
+                        </form>
+                        <form action="/Campaigns/SetCampaignStatus" id="form-campaign-pause" method="post">
+                            <input name="__RequestVerificationToken" type="hidden" value="gwpBEjdmm13By4tQ_jNIVk64SVQaNqGAs063MRJ9KPB3yVK6VyWLRLDY4hHfdrag8niOwIP7KV3_FNZfLfdgi5PdJ1W14sL6Obi9keFO_yTZuizHt8gjMPdjrYaThXaYmCsDZu15p95KGIVoUN3QUg2">
+                            <input data-val="true" data-val-number="The field CampaignId must be a number." id="campaignId" name="campaignId" type="hidden" value="18">
+                            <input id="statusString" name="statusString" type="hidden" value="CAMPAIGN_PAUSED">
+                        </form>
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <button type="button" class="btn btn-default btn-oval mb-sm demo2"> <em class="fa fa-play fa-fw text-muted"></em> <span>Start</span> </button>
+                                <a disabled="" type="button" href="#" onclick="$('#form-campaign-pause').submit();" class="btn btn-default btn-oval mb-sm"> <em class="fa fa-pause fa-fw text-muted"></em> <span>Pause</span> </a> <em>&nbsp;</em>
+                                <div class="btn-group mb-sm">
+                                    <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-default" aria-expanded="false"><em class="fa fa-users fa-fw text-muted"></em> <span>Add members&nbsp;</span> <span class="caret"></span> </button>
+                                    <ul class="dropdown-menu animated" style="width:200%;">
+                                        <li>
+                                            <div class="list-group" style="line-height: 1.2;">
+                                                <div class="dropdown-header text-center">Basic Options</div>
+                                                <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModalLarge">
+                                                    <div class="media-box">
+                                                        <div class="pull-left"> <em class="fa fa-search fa-2x"></em></div>
+                                                        <div class="media-box-body clearfix">
+                                                            <p class="m0">Basic Search</p>
+                                                            <p class="m0 text-muted"> <small>Add new members with basic LinkedIn search capabilities</small></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <form action="/Campaigns/AddExistingConnectionsTask" id="AddExistingConnectionsTaskForm" method="post">
+                                                    <input name="__RequestVerificationToken" type="hidden" value="Js87rezByr7QcXKj4L9HbaT3rrHNDGo11fpIHPJZVTX2RK98ldsPk9AaxpLa1-5mn4wjdSImSEJhjj0xtoMHTPZU9h89ikPpFqI3QiBuZwDMk3XMhbiS96F3gYgbEEtHjwCePNomPUAMKW8biAAvAw2">
+                                                    <input data-val="true" data-val-number="The field CampaignId must be a number." id="CampaignId" name="CampaignId" type="hidden" value="18">
+                                                </form>
+                                                <button type="button" id="swal-add-existing-connections" class="list-group-item demo4">
+                                                    <div class="media-box">
+                                                        <div class="pull-left"> <em class="fa fa-user fa-2x"></em></div>
+                                                        <div class="media-box-body clearfix">
+                                                            <p class="m0">Add Existing Connections</p>
+                                                            <p class="m0 text-muted"> <small>Add your exisiting connections to campaign</small></p>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <div class="dropdown-header text-center" style="line-height: 1.2;">Advanced Options*
+                                                    <br><small>*available only with Sales Navigator <br>and <a href="#">Pro Subscription Plan</a></small></div>
+                                                <a href="#" class="list-group-item disabled">
+                                                    <div class="media-box">
+                                                        <div class="pull-left"> <em class="fa fa-search fa-2x text-info"></em></div>
+                                                        <div class="media-box-body clearfix">
+                                                            <p class="m0" style="color:#555;">Pro Search</p>
+                                                            <p class="m0 text-muted"> <small>Search for new members with Sales Navigator</small></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#" class="list-group-item disabled">
+                                                    <div class="media-box">
+                                                        <div class="pull-left"> <em class="fa fa-users fa-2x text-warning"></em></div>
+                                                        <div class="media-box-body clearfix">
+                                                            <p class="m0" style="color:#555;">Import Leads</p>
+                                                            <p class="m0 text-muted"> <small>Import leads previously saved in Sales Navigator</small></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#" class="list-group-item disabled">
+                                                    <div class="media-box">
+                                                        <div class="pull-left"> <em class="fa fa-list fa-2x text-success"></em></div>
+                                                        <div class="media-box-body clearfix">
+                                                            <p class="m0" style="color:#555;">Import Saved Searches</p>
+                                                            <p class="m0 text-muted"> <small>Import searches previously saved in Sales Navigator</small></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><em>&nbsp;</em><a disabled="" href="getting-started.html" class="btn btn-default mb-sm btn-oval" aria-expanded="false"><em class="fa fa-gear fa-fw text-muted"></em> <span> Settings</span></a>
+                            <div class="pull-right"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>Campaign Settings</label>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/Campaigns/Update" class="form-horizontal" method="post" role="form">
+                            <input name="__RequestVerificationToken" type="hidden" value="WNkbPIat37IXzCebi1ukObO9kPhl8YzGn3U1HvUeGTn_oCnX1dB7ifbPn8TbNFbRhDqocQFAsA12vojaO8vL-rYDqM4UDyihPQTBu9VbCPg1PilQvZNN_U2OcItyIvk97fF-YGSbomkWjjDSdpjLbg2">
+                            <input data-val="true" data-val-number="The field CampaignId must be a number." id="CampaignSettingsForm_CampaignId" name="CampaignSettingsForm.CampaignId" type="hidden" value="18">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="CampaignSettingsForm_CampaignName">Campaign Name*</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Campaign Name* field is required." id="CampaignSettingsForm_CampaignName" name="CampaignSettingsForm.CampaignName" placeholder="Enter Campaign name here" type="text" value="My Campaign (2)"> <span class="field-validation-valid text-danger small" data-valmsg-for="CampaignSettingsForm.CampaignName" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label" for="CampaignSettingsForm_Description">Description</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" cols="20" id="CampaignSettingsForm_Description" name="CampaignSettingsForm.Description" placeholder="A short description of your campaign" rows="3"></textarea><span class="field-validation-valid text-danger small" data-valmsg-for="CampaignSettingsForm.Description" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Connection Message</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" data-val="true" data-val-number="The field ConnectionMessageId must be a number." id="CampaignSettingsForm_ConnectionMessageId" name="CampaignSettingsForm.ConnectionMessageId">
+                                        <option value="-1">(none)</option>
+                                        <option value="10">New Message</option>
+                                        <option selected="selected" value="9">Please Connect with Me</option>
+                                    </select> <a href="create-new-connection-message.html" class="btn btn-link"><em class="icon-speech">&nbsp;</em>Create New Connection Message</a></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Connection Requests Limit</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group"> <span class="input-group-addon">from</span>
+                                        <input class="form-control" data-val="true" data-val-number="The field ConnectionRequestsLimitFrom must be a number." data-val-required="The ConnectionRequestsLimitFrom field is required." id="CampaignSettingsForm_ConnectionRequestsLimitFrom" name="CampaignSettingsForm.ConnectionRequestsLimitFrom" type="number" value="12"> <span class="input-group-addon">to</span>
+                                        <input class="form-control" data-val="true" data-val-number="The field ConnectionRequestsLimitTo must be a number." data-val-required="The ConnectionRequestsLimitTo field is required." id="CampaignSettingsForm_ConnectionRequestsLimitTo" name="CampaignSettingsForm.ConnectionRequestsLimitTo" type="number" value="15"> <span class="input-group-addon">per day</span></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Autoresponder Messages Limit</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group"> <span class="input-group-addon">from</span>
+                                        <input class="form-control" data-val="true" data-val-number="The field MessagesLimitFrom must be a number." data-val-required="The MessagesLimitFrom field is required." id="CampaignSettingsForm_MessagesLimitFrom" name="CampaignSettingsForm.MessagesLimitFrom" type="number" value="12"> <span class="input-group-addon">to</span>
+                                        <input class="form-control" data-val="true" data-val-number="The field MessagesLimitTo must be a number." data-val-required="The MessagesLimitTo field is required." id="CampaignSettingsForm_MessagesLimitTo" name="CampaignSettingsForm.MessagesLimitTo" type="number" value="15"> <span class="input-group-addon">per day</span></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Campaign Schedule</label>
+                                <div class="col-lg-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleSunday field is required." id="CampaignSettingsForm_CampaignScheduleSunday" name="CampaignSettingsForm.CampaignScheduleSunday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleSunday" type="hidden" value="false"> Sunday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleMonday field is required." id="CampaignSettingsForm_CampaignScheduleMonday" name="CampaignSettingsForm.CampaignScheduleMonday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleMonday" type="hidden" value="false"> Monday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleTuesday field is required." id="CampaignSettingsForm_CampaignScheduleTuesday" name="CampaignSettingsForm.CampaignScheduleTuesday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleTuesday" type="hidden" value="false"> Tuesday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleWednesday field is required." id="CampaignSettingsForm_CampaignScheduleWednesday" name="CampaignSettingsForm.CampaignScheduleWednesday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleWednesday" type="hidden" value="false"> Wednesday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleThursday field is required." id="CampaignSettingsForm_CampaignScheduleThursday" name="CampaignSettingsForm.CampaignScheduleThursday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleThursday" type="hidden" value="false"> Thursday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleFriday field is required." id="CampaignSettingsForm_CampaignScheduleFriday" name="CampaignSettingsForm.CampaignScheduleFriday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleFriday" type="hidden" value="false"> Friday </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input checked="checked" data-val="true" data-val-required="The CampaignScheduleSaturday field is required." id="CampaignSettingsForm_CampaignScheduleSaturday" name="CampaignSettingsForm.CampaignScheduleSaturday" type="checkbox" value="true">
+                                            <input name="CampaignSettingsForm.CampaignScheduleSaturday" type="hidden" value="false"> Saturday </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-b">
+                                <label class="col-lg-2 control-label" for="CampaignSettingsForm_RunTasksEveryHrs">Run Tasks Every</label>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input class="form-control" data-val="true" data-val-number="The field Run Tasks Every must be a number." data-val-required="The Run Tasks Every field is required." id="CampaignSettingsForm_RunTasksEveryHrs" name="CampaignSettingsForm.RunTasksEveryHrs" type="number" value="24"><span class="input-group-addon">hrs</span></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <div class="btn-group"> <a href="onclick-save-setting.html" class="btn btn-labeled btn-info col-lg-12"><span class="btn-label"><em class="fa fa-save"></em></span>Save</a></div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <div class="btn-group">
+                                    <button type="reset" class="btn btn-labeled btn-default col-lg-12"><span class="btn-label"><em class="fa fa-times"></em></span>Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal"></form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>Autoresponder Messages</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group m-b">
+                            <table class="table table-bordered bg-transparent">
+                                <tbody></tbody>
+                            </table>
+                            <button disabled="" data-toggle="modal" data-target="#myModal" class="btn btn-link"><em class="fa fa-plus">&nbsp;</em>Add New Autoresponder Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"> <span aria-hidden="true">×</span> </button>
+                    <h4 id="myModalLabel" class="modal-title">Attach Autoresponder Message</h4></div>
+                <div class="modal-body">
+                    <form action="/Campaigns/AttachAutoresponderMessage" class="form-horizontal" id="modal-form" method="post" role="form">
+                        <input name="__RequestVerificationToken" type="hidden" value="6FfupwftWJG1bMJXO2VM1e_yhQMYuOre5pfbJXxG_M1q1dltWJz0FHw4yDmrsAB9qfV6EDyl3xqLVgwEfoi18sD2ZuEfSQlmuhszt9qOAkLWM2MQV5pbHsY9AlzJom777Zdw1x7TK9tnOhkSsnl-7g2">
+                        <input id="modalConnectionMessageId" name="campaignId" type="hidden" value="18">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Message</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="autoresponderMessageId" name="autoresponderMessageId">
+                                    <option value="7">Thanks for connecting</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Send After</label>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <input class="form-control" id="sendAfter" name="sendAfter" type="number" value="0"> <span class="input-group-addon">days</span></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button form="modal-form" type="submit" class="btn btn-primary" id="modalSaveChanges">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>

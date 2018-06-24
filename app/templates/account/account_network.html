@@ -1,0 +1,202 @@
+{% extends 'new/account/base.html' %}
+{% load static %}
+{% block title %}Send messages to your Existing Connections.{% endblock title %}
+{% block extra_head %}
+    <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+{% block content%}
+<div class="row">
+    <div class="col-md-12  mb-4">
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h5 class="mb-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Send Messages to Your Existing Connections.
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-body pad-reduce">
+                        Now you can manage with ease messaging Existing Connections. Have different Existing Connections in different Campaigns or No Campaigns. You have full control.
+Direct Chat allows to to not leave the platform to manage an active conversation, also you now can with one click see all active conversations.x
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-4">
+        <div class="table100">
+            {% include 'app/includes/people_datatable.html' with contacts=object_list campaign=1 %}
+            {% include 'app/includes/hidden_people_table.html' with contacts=object_list_default campaign=1 %}
+        </div>
+    </div>
+    <div class="main-section">
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 first-section">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-6 left-first-section">
+                        <p style="font-size: 1.3em;"><i class="fa fa-comment fa-2x"></i> &nbsp;&nbsp;Direct Chat</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 right-first-section">
+                        <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 second-section">
+                <div class="chat-section">
+                    <div class="card-body" id="uinfo_box">
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 third-section">
+                <div class="text-bar">
+                    <input class="input-chat-message" type="text" placeholder="Write messege">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    table {
+        background: white !important;
+        border-collapse: collapse;
+        border-radius: 0px;
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+    .dataTables_paginate {
+        position: relative;
+        float: inside;
+    }
+    .dataTables_info{
+         position: relative;
+    }
+    th input[type="checkbox"] {
+         box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        margin-left: 15px;
+    }
+
+     th select{
+         box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+         margin-left: 15px;
+         height: 30px;
+    }
+    table thead tr {
+        height: 60px;
+        background: #13353f;
+    }
+    .dt-checkboxes {
+        box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        margin-left: 15px;
+    }
+
+    .table100-head th{
+        font-size: 18px !important;
+        color: white !important;
+        font-weight: unset !important;
+        vertical-align: center !important;
+    }
+
+    tr{
+        cursor: pointer;
+    }
+    .hidden{
+        display: none;
+    }
+    .pad-reduce{
+
+        padding: 1.0rem !important;
+
+    }
+ </style>
+{% endblock %} {% block pagefooter %} {% include 'app/includes/datatable_pagefooter.html' %}
+<div class="modal fade" tabindex="-1" role="dialog" id="add2campaign">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="{% url 'campaign-contacts' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Connection to Messenger Campaign</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-body-input">
+                    {% if messenger_campaigns_count > 0 %}
+                    <p>Choose Campaign</p>
+                    <select class="form-control" name="campaign" id="campaign">
+
+                        {% include 'app/includes/campaigns/list_select.html' with campaigns=messenger_campaigns %}
+                    </select>
+
+                    {% include 'app/includes/campaigns/list_hidden.html' with campaigns=messenger_campaigns %} {% else %} You don't have any
+                    Messenger Campaigns yet. To create one go
+                    <a href="{% url 'account-messenger' pk=account.id %}">here</a>. {% endif %}
+                </div>
+                <input type="hidden" name="cid" value="">
+                <div class="modal-body modal-body-move text text-danger">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {% if messenger_campaigns_count > 0 %}
+                        <button type="button" class="btn btn-primary add2bulk_button">Add to Messenger</button>
+                        <button type="button" class="btn btn-info move2bulk_button hidden">Move</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/table2CSV.js' %}"></script>
+<script>
+    let toggle_chat = false;
+    $(document).ready(function () {
+        $('.dt-checkboxes').addClass('custom-control-input');
+        $(".fa-minus").click(function(){
+            $('.main-section').toggleClass("open-more");
+            if($('.input-chat-message').is(':visible')){
+                $('.input-chat-message').hide();
+            } else {
+                $('.input-chat-message').show();
+            }
+
+        });
+        $(".left-first-section").click(function(){
+            $('.main-section').toggleClass("open-more");
+             if(!toggle_chat){
+                $('.input-chat-message').hide();
+                toggle_chat =true;
+            }else{
+                $('.input-chat-message').show();
+                toggle_chat =false;
+            }
+        });
+        $(".export-to-csv").click(function () {
+            var $table = $('#csv_convert_table');
+            var csv = $table.table2CSV({
+                delivery: 'value'
+            });
+
+            var downloadLink = document.createElement("a");
+            downloadLink.href = 'data:text/csv;charset=UTF-8,' +
+                encodeURIComponent(csv);
+            downloadLink.download = "my_network.csv";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{% if object_list %}>
+    <table class="table table-bordered">
+
+        <tbody>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Contacts</th>
+            <th>Replied</th>
+        </tr>
+        {% for mc in object_list %}
+            <tr>
+                <td><a href="{% url 'messenger-campaign' pk=mc.id %}">{{ mc.title }}</a></td>
+                <td>
+                    <span class="label bg-{%if mc.status%}green{%else%}black{%endif%}">{%if mc.status%}Active{%else%}Inactive{%endif%}</span>
+                </td>
+                <td>{{ mc.contacts.count }}</td>
+                <td>{{ mc.count_replies }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% else %}
+<p>There is no Connector Campaign at this moment</p>
+{% endif %}

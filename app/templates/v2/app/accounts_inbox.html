@@ -1,0 +1,78 @@
+{% extends 'new/account/base.html' %}
+{% load static %}
+{% block title %}Inbox{% endblock title %}
+{%block content%}
+
+{% block extra_head %}
+    <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+<section class="content">
+<div class="row mb-4">
+    <div class="col-md-12 mb-5">
+        <div class="card">
+            <div class="card-body">
+               {% include 'app/includes/people_datatable.html' with contacts=object_list %}
+            </div>
+        </div>
+    </div>
+
+    <div class="main-section">
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 first-section">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-6 left-first-section">
+                        <p style="font-size: 1.3em;"><i class="fa fa-comment fa-2x"></i> &nbsp;&nbsp;Direct Chat</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 right-first-section">
+                        <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 second-section">
+                <div class="chat-section">
+                    <div class="card-body" id="uinfo_box">
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="row border-chat">
+            <div class="col-md-12 col-sm-12 col-xs-12 third-section">
+                <div class="text-bar">
+                    <input class="input-chat-message" type="text" placeholder="Write messege">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+    <script>
+    let toggle_chat =false;
+    $(".fa-minus").click(function(){
+            $('.main-section').toggleClass("open-more");
+            if(!toggle_chat){
+                $('.input-chat-message').hide();
+                toggle_chat =true;
+            }else{
+                $('.input-chat-message').show();
+                toggle_chat =false;
+            }
+        });
+        $(".left-first-section").click(function(){
+            $('.main-section').toggleClass("open-more");
+             if(!toggle_chat){
+                $('.input-chat-message').hide();
+                toggle_chat =true;
+            }else{
+                $('.input-chat-message').show();
+                toggle_chat =false;
+            }
+        });
+    </script>
+{%endblock%}
+{% block pagefooter%}
+{% include 'app/includes/datatable_pagefooter.html' %}
+{%endblock%}
+

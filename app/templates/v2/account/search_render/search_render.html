@@ -1,0 +1,274 @@
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        position: relative;
+        /* float: left; */
+        padding: 2px 11px;
+        line-height: 1.52857;
+        text-decoration: none;
+        color: #515253;
+        border: 1px solid #eee;
+        margin-left: -1px;
+    }
+    .has-error {
+      color:red;
+    }
+</style>
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <span class="btn btn-default"><input id="select_all_items" type="checkbox" data-click="checkAll"></span>&nbsp;&nbsp;&nbsp;
+
+                    <a class="btn btn-default" id="add_selected" data-click="addSelected2Campaign">Add selected
+                        people to Connection Campaign</a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default" id="add_allnew" data-click="addAll2Campaign">Add all new people to
+                        Connection Campaign</a>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-default" data-click="export" data-page="search" data-toggle="tooltip"
+                            title="Export contacts to CSV"><i class="fa fa-file-excel-o"></i></button>
+
+                    <div class="table-responsive">
+                        <table id="datatable-1"  class="table table-datatable table-striped table-hover">
+                            <thead>
+                                <tr style="cursor: pointer !important;">
+                                    <th  class="cursor-pointer no-sort" style="width: 5%" ><input id="select_all_items_th" type="checkbox" data-click="checkAll">&nbsp;</th>
+                                    <th class="cursor-pointer">Name
+                                        <div class="torder" data-click="table_order" data-col="name"></div>
+                                    </th>
+                                    <th class="cursor-pointer">Company
+                                        <div class="torder" data-click="table_order" data-col="company"></div>
+                                    </th>
+                                    <th class="cursor-pointer">Title
+                                        <div class="torder" data-click="table_order" data-col="title"></div>
+                                    </th>
+                                    <th class="cursor-pointer">Location
+                                        <div class="torder" data-click="table_order" data-col="location"></div>
+                                    </th>
+                                    <th class="cursor-pointer">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for search_result in search_results %}
+
+                                <tr style="cursor: pointer !important;" id="ctct_{{ search_result.pk }}">
+                                    <td> {% if not search_result.search_result_status %}
+                                        <input class="select_items" value="{{ search_result.pk }}" type="checkbox"> {% endif %}
+                                    </td>
+                                    <td>{{ search_result.name }}</td>
+                                    <td>{{ search_result.company }}</td>
+                                    <td>{{ search_result.title }}</td>
+                                    <td>{{ search_result.location }}</td>
+
+                                    <td>
+                                        {% if search_result.search_result_status == 1 %}
+
+                                            <span class="badge badge-primary" data-toggle="tooltip" data-html="true" title=""
+                                                  data-original-title="<strong>Connection</strong><br>In Queue for Connection request">In Queue</span>
+
+                                        {% elif search_result.search_result_status == 2 %}
+
+                                            <span class="badge badge-success" data-toggle="tooltip" data-html="true" title=""
+                                                  data-original-title="<strong>Connection</strong><br> Connected">Connected</span>
+                                        {% else %}
+                                            <a class="text-nowrap select_an_item_to_campaign" href="#" data-toggle="modal"
+                                               data-cid="{{ search_result.pk }}">Add to Campaign</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $('.table').DataTable({"columnDefs": [ {
+          "targets": 'no-sort',
+          "orderable": false,
+    } ]})
+    $(document).ready(function () {
+
+        $('#search_input_datatable').keyup(function () {
+            console.log('ok')
+            oTable.search($(this).val()).draw();
+        })
+        $("#add_connector_camapaign_form").validate({
+                errorElement: "span",
+                errorClass: "help-block help-block-error",
+                focusInvalid: !1,
+                ignore: "",
+                rules: {
+                    first_name: {
+                        required: true,
+                    },
+                    last_name: {
+                        required: true,
+                    },
+                    countrycode: {
+                      required: true,
+                    },
+                },
+                errorPlacement: function (error, element) {
+                    let placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (e) {
+                    $(e).closest(".form-group").addClass("has-error")
+                },
+                unhighlight: function (e) {
+                    $(e).closest(".form-group").removeClass("has-error")
+                },
+                success: function (e) {
+                    e.closest(".form-group").removeClass("has-error")
+                },
+                submitHandler: function (e) {
+                  add();
+                }
+            });
+        ACCOUNT_SEARCH_URL = "{% url  'account-search-result' %}";
+        function load_data() {
+            data = JSON.parse($('#ajax_data_render_field')[0].innerHTML)
+            console.log('======', data)
+
+            $.ajax({
+                url: ACCOUNT_SEARCH_URL,
+                type: "post",
+                data: data,
+                success: function (response) {
+                    $('#search_people').html(response);
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+
+
+            });
+        }
+
+
+        function set_ajax_data(data) {
+            console.log(data)
+            $('#ajax_data_render_field').html(JSON.stringify(data));
+        }
+
+        function get_ajax_data() {
+            data = JSON.parse($('#ajax_data_render_field')[0].innerHTML);
+            console.log(data);
+            return data;
+        }
+
+        function set_search_text(search_text) {
+            data = get_ajax_data();
+            data.search_text = search_text;
+            set_ajax_data(data);
+        }
+
+
+        $("#search_submit_btn").click(function () {
+            console.log($('#search_text_input').value);
+            set_search_text($('#search_text_input')[0].value);
+            load_data();
+
+        });
+        {##}
+        $("#select_all_items").change(function () {
+            $('.select_items').prop('checked', this.checked);
+        });
+        $("#select_all_items_th").change(function () {
+            $('.select_items').prop('checked', this.checked);
+        });
+        {##}
+        $(".select_an_item_to_campaign").click(function () {
+
+            data = get_ajax_data();
+            data.selected_items = this.getAttribute('data-cid');
+            set_ajax_data(data);
+
+            $('#add2campaign').modal('show');
+
+
+        });
+        {##}
+        {##}
+        $("#add_all_selected_item_button").click(function () {
+        	//check connect message
+        	var camp_id = $('#campaign_select')[0].value;
+        	var that = $(this);
+        	var connect = $('#add2campaign .connect-'+camp_id);
+        	var connect_msg = connect.html();
+        	if(connect_msg === "" || connect_msg.length < 5){
+        		that.hide();
+        		var text = "<p class='text text-danger'>Your Connection campaign does not have any message. Please add it <a href='";
+        		text+=connect.data('url') + "'>here</a></p>";
+        		$('#add2campaign .modal-body').html(text);
+        		return;
+        	}
+          // if(!$('#add_connector_camapaign_form').valid()){
+          //   return
+          // };
+          // $("#country").val($("#country").countrySelect("getSelectedCountryData").iso2);
+          // var extra_data = $('#add_connector_camapaign_form').serializeArray();
+          $('#add2campaign').modal('hide');
+          // $('#add_connector_camapaign_form')[0].reset();
+          data = get_ajax_data();
+          data.campaign = camp_id;
+          set_ajax_data(data);
+          load_data();
+          data = get_ajax_data();
+          if (data.selected_items) delete data.selected_items;
+          if (data.add_all_selected_item_button) delete data.add_all_selected_item_button;
+          if (data.campaign) delete data.campaign;
+          set_ajax_data(data);
+        });
+
+        $("#add_selected").click(function () {
+            checked_item = $('.select_items:checkbox:checked');
+            console.log("checked_item");
+            console.log(checked_item);
+            console.log(checked_item.length)
+            if (checked_item.length) {
+                selected_items_list = new Array()
+                for (i = 0; i < checked_item.length; i++) {
+                    selected_items_list[i] = checked_item[i].value;
+                }
+                console.log("selected_items_list");
+                console.log(selected_items_list)
+                data = get_ajax_data();
+                data.selected_items = selected_items_list;
+                set_ajax_data(data);
+
+                $('#add2campaign').modal('show');
+
+            } else {
+              swal({
+                  title: "Warring",
+                  text: "No item selected!",
+                  icon: "warring",
+                  button: "Ok!",
+              });
+            }
+
+
+        });
+
+        $("#add_allnew").click(function () {
+            checked_item = $('.select_items:checked');
+            data = get_ajax_data();
+            data.add_all_selected_item_button = true;
+            set_ajax_data(data);
+            $('#add2campaign').modal('show');
+        });
+
+
+    })
+    ;
+</script>

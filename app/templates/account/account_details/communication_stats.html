@@ -1,0 +1,46 @@
+
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td></td>
+        <td><strong>24h</strong></td>
+        <td><strong>48h</strong></td>
+        <td><strong>72h</strong></td>
+        <td><strong>1w</strong></td>
+        <td><strong>1m</strong></td>
+    </tr>
+    <tr>
+        <td>Connection requests:</td>
+        <td>{{ connection.h24 }}</td>
+        <td>{{ connection.h48 }}</td>
+        <td>{{ connection.h72 }}</td>
+        <td>{{ connection.d7 }}</td>
+        <td>{{ connection.m1 }}</td>
+
+    </tr>
+    <tr>
+        <td>Connected:</td>
+        <td>{{ calculate_communication_stats.h24.connected }}</td>
+        <td>{{ calculate_communication_stats.h48.connected }}</td>
+        <td>{{ calculate_communication_stats.h72.connected }}</td>
+        <td>{{ calculate_communication_stats.w1.connected }}</td>
+        <td>{{ calculate_communication_stats.m1.connected }}</td>
+    </tr>
+    <tr>
+        <td>Replied to connection message:</td>
+        <td>{{ calculate_communication_stats.h24.replied }}</td>
+        <td>{{ calculate_communication_stats.h48.replied }}</td>
+        <td>{{ calculate_communication_stats.h72.replied }}</td>
+        <td>{{ calculate_communication_stats.w1.replied }}</td>
+        <td>{{ calculate_communication_stats.m1.replied }}</td>
+    </tr>
+    <tr>
+        <td>Replied to other messages:</td>
+        <td>{{ calculate_communication_stats.h24.replied_others }}</td>
+        <td>{{ calculate_communication_stats.h48.replied_others }}</td>
+        <td>{{ calculate_communication_stats.h72.replied_others }}</td>
+        <td>{{ calculate_communication_stats.w1.replied_others }}</td>
+        <td>{{ calculate_communication_stats.m1.replied_others }}</td>
+    </tr>
+    </tbody>
+</table>

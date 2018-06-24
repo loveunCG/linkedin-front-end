@@ -1,0 +1,90 @@
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block pageheader %}
+{{ block.super }}
+{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <div class="row mb-5">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h2>Bot Task List</h2>
+            <table class="table" id="bot_task_table">
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% csrf_token %}
+{% endblock %}
+{% block extra_script %}
+<script>
+  let ajax_get_bot_list_url = '{% url 'bot-list' pk=linkedin_account.id %}';
+  let botTable;
+  let status = {
+      'Done': 'success',
+      'Error': 'danger',
+      'Running': 'info',
+  };
+  $(function() {
+    $('#add_ip_modal').iziModal();
+    botTable = $('#bot_task_table').DataTable({
+      "ajax": ajax_get_bot_list_url,
+      "order": [
+        [0, "asc"]
+      ],
+      "pageLength": 5,
+      "searching": false,
+      "bLengthChange": false,
+      "bFilter": true,
+      "columns": [{
+          "data": "id"
+        },
+        {
+          "data": "name"
+        },
+        {
+          "data": "task_type"
+        },
+        {
+          "data": "status"
+        },
+        {
+          "data": "completed_date"
+        }
+      ],
+      "columnDefs": [
+          {
+            "title": "No",
+            "targets": 0 ,
+            "render": function ( data, type, row , meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+          },
+        {
+          "title": "name",
+          "targets": 1
+        },
+        {
+          "title": "Task Type",
+          "targets": 2
+        },
+        {
+          "title": "Status",
+          "targets": 3,
+          "render": function (data, type, row) {
+                return '<button type="button" class="btn btn-sm btn-'+status[row.status]+' waves-effect waves-light">'+row.status+'</button>';
+          }
+        },
+        {
+          "title": "Completed Date",
+          "targets": 4
+        }
+      ],
+    });
+  });
+</script>
+{% endblock %}

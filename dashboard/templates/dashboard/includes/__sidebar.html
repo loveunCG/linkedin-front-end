@@ -1,0 +1,21 @@
+{% load static %}
+<nav id="sidebar" class="px-0 bg-dark bg-gradient sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="logo-nav-item">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'new/img/B2B_Logo.png' %}" style="width:130px; margin: 0 1.5em" alt="QuillPro" class="mCS_img_loaded">
+            </a>
+            <h8 class="nav-header text-center" style="font-size:10px !important;">{{ user.email }}</h8>
+        </li>
+        <li>
+            <h6 class="nav-header">General</h6>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/dashboard/' %} active {% endif %}" href="{% url 'dashboard' %}">
+                <i class="batch-icon batch-icon-browser-alt"></i>
+                Dashboard
+                <span class="batch-icon batch-icon-arrow-right pull-right"></span>
+            </a>
+        </li>
+    </ul>
+</nav> 

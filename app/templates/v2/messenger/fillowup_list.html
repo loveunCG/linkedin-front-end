@@ -1,0 +1,28 @@
+<div class="list-group">
+    <button type="button" data_val="init" class="list-group-item list-group-item-action active">
+        <strong>Initial Email</strong>
+
+    </button>
+
+    {% for campaign_step in campaign_steps %}
+    <button type="button" data_val="{{ campaign_step.pk }}" class="list-group-item list-group-item-action"><strong>Followup
+         {{ forloop.counter }}</strong>
+        <i class="batch-icon batch-icon-delete text-right pull-right" onclick="delete_email({{ campaign_step.pk }})"></i>
+        <span style="margin-right: 1em" class="badge badge-light pull-right"> {{ campaign_step.step_time }} days</span></li>
+    </button>
+    {% endfor %}
+
+
+    <button data_val="new" id="new_followup" type="button"
+            class="list-group-item list-group-item-action hidden"><strong class="text-danger">New
+        Followup
+    </strong>
+
+    </button>
+
+
+</div>
+<br>
+<button type="button" id="add_followup" class="btn btn-dark btn-block waves-effect waves-light">+ Add
+    Followup
+</button>

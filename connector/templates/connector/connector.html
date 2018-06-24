@@ -1,0 +1,8 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Connector{% endblock %}
+
+{% block content %}
+    <h2>Connector</h2>
+    <a href="{% url 'connector:create_connector' %}"><button>Create Connector Campaign</button></a>
+{% endblock %}

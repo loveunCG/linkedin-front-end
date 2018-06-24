@@ -1,0 +1,36 @@
+{% csrf_token %}
+{% load widget_tweaks %}
+
+
+			<div class="row">
+				<div class="col-md-9">
+					<div class="box">
+						<div class="box-body">
+							<div class="form-group">
+								<label>
+                                    {%if not messenger %}Connection {%endif%}Please connect with me message
+
+
+
+                                </label>
+                                    <div class="note-btn-group btn-group note-mybutton float-right">
+
+                                        <button type="button" onclick="addText(this, '{FirstName}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">First name</button>
+                                        <button type="button" onclick="addText(this, '{Company}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Company</button>
+                                        <button type="button" onclick="addText(this, '{Title}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Title</button>
+                                        <button type="button" onclick="addText(this, '{Location}')" class="note-btn btn btn-default btn-sm float-right" tabindex="-1">Location</button>
+                                    </div>
+								{% render_field form.connection_message  maxlength="300" style="height: 8rem;" %}
+                                <small class="form-text text-muted" style="margin-top:-.50rem">Remained chars 300</small>
+							</div>
+
+						</div>
+					</div>
+
+					{% include 'app/includes/campaigns/step_formset.html' with campaignsteps=campaignsteps %}
+
+
+
+				</div>
+				{% include 'app/includes/campaigns/msg_var.html' %}
+            </div>

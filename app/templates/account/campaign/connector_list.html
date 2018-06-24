@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header">
+        <h3>Connection Campaigns</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="card-body" id="bulk_campaigns_list">
+        <table class="table table-datatable table-striped table-hover">
+            <thead class="align-items-center">
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Contacts</th>
+                <th>Connected</th>
+                <th>Replied to connection message</th>
+                <th>Replied to other messages</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for mc in object_list %}
+                <tr>
+                    <td><a href="{% url 'connector-campaign' pk=mc.id %}">{{ mc.title }}</a></td>
+                    <td>
+                        <span class="badge badge-{%if mc.status%}green{%else%}black{%endif%}">{%if mc.status%}Active{%else%}Inactive{%endif%}</span>
+                    </td>
+                    <td>{{ mc.contacts.all | length }}</td>
+                    <td>{{ mc.count_sends }}</td>
+                    <td>{{ mc.count_replies }}</td>
+                    <td>{{ mc.count_reply_other }}</td>
+                </tr>
+            {% endfor %}
+           </tbody>
+
+        </table>
+    </div>
+</div>

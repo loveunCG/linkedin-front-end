@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Create Connector{% endblock %}
+
+{% block content %}
+    <h2>Create Connector</h2>
+    <form method="post">
+    {% csrf_token %}
+        <label for="connector_name">New Connector Name:</label>
+        <input name="connector_name" type="text" required>
+        <label for="copy_connector_name">Copy Connector Name:</label>
+        <select name="copy_connector_name">
+            <option></option>
+        {% for option_connector_name in connector_name_list  %}
+            <option>{{ option_connector_name }}</option>
+        {% endfor %}
+        </select>
+        <button type="submit">Create New Connector</button>
+    </form>
+{% endblock %}

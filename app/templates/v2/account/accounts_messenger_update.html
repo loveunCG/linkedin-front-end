@@ -1,0 +1,79 @@
+{% extends 'v2/account/base.html' %}
+{% load static %}
+
+{% block title %}Messenger Details{% endblock title %}
+{% block head %}
+    <link href="{% static 'css/chat.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/plugins/datatables/css/responsive.dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/datatables/css/responsive.bootstrap4.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h2>
+                                Messenger Details
+                                <div class="float-right m0" style="margin:0px;">
+                                    <label class="switch pull-right m0" style="margin-top:6px">
+                                        {% include 'app/includes/campaigns/switch_button.html' with object=object %}
+                                    </label>
+                                    <span class="pt-3">{{object.title}}</span>
+                                </div>
+
+                            </h2>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="people-tab" data-toggle="tab" href="#people" role="tab" aria-controls="people" aria-selected="false">People</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="loadTextCount()" id="steps-tab" data-toggle="tab" href="#steps" role="tab" aria-controls="steps" aria-selected="true">Steps</a>
+                                </li>
+                            <input type="hidden" id="__my_network_url__" value="{%url 'account-network' pk=object.owner_id %}"/>
+
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="people" role="tabpanel" aria-labelledby="people-tab">
+                                    {% include 'v2/account/campaign/messenger_tab1.html' %}
+                                </div>
+                                <div class="tab-pane fade" id="steps" role="tabpanel" aria-labelledby="steps-tab">
+                                    <form name="campaign" method="POST" action="{% url 'messenger-campaign' pk=object.pk %}">
+                                        {% include 'account/campaign/tab_2_messenger_form.html' with messenger=1 %}
+                                           </form>
+                                </div>
+                                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                    {% include 'account/campaign/tab_3.html' %}
+                                </div>
+                                <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+                                    <!-- /.tab-pane -->
+                                    {% include 'v2/account/campaign/tab_4.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{%  block script %}
+    {% include 'app/includes/datatable_pagefooter.html' %}
+    {% include 'app/includes/campaigns/page_footer.html' %}
+    <script src="{% static 'js/jquery.formset.js' %}?v=1"></script>
+    <script src="{% static 'js/campaignformset.js' %}?v=16"></script>
+    <script type="text/javascript" src="{% static 'assets/plugins/toastr/toastr.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/plugins/easypiechart/jquery.easypiechart.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/plugins/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/plugins/datatables/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/scripts/messenger_compaign.js' %}"></script>
+{% endblock %}

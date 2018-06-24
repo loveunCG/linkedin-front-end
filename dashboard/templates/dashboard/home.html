@@ -1,0 +1,208 @@
+
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block pageheader %}
+{{ block.super }}
+{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <div class="row mb-5">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h2>Scrape/Posting activities</h2>
+            <table class="table" id="linkedin_user_table">
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="add_ip_modal" data-iziModal-title="Add Ip"  data-iziModal-icon="icon-key">
+          <div class="card">
+              <div class="card-body">
+                <form id="add_ip_form">
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1" class="active">Email address</label>
+                      <input type="hidden" id="linked_id" name="linked_id">
+                      {% csrf_token %}
+                      <input type="Ip" class="form-control" id="inputIp" name="ip" placeholder="IP">
+                      <p class="text-danger" id="ip_input_error"></p>
+                  </div>
+                  <div class="form-group">
+                      <button class="btn-primary btn pull-right" onclick = "add_ip_submit()" type="button">Add</button>
+                      <button class="btn btn-info btn-left" data-izimodal-close="">Close</button>
+                  </div>
+              </form>
+              </div>
+          </div>
+        </div>
+    <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% csrf_token %}
+{% endblock %}
+{% block extra_script %}
+<script>
+  var ajax_linkedin_user_url = '{%url "get_linked_list" %}'
+  var linkedinTable
+  $(".add_ip_btn").click(function(event) {
+    event.preventDefault();
+    $('#ipModal').modal('show');
+    $('#change_ip_item_id')[0].value = this.getAttribute('data-value');
+
+  });
+
+  $("#add_ip_form_submit").click(function(event) {
+    event.preventDefault();
+    if ($('#inputIp')[0].value.match(/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/))
+      $('#add_ip_form').submit();
+    else
+      $('#ip_input_error').html('<br>Enter valid ip')
+  });
+
+  function setting (id) {
+
+  }
+  function add_ip_submit(){
+      if ($('#inputIp')[0].value.match(/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/)){
+      }else{
+        $('#ip_input_error').html('<br>Enter valid ip')
+        return
+      }
+      let formData = $('#add_ip_form').serialize();
+      console.log(formData)
+      let settings = {
+          "url": "{% url 'updateIp' %}",
+          "method": "POST",
+          "data": formData
+      };
+      $.ajax(settings).done(function (response) {
+        if(response.response_code){
+          $('#add_ip_modal').iziModal('close');
+        }
+        $.alert({
+            title: 'Alert!',
+            content: response.message,
+            columnClass: 'small',
+            theme: 'bootstrap',
+            buttons: {
+                ok: {
+                    text: 'Ok',
+                    btnClass: 'btn-info',
+                    action: function () {
+                        if(response.response_code){
+                            linkedinTable.ajax.reload();
+                        }else{
+
+                        }
+                    }
+                }
+            }
+        });
+      })
+      .fail(function(err) {
+          console.log( err );
+      });
+
+  }
+  function update_status(id, status){
+       var data = {
+         linked_id: id,
+         status:status,
+         'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+       }
+       let settings = {
+           "url": "{% url 'updateStatus' %}",
+           "method": "POST",
+           "data": data
+       };
+       $.ajax(settings).done(function (response) {
+           $.alert({
+               title: 'Alert!',
+               content: response.message,
+               columnClass: 'small',
+               theme: 'bootstrap',
+               buttons: {
+                   ok: {
+                       text: 'Ok',
+                       btnClass: 'btn-info',
+                       action: function () {
+                           if(response.response_code){
+                               linkedinTable.ajax.reload();
+                           }else{
+
+                           }
+                       }
+                   }
+               }
+           });
+       })
+       .fail(function(err) {
+           console.log( err );
+       });
+  }
+
+  function add_ip(id){
+    $('#linked_id').val(id);
+    $('#add_ip_modal').iziModal('open');
+  }
+
+  $(function() {
+
+
+    $('#add_ip_modal').iziModal();
+    linkedinTable = $('#linkedin_user_table').DataTable({
+      "ajax": ajax_linkedin_user_url,
+      "order": [
+        [0, "asc"]
+      ],
+      "bLengthChange": false,
+      "bFilter": true,
+      "bPaginate": false,
+      "columns": [{
+          "data": "index"
+        },
+        {
+          "data": "email"
+        },
+        {
+          "data": "bot_ip"
+        },
+        {
+          "data": "action"
+        },
+      ],
+      "searching": false,
+      "columnDefs": [{
+          "title": "No",
+          "width": "5%",
+          "targets": 0
+        },
+        {
+          "title": "Email",
+          "targets": 1
+        },
+        {
+          "title": "IP",
+          "targets": 2
+        },
+        {
+          "title": "Action",
+          "targets": 3
+        },
+        {"className": "dt-center", "targets": "_all"}
+      ],
+      "bAutoWidth": false
+    });
+  });
+</script>
+{% endblock %}

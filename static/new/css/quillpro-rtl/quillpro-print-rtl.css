@@ -1,0 +1,80 @@
+/* QUILLPRO SASS */
+/* QUILLPRO PRINT STYLES */
+/* QUILLPRO VARIABLES */
+/* QUILLPRO MIXINS */
+/* Colors */
+html,
+body {
+  background-color: transparent;
+  color: #000000 !important; }
+
+.right-column .navbar {
+  display: none !important; }
+
+.sidebar {
+  display: none !important; }
+
+.sidebar + .right-column {
+  margin-right: 0 !important; }
+
+.main-content {
+  padding: 0 !important;
+  width: 97% !important;
+  margin-right: auto !important;
+  margin-left: auto !important; }
+
+h1 {
+  display: none !important; }
+
+.card {
+  box-shadow: none !important;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0; }
+  .card .card-body {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+
+footer {
+  display: none !important; }
+
+/* Print Utilities */
+.col-sm-1 {
+  max-width: calc(1 / 12 * 100%); }
+
+.col-sm-2 {
+  max-width: calc(2 / 12 * 100%); }
+
+.col-sm-3 {
+  max-width: calc(3 / 12 * 100%); }
+
+.col-sm-4 {
+  max-width: calc(4 / 12 * 100%); }
+
+.col-sm-5 {
+  max-width: calc(5 / 12 * 100%); }
+
+.col-sm-6 {
+  max-width: calc(6 / 12 * 100%); }
+
+.col-sm-7 {
+  max-width: calc(7 / 12 * 100%); }
+
+.col-sm-8 {
+  max-width: calc(8 / 12 * 100%); }
+
+.col-sm-9 {
+  max-width: calc(9 / 12 * 100%); }
+
+.col-sm-10 {
+  max-width: calc(10 / 12 * 100%); }
+
+.col-sm-11 {
+  max-width: calc(11 / 12 * 100%); }
+
+.col-sm-12 {
+  max-width: calc(12 / 12 * 100%); }
+
+/*# sourceMappingURL=quillpro-print-rtl.css.map */

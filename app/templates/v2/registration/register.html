@@ -1,0 +1,106 @@
+
+{% extends 'v2/app/base_headless.html' %}
+{% load site_title %}
+{% load static %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<form action="" id="registration-form" method="post">
+                            {% csrf_token %}
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="validemail">Email address</label>
+								<input type="email" required class="form-control" id="email" name="email" value="{{email}}" data-validation="email" aria-describedby="emailHelp" placeholder="Enter email">
+								<div class="form-control-feedback text-danger" id="email_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" id="label_pass" >Password</label>
+								<input type="password" required class="form-control" id="password" value="{{password}}"  name="password" placeholder="Password">
+                                <div class="form-control-feedback text-danger" id="password_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" id="label_confirm_pass">Confirm Password</label>
+								<input type="password" required class="form-control" value="{{password}}"  id="confirm-password" name="confirm_passwd" data-validation="strength" placeholder="Password">
+                                <div class="form-control-feedback text-danger" id="confirm_password_error"></div>
+							</div>
+							
+							<div class="form-group">
+								<label for="exampleInputPassword2" id="label_confirm_pass">Subscription Plan</label>
+								<select  required class="form-control"  id="plan" name="plan" size=1>
+								{% for p in plans %}
+								<option value="{{p.stripe_id}}" {% if p.stripe_id == plan%} selected {%endif%}>{{p}}</option>
+								{%endfor%}
+								</select>
+                                <div class="form-control-feedback text-danger" id="confirm_password_error"></div>
+							</div>
+							
+							<div class="form-group mb-3">
+
+								<label >By creating an account, I agree with the terms</label>
+							</div>
+							<button id="validate" type="submit" class="btn btn-primary btn-gradient btn-block">
+								<i class="batch-icon batch-icon-quill"></i>
+								Sign Up
+							</button>
+							<hr>
+							<p class="text-center">
+								Already Have An Account? <a href="/login/">Sign In here</a>
+							</p>
+						</form>
+
+<style>
+.has-error{
+	color: red;
+}
+</style>
+    {% endblock content %}
+
+    {% block script %}
+        <script>
+            var msg = "{{ msg }}";
+						$(function(){
+
+						})
+
+						$("#registration-form").validate({
+									errorElement: "span",
+									errorClass: "help-block help-block-error",
+									focusInvalid: !1,
+									ignore: "",
+									rules: {
+											email: {
+													required: true,
+													email: true
+											},
+											password: {
+													required: true,
+													minlength: 8
+											},
+											confirm_passwd: {
+													equalTo: "#password"
+											},
+									},
+									errorPlacement: function (error, element) {
+											let placement = $(element).data('error');
+											if (placement) {
+													$(placement).append(error)
+											} else {
+													error.insertAfter(element);
+											}
+									},
+									highlight: function (e) {
+											$(e).closest(".form-group").addClass("has-error")
+									},
+									unhighlight: function (e) {
+											$(e).closest(".form-group").removeClass("has-error")
+									},
+									success: function (e) {
+											e.closest(".form-group").removeClass("has-error")
+									},
+									submitHandler: function (e) {
+										e.submit();
+									}
+							});
+						console.log(msg)
+        </script>
+        
+    {% endblock script %}

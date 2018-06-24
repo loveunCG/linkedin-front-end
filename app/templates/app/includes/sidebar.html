@@ -1,0 +1,77 @@
+{% load static %}
+{% block sidebar %}
+
+<aside class="aside">
+    <div class="aside-inner">
+        <nav class="sidebar" data-sidebar-anyclick-close="">
+            <ul class="nav">
+                <li class="has-user-block">
+                    <div id="user-block" class="">
+                        <div class="item user-block">
+                            <style>
+                                .btn-custom-link,
+                                .btn-custom-link:hover {
+                                    color: grey;
+                                    text-decoration: none
+                                }
+                                
+                                .btn-custom-link:hover {
+                                    color: rgb(51, 51, 51)
+                                }
+                            </style>
+                            <div class="pull-right" style="margin-top: -12px; margin-right: 11px;"> <a class="btn btn-link btn-custom-link" type="button" href="#account-settings" title="Account Settings"><em class="icon-settings"></em></a></div>
+                            <div class="user-block-picture">
+                                <div class="user-block-status"> <img src="{% static 'images/10.jpg' %}" alt="Jonathan Korkol" width="60" height="60" class="img-thumbnail img-circle">
+                                    <div class="circle circle-default circle-lg" title="Not logged in"></div>
+                                </div>
+                            </div>
+                            <div class="user-block-info"> <span class="user-block-name">Jonathan Korkol</span>
+                                <div class="user-block-role" style="white-space: normal;">Business Loan Specialist - Same Day Loan Offers Available</div> <span class="user-block-role"><strong>cpnnumbers@gmail.com</strong></span></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="False">
+                    <a href="{% static 'getting-started.html' %}" title="Getting Started"> <em class="icon-home"></em> <span>Getting Started</span> </a>
+                </li>
+                <li class="nav-heading"> <span>User Menu</span></li>
+                <li class="False">
+                    <a href="{% url 'index' %}" title="Dashboard"> <em class="icon-speedometer"></em> <span>Dashboard</span> </a>
+                </li>
+                <li class="False">
+                    <a href="#campaigns" title="Campaigns" data-toggle="collapse">
+                        <div class="label label-info pull-right">1</div> <em class="icon-grid"></em> <span> Campaigns</span> </a>
+                    <ul id="campaigns" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header">Campaigns</li>
+                        <li class="False" style="text-wrap:normal">
+                            <a href="{% static 'my-first-campaign.html' %}" title="My First Campaign"> <span>My First Campaign</span> </a>
+                        </li>
+                        <li class="False">
+                            <a href="{% static 'add-new-campaign.html' %}" title="Add New Campaign"> <span><em class="fa fa-plus"></em>&nbsp;Add New Campaign</span> </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="False">
+                    <a href="{% static 'connection-messages.html' %}" title="Connection Messages"> <em class="icon-speech"></em> <span>Connection Messages</span> </a>
+                </li>
+                <li class="False">
+                    <a href="{% static 'autoresponder.html' %}" title="Autoresponder"> <em class="icon-envelope"></em> <span>Autoresponder</span> </a>
+                </li>
+                <li class="False">
+                    <a href="#" title="External Integrations"> <em class="icon-vector"></em> <span>External Integrations</span> </a>
+                </li>
+                <li class="nav-heading"> <span>Global Menu</span></li>
+                <li class="False">
+                    <a href="{% static 'settings.html' %}" title="Settings"> <em class="icon-settings"></em> <span>Settings</span> </a>
+                </li>
+                <li class="False">
+                    <a href="{% static 'settings.html' %}" title="Billing"> <em class="fa fa-usd"></em> <span>Billing</span> </a>
+                </li>
+                <li class="False">
+                    <a href="{% url 'logout' %}" title="Log out"> <em class="icon-logout"></em> <span>Log out</span> </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+{% endblock sidebar %}

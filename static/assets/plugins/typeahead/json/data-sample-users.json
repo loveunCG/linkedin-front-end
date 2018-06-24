@@ -1,0 +1,8 @@
+[
+  { "value": 1, "text": "Johanna Quinn", "image": "assets/img/profile-pic-1.jpg"},
+  { "value": 2, "text": "Samantha Carter", "image": "assets/img/profile-pic-2.jpg"},
+  { "value": 3, "text": "Jack O'Neill", "image": "assets/img/profile-pic-3.jpg"},
+  { "value": 4, "text": "Danielle Jackson", "image": "assets/img/profile-pic-4.jpg"},
+  { "value": 5, "text": "Teal'c Jafar", "image": "assets/img/profile-pic-5.jpg"},
+  { "value": 6, "text": "Tiffany Turner", "image": "assets/img/profile-pic-6.jpg"}
+]

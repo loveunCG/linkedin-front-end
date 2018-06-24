@@ -1,0 +1,123 @@
+/* QUILLPRO VARIABLES */
+
+@import "quillpro-mixins-rtl";
+
+// User Changeable Variables - Start
+$qp-active-font: "Montserrat";
+$qp-active-font-size-button: 1.333rem;
+// User Changeable Variables - End
+
+$qp-golden-ratio:					1.618;
+$qp-default-padding:				2.083rem;
+
+/* Colors */
+$mdb-color-blue:					#4285F4;
+
+$qp-hover-highlight:				#F7F7FA;
+
+$qp-color-text:						#72848c;
+
+$qp-color-white:					#FFFFFF;
+$qp-color-darkblue:					#122f3b; // Use sparingly
+
+$qp-color-grey:						#d2d2d2;
+
+$qp-color-primary:					#07a7e3;
+$qp-color-primary-light-1:			lighten($qp-color-primary, 10%);
+$qp-color-primary-light-2:			lighten(desaturate($qp-color-primary, 10%), 10%);
+$qp-color-primary-light-3:			lighten(desaturate($qp-color-primary, 10%), 15%);
+$qp-color-primary-dark-1:			darken($qp-color-primary, 10%);
+$qp-color-primary-dark-2:			darken($qp-color-primary, 20%);
+$qp-color-primary-gradient-1:		$qp-color-primary;
+$qp-color-primary-gradient-2:		#32dac3;
+
+$qp-color-secondary:				#4f5b60;
+$qp-color-secondary-light-1:		lighten($qp-color-secondary, 10%);
+$qp-color-secondary-light-2:		lighten(desaturate($qp-color-secondary, 10%), 10%);
+$qp-color-secondary-light-3:		lighten(desaturate($qp-color-secondary, 10%), 15%);
+$qp-color-secondary-dark-1:			darken($qp-color-secondary, 10%);
+$qp-color-secondary-dark-2:			darken($qp-color-secondary, 20%);
+$qp-color-secondary-gradient-1:		$qp-color-secondary;
+$qp-color-secondary-gradient-2:		#97a9b2;
+
+$qp-color-success:					#0ad251;
+$qp-color-success-light-1:			lighten($qp-color-success, 2%);
+$qp-color-success-light-2:			lighten(desaturate($qp-color-success, 10%), 10%);
+$qp-color-success-light-3:			lighten($qp-color-success, 5%);
+$qp-color-success-dark-1:			darken($qp-color-success, 10%);
+$qp-color-success-dark-2:			darken($qp-color-success, 20%);
+
+$qp-color-info:						#55d3f5;
+$qp-color-info-light-1:				lighten($qp-color-info, 2%);
+$qp-color-info-light-2:				lighten(desaturate($qp-color-info, 10%), 10%);
+$qp-color-info-light-3:				lighten($qp-color-info, 5%);
+$qp-color-info-dark-1:				darken($qp-color-info, 10%);
+$qp-color-info-dark-2:				darken($qp-color-info, 20%);
+
+$qp-color-warning:					#fce418;
+$qp-color-warning-light-1:			lighten($qp-color-warning, 10%);
+$qp-color-warning-light-2:			lighten(desaturate($qp-color-warning, 10%), 10%);
+$qp-color-warning-light-3:			lighten($qp-color-warning, 20%);
+$qp-color-warning-dark-1:			darken($qp-color-warning, 10%);
+$qp-color-warning-dark-2:			darken($qp-color-warning, 20%);
+
+$qp-color-danger:					#f43a59;
+$qp-color-danger-light-1:			lighten($qp-color-danger, 10%);
+$qp-color-danger-light-2:			lighten(desaturate($qp-color-danger, 10%), 10%);
+$qp-color-danger-light-3:			lighten($qp-color-danger, 20%);
+$qp-color-danger-dark-1:			darken($qp-color-danger, 10%);
+$qp-color-danger-dark-2:			darken($qp-color-danger, 20%);
+
+$qp-color-yellow:					#F8D800;
+$qp-color-yellow-light-1:			lighten($qp-color-yellow, 10%);
+$qp-color-yellow-light-2:			lighten(desaturate($qp-color-yellow, 10%), 10%);
+$qp-color-yellow-light-3:			lighten(desaturate($qp-color-yellow, 10%), 15%);
+$qp-color-yellow-dark-1:			darken($qp-color-yellow, 10%);
+$qp-color-yellow-dark-2:			darken($qp-color-yellow, 20%);
+$qp-color-yellow-gradient-1:		$qp-color-yellow;
+$qp-color-yellow-gradient-2:		#FDEB71;
+
+$qp-color-blue:						#3677FF;
+$qp-color-blue-light-1:				lighten($qp-color-blue, 10%);
+$qp-color-blue-light-2:				lighten(desaturate($qp-color-blue, 10%), 10%);
+$qp-color-blue-light-3:				lighten(desaturate($qp-color-blue, 10%), 15%);
+$qp-color-blue-dark-1:				darken($qp-color-blue, 10%);
+$qp-color-blue-dark-2:				darken($qp-color-blue, 20%);
+$qp-color-blue-gradient-1:			$qp-color-blue;
+$qp-color-blue-gradient-2:			#FFD26F;
+
+$qp-color-red:						#EA5455;
+$qp-color-red-light-1:				lighten($qp-color-red, 10%);
+$qp-color-red-light-2:				lighten(desaturate($qp-color-red, 10%), 10%);
+$qp-color-red-light-3:				lighten(desaturate($qp-color-red, 10%), 15%);
+$qp-color-red-dark-1:				darken($qp-color-red, 10%);
+$qp-color-red-dark-2:				darken($qp-color-red, 20%);
+$qp-color-red-gradient-1:			$qp-color-red;
+$qp-color-red-gradient-2:			#FC9131;
+
+$qp-color-purple:					#973999;
+$qp-color-purple-light-1:			lighten($qp-color-purple, 10%);
+$qp-color-purple-light-2:			lighten(desaturate($qp-color-purple, 10%), 10%);
+$qp-color-purple-light-3:			lighten(desaturate($qp-color-purple, 10%), 15%);
+$qp-color-purple-dark-1:			darken($qp-color-purple, 10%);
+$qp-color-purple-dark-2:			darken($qp-color-purple, 20%);
+$qp-color-purple-gradient-1:		$qp-color-purple;
+$qp-color-purple-gradient-2:		#43CBFF;
+
+$qp-color-orange:					#FC9131;
+$qp-color-orange-light-1:			lighten($qp-color-orange, 10%);
+$qp-color-orange-light-2:			lighten(desaturate($qp-color-orange, 10%), 10%);
+$qp-color-orange-light-3:			lighten(desaturate($qp-color-orange, 10%), 15%);
+$qp-color-orange-dark-1:			darken($qp-color-orange, 10%);
+$qp-color-orange-dark-2:			darken($qp-color-orange, 20%);
+$qp-color-orange-gradient-1:		$qp-color-orange;
+$qp-color-orange-gradient-2:		#FCCF31;
+
+$qp-color-green:					#28C76F;
+$qp-color-green-light-1:			lighten($qp-color-green, 10%);
+$qp-color-green-light-2:			lighten(desaturate($qp-color-green, 10%), 10%);
+$qp-color-green-light-3:			lighten(desaturate($qp-color-green, 10%), 15%);
+$qp-color-green-dark-1:				darken($qp-color-green, 10%);
+$qp-color-green-dark-2:				darken($qp-color-green, 20%);
+$qp-color-green-gradient-1:			$qp-color-green;
+$qp-color-green-gradient-2:			#81FBB8;

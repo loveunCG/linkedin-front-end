@@ -1,0 +1,61 @@
+
+{% extends 'v2/app/base_headless.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+	
+						
+						<form action="" id="login-form" method="post">
+							{% csrf_token %}
+
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="validemail">Email address</label>
+								<input type="email" required class="form-control" id="email" name="email" data-validation="email" aria-describedby="emailHelp" placeholder="Enter email">
+								<div class="form-control-feedback text-danger" id="email_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" id="label_pass" >Password</label>
+								<input type="password" required class="form-control" id="password" name="password" placeholder="Password">
+
+							</div>
+                            <div class="form-group">
+                                <div class="form-control-feedback text-danger" id="password_error"></div>
+                            </div>
+
+
+							<button onclick="return validateLogin()" type="submit" class="btn btn-primary btn-gradient btn-block">
+								<i class="batch-icon batch-icon-key"></i>
+								Sign In
+							</button>
+							<hr>
+							<p class="text-center">
+								Don't Have An Account? <a href="/register/">Sign Up here</a>
+							</p>
+                            <p class="text-center">
+								Forget Password? <a href="{% url 'password_reset'%}">Forget Password</a>
+							</p>
+						</form>
+					
+
+
+    {% endblock content %}
+
+
+    {% block script %}
+
+        <script>
+            var msg = "{{ msg }}";
+
+
+        </script>
+        <script type="text/javascript" src="{% static 'assets/plugins/form-validator/jquery.form-validator.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/scripts/login.js' %}"></script>
+
+
+
+
+    {% endblock script %}

@@ -1,0 +1,47 @@
+{% extends 'new/account/base.html' %}
+{% load static %}
+
+{% block title %}Connect Campaign{% endblock title %}
+
+{% block pagetitle %}
+Connect Campaign
+{% endblock %}
+
+{%block content%}
+
+
+
+
+<div class="row mb-5">
+		<div class="col-md-3">
+			<a class="btn btn-primary btn-gradient waves-effect waves-light btn-block" href="{% url 'account-campaign-add' pk=pk %}">NEW CONNECTION CAMPAIGNS</a>
+		</div>
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-body">
+					<div id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="header" role="tab" id="headingOne">
+							<h4 class="mb-0">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+										Want to grow your network and find new leads? Start new Connection Campaign.
+									</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">				
+								<ul>
+										<li>Set up steps with personalized automated messages for connection requests or a follow-up messages to be sent a few hours or days after connecting, set another automated follow-up messages if no response is received in a few days. This is done by clicking on the <u>Steps</u> tab inside the Connection Campaign.</li>
+										<li>Search for new leads by keyword, location, industry, company, title. To start a new search, go to the <u>Search</u> page on the top menu, and click on 'Start new search' on the right side.</li>
+										<li>After the search is completed select people you would like to be added to Connection Campaign and click 'Add selected people to Connection Campaign', or add all new people found by clicking 'Add all new people to Connection Campaign'.</li>
+									</ul>			
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+{%include 'account/campaign/connector_list.html' with object_list=object_list %}	
+
+
+{%endblock%}

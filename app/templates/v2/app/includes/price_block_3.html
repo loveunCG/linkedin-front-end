@@ -1,0 +1,41 @@
+{% load humanize  %}
+
+<div class="plan {%if current_sub.plan == price%}feature bg-primary{%endif%} col-md-4">
+    <h3 class="plan-title">
+         Enterprise Team 
+    </h3>
+    
+    
+    
+    <div class="plan-cost"><span class="plan-price <span class="plan-price {%if current_sub.plan == price%} bg-warning{%endif%}">${{price.amount | floatformat:0 | intcomma}}</span><span class="plan-type">/ Monthly</span>
+    <br>
+    <small>
+    User can add additional seat and will be billed $37 per additional seat after 10 (no free trial for additional seats) 
+    
+    </small>
+    
+    
+    </div>
+    <ul class="plan-features">
+        <li><i class="ion-checkmark"> </i>Add personalized connection message and autoresponder messages</li>
+        <li><i class="ion-checkmark"> </i><b>Unlimited</b> results per search</li>
+        <li><i class="ion-checkmark"> </i><b>Unlimited</b> saved searches</li>
+        <li><i class="ion-checkmark"> </i><b>Unlimited</b> campaigns</li>
+        <li><i class="ion-checkmark"> </i>2-way communication</li>
+        <li><i class="ion-checkmark"> </i> 
+            Welcome message</li>
+        <li><i class="ion-checkmark"> </i>
+            Custom connect message</li>
+        <li><i class="ion-checkmark"> </i>
+            Company &amp; title search filter</li>
+        <li><i class="ion-checkmark"> </i>
+            Withdraw invites</li>
+        
+        <li><i class="ion-checkmark"></i>
+            Export csv</li>
+    </ul>
+    
+    {% include 'v2/app/includes/price_block_select.html' with price=price current_sub=current_sub %}
+    
+    
+</div>

@@ -1,0 +1,97 @@
+{% extends 'v2/account/base.html' %}
+{% load static %}
+{% block title %} Report{% endblock title %}
+{% block head %}
+   
+{% endblock %}
+{% block content %}
+<div class="row mb-5 justify-content-md-center">
+    <div class="col-md-5 mb-5">
+        <div class="card text-center">
+            <div class="card-header">
+                Select Filter For Report
+            </div>
+            <div class="card-body">
+                    {% if msg %}
+                    <div class="alert alert-light" role="alert">
+                            <strong>{{ msg }}</strong> 
+                    </div>
+                    {% endif %}
+                                    
+                    <form id="form-add" method="post">
+                        {% csrf_token %}
+                        
+                            <div class="form-group">
+                                       
+                                <label class="control-label">Last
+                                </label>
+                                <input type="number"  class="form-control" autocomplete="off"  
+                                name="start" value= {{ last }} required>
+                                <br>
+                                
+                                <label class="control-label">Calendar</label>
+                                <select class="form-control"  name="opt">
+                                        <option value="day" {% if day %} selected {% endif %}">Day</option>
+                                        <option value="week" {% if week %} selected {% endif %}">Week</option>
+                                        <option value="month" {% if month %} selected {% endif %}">Month</option>
+                                        <option value="quarter" {% if quarter %} selected {% endif %}">Quarter</option>
+                                </select> 
+
+                            </div>
+                            
+                            <input type="submit" name="save" class="btn btn-primary btn-gradient waves-effect waves-light btn-block" value="submit">
+                        
+                    </form>
+                             
+            </div>
+        </div>
+    </div>
+    {% if number_of_conn %}
+    
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Connection Report</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table  table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>connection invitations</th>
+                            <th>Invitations Accepted</th>
+                            <th>Number of existing contacts</th>
+                            <th>Connection Growth </th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr>
+                                
+                                <td>
+                                    {{ conncetion_request_sent }}
+                                </td>
+                                <td>{{ inv_accepted }}</td>
+                                <td>{{ number_of_conn }}</td>
+                                <td>{{ con_growth |floatformat:2 }} </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+
+    
+
+  
+
+</div>
+
+</div>
+{% endblock %}x
